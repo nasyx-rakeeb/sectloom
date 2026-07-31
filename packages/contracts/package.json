@@ -1,0 +1,21 @@
+{
+  "name": "@sectloom/contracts",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Runtime schemas and shared types",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "validate-fixtures": "node scripts/validate.mjs"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

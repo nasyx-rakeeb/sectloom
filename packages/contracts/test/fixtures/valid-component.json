@@ -1,0 +1,31 @@
+{
+  "name": "example-hero",
+  "type": "registry:section",
+  "title": "Example Hero",
+  "description": "A valid example hero component",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "example-hero.tsx",
+      "content": "export default function Hero() { return <div>Hero</div> }",
+      "type": "registry:section"
+    }
+  ],
+  "designProfiles": [
+    {
+      "style": "Modern",
+      "theme": "Any",
+      "complexity": "Medium",
+      "tags": ["hero", "marketing"]
+    }
+  ],
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://example.com/preview.png",
+      "alt": "Hero Preview"
+    }
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,89 @@
+[
+  {
+    "category": "hero",
+    "checksum": "d37f386aaeb3950157519d4140841c4684155345fa40ab309a7939b7a87759e7",
+    "dependencies": [
+      "next",
+      "react",
+      "react-dom"
+    ],
+    "description": "A dark-themed minimal hero with a responsive statistics grid.",
+    "name": "hero-efficiency",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://pub-07ecf4b5631f4300b4fde9376686e3b9.r2.dev/images/hero/001_1inch_efficiency_hero_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Efficiency Hero",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "cta",
+    "checksum": "bea8ccb8ced5204f5434144d03f289f3d1313175d4df76cf447f5111ecec20b6",
+    "dependencies": [
+      "next",
+      "react",
+      "react-dom",
+      "lucide-react"
+    ],
+    "description": "Solid color call to action block with abstract geometric graphic.",
+    "name": "cta-apis",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://pub-07ecf4b5631f4300b4fde9376686e3b9.r2.dev/images/cta/001_1inch_apis_cta_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "APIs CTA",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "contact",
+    "checksum": "26ef2667bd655221bee5e6a06699333fb5dd55fbeb61140639ff665756a1e845",
+    "dependencies": [
+      "next",
+      "react",
+      "react-dom",
+      "lucide-react"
+    ],
+    "description": "An interactive, multi-card contact section using safe standard link behaviors.",
+    "name": "contact-grid",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://pub-07ecf4b5631f4300b4fde9376686e3b9.r2.dev/images/contact/002_after_now_contact_grid_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Contact Grid",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "footer",
+    "checksum": "3a31a94671b480bd5a3a11cf7c506ad9ddc885e0d65b8a991f54a31f7988b1f9",
+    "dependencies": [
+      "next",
+      "react",
+      "react-dom",
+      "lucide-react"
+    ],
+    "description": "A dense, responsive multi-column layout for brand and navigation.",
+    "name": "footer-products",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://pub-07ecf4b5631f4300b4fde9376686e3b9.r2.dev/images/footer/002_1inch_products_footer_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Products Footer",
+    "type": "registry:section",
+    "version": "0.1.0"
+  }
+]

@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+.env
+.turbo
+dist
+build
+.next
+coverage
+data/
+packages/registry/public/images/
+.vercel
+.env*
