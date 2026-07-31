@@ -90,7 +90,7 @@ export default async function ComponentDetailPage({
               <div className="border border-border rounded-xl overflow-hidden bg-accent/10 relative h-[600px]">
                 {comp.previewAssets && comp.previewAssets.length > 0 ? (
                   <Image 
-                    src={`${registryUrl}${comp.previewAssets[0].url}`} 
+                    src={comp.previewAssets[0].url} 
                     alt={comp.name} 
                     fill
                     className="object-contain" 
