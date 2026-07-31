@@ -1,7 +1,7 @@
 [
   {
     "category": "hero",
-    "checksum": "d37f386aaeb3950157519d4140841c4684155345fa40ab309a7939b7a87759e7",
+    "checksum": "bdfcbf4887fa5105458561d30c903ea51cad76b56532e4ed863cb4e6ca2309ab",
     "dependencies": [
       "next",
       "react",
@@ -22,7 +22,7 @@
   },
   {
     "category": "cta",
-    "checksum": "bea8ccb8ced5204f5434144d03f289f3d1313175d4df76cf447f5111ecec20b6",
+    "checksum": "77f634967c5a9c1bd32c34ee7b7696ceb7e6c9c10fdf6666d1c6b8c49a146b15",
     "dependencies": [
       "next",
       "react",
@@ -44,7 +44,7 @@
   },
   {
     "category": "contact",
-    "checksum": "26ef2667bd655221bee5e6a06699333fb5dd55fbeb61140639ff665756a1e845",
+    "checksum": "62958b0f667dd2a8bebcc97ba5cd8902956f267e5647b181d070ed4c8c245fce",
     "dependencies": [
       "next",
       "react",
@@ -66,7 +66,7 @@
   },
   {
     "category": "footer",
-    "checksum": "3a31a94671b480bd5a3a11cf7c506ad9ddc885e0d65b8a991f54a31f7988b1f9",
+    "checksum": "98d71b91e8ace1d5b73679177b7240344c5b0b87551d9467372fa54bd16f1920",
     "dependencies": [
       "next",
       "react",

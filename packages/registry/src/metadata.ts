@@ -70,7 +70,7 @@ export const registryComponents: ComponentSourceMeta[] = [
         target: 'components/sectloom/hero-efficiency.tsx',
       },
     ],
-    previewAsset: '/images/hero/001_1inch_efficiency_hero_design.jpg',
+    previewAsset: 'https://media.sectloom.dpdns.org/images/hero/001_1inch_efficiency_hero_design.jpg',
   },
   {
     id: 'cta-apis',
@@ -108,7 +108,7 @@ export const registryComponents: ComponentSourceMeta[] = [
         target: 'components/sectloom/cta-apis.tsx',
       },
     ],
-    previewAsset: '/images/cta/001_1inch_apis_cta_design.jpg',
+    previewAsset: 'https://media.sectloom.dpdns.org/images/cta/001_1inch_apis_cta_design.jpg',
   },
   {
     id: 'contact-grid',
@@ -150,7 +150,7 @@ export const registryComponents: ComponentSourceMeta[] = [
         target: 'components/sectloom/contact-grid.tsx',
       },
     ],
-    previewAsset: '/images/contact/002_after_now_contact_grid_design.jpg',
+    previewAsset: 'https://media.sectloom.dpdns.org/images/contact/002_after_now_contact_grid_design.jpg',
   },
   {
     id: 'footer-products',
@@ -194,6 +194,6 @@ export const registryComponents: ComponentSourceMeta[] = [
         target: 'components/sectloom/footer-products.tsx',
       },
     ],
-    previewAsset: '/images/footer/002_1inch_products_footer_design.jpg',
+    previewAsset: 'https://media.sectloom.dpdns.org/images/footer/002_1inch_products_footer_design.jpg',
   },
 ];

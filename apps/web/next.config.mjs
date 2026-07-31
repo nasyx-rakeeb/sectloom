@@ -11,8 +11,8 @@ const nextConfig = {
       // In a real production scenario, you would also add your production registry domain here
       {
         protocol: 'https',
-        hostname: 'sectloom.dev',
-        pathname: '/registry/**',
+        hostname: 'media.sectloom.dpdns.org',
+        pathname: '/**',
       },
     ],
   },
