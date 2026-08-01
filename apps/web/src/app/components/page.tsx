@@ -72,7 +72,7 @@ export default async function ComponentsPage() {
         navigation={[
           { label: "Components", href: "/components" },
           { label: "Documentation", href: "/docs" },
-          { label: "GitHub", href: "https://github.com/sectloom/sectloom" },
+          { label: "GitHub", href: "https://github.com/nasyx-rakeeb/sectloom" },
         ]}
         enterpriseCta={{ label: "Contact Sales", href: "/contact" }}
         linkGroups={[]}
