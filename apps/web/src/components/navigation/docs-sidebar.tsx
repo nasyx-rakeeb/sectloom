@@ -9,7 +9,7 @@ interface DocsSidebarProps {
 
 export function DocsSidebar({ currentPath }: DocsSidebarProps) {
   return (
-    <div className="w-64 shrink-0 hidden lg:block border-r min-h-[calc(100vh-3.5rem)] pb-10">
+    <div className="w-64 shrink-0 hidden lg:block border-r sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
       <ScrollArea className="h-full py-6 pr-6 lg:pl-8">
         <div className="flex flex-col gap-6">
           {docsNavigation.map((section, index) => (
