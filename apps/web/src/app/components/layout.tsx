@@ -14,22 +14,20 @@ export default function ComponentsLayout({ children }: ComponentsLayoutProps) {
   return (
     <>
       <SiteHeader />
-      <div className="container-wrapper">
-        <div className="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-          <CatalogSidebar className="hidden md:block fixed top-14 z-30 -ml-2 w-full shrink-0 md:sticky md:block" />
-          <main
-            id="main-content"
-            className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]"
-          >
-            <div className="mx-auto w-full min-w-0">
-              <div className="md:hidden flex items-center mb-4">
-                <CatalogMobileNav categories={categories} />
-                <span className="text-sm font-medium">Menu</span>
-              </div>
-              {children}
+      <div className="container mx-auto flex-1 items-start px-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 md:px-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+        <CatalogSidebar className="hidden md:block sticky top-14 z-30 -ml-2 h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto py-6 pr-2 lg:py-8" />
+        <main
+          id="main-content"
+          className="relative py-6 lg:py-8"
+        >
+          <div className="mx-auto w-full min-w-0">
+            <div className="md:hidden flex items-center mb-4">
+              <CatalogMobileNav categories={categories} />
+              <span className="text-sm font-medium">Menu</span>
             </div>
-          </main>
-        </div>
+            {children}
+          </div>
+        </main>
       </div>
       <SiteFooter />
     </>

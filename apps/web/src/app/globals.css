@@ -124,3 +124,74 @@
     @apply antialiased;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Docs prose styling — formats raw HTML produced by documentation pages
+   --------------------------------------------------------------------------- */
+.docs-content h2 {
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight mt-10 mb-4 first:mt-0;
+}
+
+.docs-content h3 {
+  @apply scroll-m-20 text-xl font-semibold tracking-tight mt-8 mb-3;
+}
+
+.docs-content h4 {
+  @apply scroll-m-20 text-lg font-semibold tracking-tight mt-6 mb-2;
+}
+
+.docs-content p {
+  @apply leading-7 mb-4;
+}
+
+.docs-content ul {
+  @apply my-4 ml-6 list-disc space-y-2;
+}
+
+.docs-content ol {
+  @apply my-4 ml-6 list-decimal space-y-2;
+}
+
+.docs-content li {
+  @apply leading-7;
+}
+
+.docs-content a {
+  @apply font-medium underline underline-offset-4 text-primary hover:text-primary/80;
+}
+
+.docs-content code {
+  @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm;
+}
+
+.docs-content pre {
+  @apply my-4 overflow-x-auto rounded-lg border bg-muted/50 p-4;
+}
+
+.docs-content pre code {
+  @apply bg-transparent p-0 text-sm leading-relaxed;
+}
+
+.docs-content blockquote {
+  @apply mt-6 border-l-2 pl-6 italic text-muted-foreground;
+}
+
+.docs-content table {
+  @apply my-6 w-full;
+}
+
+.docs-content th {
+  @apply border px-4 py-2 text-left font-bold;
+}
+
+.docs-content td {
+  @apply border px-4 py-2;
+}
+
+.docs-content strong {
+  @apply font-semibold;
+}
+
+.docs-content hr {
+  @apply my-8;
+}

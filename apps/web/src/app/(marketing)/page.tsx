@@ -16,7 +16,7 @@ export default function HomePage() {
     <>
       <WebSiteJsonLd />
       <SoftwareApplicationJsonLd />
-      <div className="container relative pb-10">
+      <div className="container mx-auto relative px-4 pb-10 md:px-8">
         <section className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
           <span className="text-sm font-medium tracking-wider text-muted-foreground uppercase mb-2">
             Open Source Section Library
