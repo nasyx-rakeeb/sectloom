@@ -4,9 +4,7 @@
   "category": "cta",
   "title": "APIs CTA",
   "description": "Solid color call to action block with abstract geometric graphic.",
-  "dependencies": [
-    "lucide-react"
-  ],
+  "dependencies": ["lucide-react"],
   "registryDependencies": [],
   "requires": {
     "next": ">=14.0.0",
@@ -36,9 +34,7 @@
       "style": "Modern",
       "theme": "System",
       "complexity": "Medium",
-      "tags": [
-        "bold-solid"
-      ]
+      "tags": ["bold-solid"]
     }
   ],
   "sourceReferenceMetadata": {

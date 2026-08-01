@@ -4,9 +4,7 @@
   "category": "footer",
   "title": "Products Footer",
   "description": "A dense, responsive multi-column layout for brand and navigation.",
-  "dependencies": [
-    "lucide-react"
-  ],
+  "dependencies": ["lucide-react"],
   "registryDependencies": [],
   "requires": {
     "next": ">=14.0.0",
@@ -37,9 +35,7 @@
       "style": "Modern",
       "theme": "System",
       "complexity": "Medium",
-      "tags": [
-        "multi-column"
-      ]
+      "tags": ["multi-column"]
     }
   ],
   "sourceReferenceMetadata": {

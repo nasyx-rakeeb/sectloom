@@ -1,18 +1,42 @@
-import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import { ThemeProvider } from 'next-themes';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { SkipLink } from '@/components/layout/skip-link';
+import { siteConfig } from '@/config/site';
+import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
+
+const fontMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+});
 
 export const metadata: Metadata = {
-  title: "Sectloom - Production React Sections",
-  description: "Copy and paste beautiful, accessible, and highly customizable Next.js App Router sections into your codebase.",
-  metadataBase: new URL("https://sectloom.dev"),
+  title: {
+    default: 'Sectloom',
+    template: '%s — Sectloom',
+  },
+  description: siteConfig.description,
+  metadataBase: new URL('https://sectloom.dev'),
   openGraph: {
-    title: "Sectloom",
-    description: "Production-ready React sections.",
-    url: "https://sectloom.dev",
-    siteName: "Sectloom",
-    locale: "en_US",
-    type: "website",
+    title: 'Sectloom',
+    description: siteConfig.description,
+    url: 'https://sectloom.dev',
+    siteName: 'Sectloom',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -23,14 +47,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body
+        className={`${inter.className} ${inter.variable} ${fontMono.variable}`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <TooltipProvider>
+            <SkipLink />
+            {children}
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

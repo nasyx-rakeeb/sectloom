@@ -49,7 +49,9 @@ export const diff = new Command('diff')
         }
 
         if (!file.content) {
-          logger.warn(`Skipping diff for ${file.path}: No content in registry.`);
+          logger.warn(
+            `Skipping diff for ${file.path}: No content in registry.`
+          );
           continue;
         }
 

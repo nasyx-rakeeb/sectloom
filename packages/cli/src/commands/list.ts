@@ -12,7 +12,8 @@ export const list = new Command('list')
     try {
       const cwd = path.resolve(options.cwd);
       const config = await getConfig(cwd);
-      const registryUrl = config?.registry || 'https://sectloom.vercel.app/registry';
+      const registryUrl =
+        config?.registry || 'https://sectloom.vercel.app/registry';
 
       const items = await fetchRegistryIndex(registryUrl);
 

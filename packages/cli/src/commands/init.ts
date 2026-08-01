@@ -158,7 +158,8 @@ export const init = new Command('init')
           components: componentsAlias,
           utils: '@/lib/utils',
         },
-        registry: existingConfig?.registry || 'https://sectloom.vercel.app/registry',
+        registry:
+          existingConfig?.registry || 'https://sectloom.vercel.app/registry',
         components: existingConfig?.components || {},
       };
 

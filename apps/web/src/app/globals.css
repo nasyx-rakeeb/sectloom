@@ -46,6 +46,8 @@
   --text-muted: var(--text-muted);
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --background: #ffffff;
@@ -113,9 +115,12 @@
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: Arial, Helvetica, sans-serif;
+    @apply antialiased;
   }
 }

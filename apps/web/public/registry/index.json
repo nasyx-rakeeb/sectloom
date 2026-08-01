@@ -19,9 +19,7 @@
   {
     "category": "cta",
     "checksum": "14075a108fddaf2bda1a5c327c9328bf7e3262d55c96590f46fa5e1c5af5622f",
-    "dependencies": [
-      "lucide-react"
-    ],
+    "dependencies": ["lucide-react"],
     "description": "Solid color call to action block with abstract geometric graphic.",
     "name": "cta-apis",
     "previewAssets": [
@@ -38,9 +36,7 @@
   {
     "category": "contact",
     "checksum": "6bf81ca0e6b75dac6b9793e77d2c875e2b15c33e90b121f45fda89a5c0f53d54",
-    "dependencies": [
-      "lucide-react"
-    ],
+    "dependencies": ["lucide-react"],
     "description": "An interactive, multi-card contact section using safe standard link behaviors.",
     "name": "contact-grid",
     "previewAssets": [
@@ -57,9 +53,7 @@
   {
     "category": "footer",
     "checksum": "c114f24272060570ca5565d4f128858e1226003ec39e5c7cc50652609edb7812",
-    "dependencies": [
-      "lucide-react"
-    ],
+    "dependencies": ["lucide-react"],
     "description": "A dense, responsive multi-column layout for brand and navigation.",
     "name": "footer-products",
     "previewAssets": [

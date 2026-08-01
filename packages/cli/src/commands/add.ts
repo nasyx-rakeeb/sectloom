@@ -75,7 +75,9 @@ export const add = new Command('add')
         }
 
         if (!file.content) {
-          throw new Error(`File ${file.path} is missing content in the registry.`);
+          throw new Error(
+            `File ${file.path} is missing content in the registry.`
+          );
         }
         filesToWrite.push({ absolutePath, content: file.content });
       }

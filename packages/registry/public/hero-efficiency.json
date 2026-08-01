@@ -41,9 +41,7 @@
       "style": "Modern",
       "theme": "System",
       "complexity": "Medium",
-      "tags": [
-        "minimal-dark"
-      ]
+      "tags": ["minimal-dark"]
     }
   ],
   "sourceReferenceMetadata": {

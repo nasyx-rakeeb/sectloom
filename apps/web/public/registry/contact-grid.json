@@ -4,9 +4,7 @@
   "category": "contact",
   "title": "Contact Grid",
   "description": "An interactive, multi-card contact section using safe standard link behaviors.",
-  "dependencies": [
-    "lucide-react"
-  ],
+  "dependencies": ["lucide-react"],
   "registryDependencies": [],
   "requires": {
     "next": ">=14.0.0",
@@ -36,9 +34,7 @@
       "style": "Modern",
       "theme": "System",
       "complexity": "Medium",
-      "tags": [
-        "card-grid"
-      ]
+      "tags": ["card-grid"]
     }
   ],
   "sourceReferenceMetadata": {

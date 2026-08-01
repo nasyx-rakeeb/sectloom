@@ -11,9 +11,21 @@
   },
   "registry": "https://sectloom.vercel.app/registry",
   "components": {
+    "contact-grid": {
+      "version": "0.1.0",
+      "checksum": "6bf81ca0e6b75dac6b9793e77d2c875e2b15c33e90b121f45fda89a5c0f53d54"
+    },
     "cta-apis": {
       "version": "0.1.0",
-      "checksum": "77f634967c5a9c1bd32c34ee7b7696ceb7e6c9c10fdf6666d1c6b8c49a146b15"
+      "checksum": "14075a108fddaf2bda1a5c327c9328bf7e3262d55c96590f46fa5e1c5af5622f"
+    },
+    "footer-products": {
+      "version": "0.1.0",
+      "checksum": "c114f24272060570ca5565d4f128858e1226003ec39e5c7cc50652609edb7812"
+    },
+    "hero-efficiency": {
+      "version": "0.1.0",
+      "checksum": "57fabfa4f500cdc25ca549168e7eba30acc74dca8e5ca591bc9bbff300df6289"
     }
   }
 }

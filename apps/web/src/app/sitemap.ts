@@ -1,37 +1,36 @@
-import type { MetadataRoute } from "next";
-import fs from "fs/promises";
-import path from "path";
+import type { MetadataRoute } from 'next';
+import { siteConfig } from '@/config/site';
+import { getSitemapEntries } from '@/lib/registry/data';
 
-async function getRegistryIndex(): Promise<any[]> {
-  const registryPath = path.join(process.cwd(), "../../packages/registry/public/index.json");
-  const data = await fs.readFile(registryPath, "utf-8");
-  return JSON.parse(data);
-}
+const docsPages = [
+  '/docs',
+  '/docs/getting-started',
+  '/docs/cli',
+  '/docs/components',
+  '/docs/theming',
+  '/docs/registry',
+];
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://sectloom.dev";
-  const registry = await getRegistryIndex();
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = siteConfig.url;
+  const now = new Date();
 
-  const componentRoutes = registry.map((comp) => ({
-    url: `${baseUrl}/components/${comp.category}/${comp.name}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
-
-  return [
+  const staticEntries: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 1.0,
     },
-    {
-      url: `${baseUrl}/components`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    ...componentRoutes,
+    ...docsPages.map((page) => ({
+      url: `${baseUrl}${page}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
   ];
+
+  const registryEntries = getSitemapEntries(baseUrl) as MetadataRoute.Sitemap;
+
+  return [...staticEntries, ...registryEntries];
 }
