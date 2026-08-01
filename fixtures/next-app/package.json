@@ -9,9 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "16.2.12",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "lucide-react": "^1.28.0",
+    "next": "^16.2.12",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sectloom": "file:../../packages/cli/sectloom-0.1.0.tgz"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

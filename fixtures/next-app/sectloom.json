@@ -1,0 +1,19 @@
+{
+  "$schema": "https://sectloom.dev/schema.json",
+  "style": "default",
+  "tailwind": {
+    "css": "/Users/nasyxrakeeb/Development/Platform/fixtures/next-app/src/app/globals.css",
+    "baseColor": "slate"
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils"
+  },
+  "registry": "https://sectloom.vercel.app/registry",
+  "components": {
+    "cta-apis": {
+      "version": "0.1.0",
+      "checksum": "77f634967c5a9c1bd32c34ee7b7696ceb7e6c9c10fdf6666d1c6b8c49a146b15"
+    }
+  }
+}
