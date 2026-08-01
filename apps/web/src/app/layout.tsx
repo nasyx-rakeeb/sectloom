@@ -18,16 +18,16 @@ const fontMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Sectloom',
-    template: '%s — Sectloom',
+    default: siteConfig.name,
+    template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
   metadataBase: new URL('https://sectloom.vercel.app'),
   openGraph: {
-    title: 'Sectloom',
+    title: siteConfig.name,
     description: siteConfig.description,
     url: 'https://sectloom.vercel.app',
-    siteName: 'Sectloom',
+    siteName: siteConfig.name,
     locale: 'en_US',
     type: 'website',
   },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   appleWebApp: {
-    title: 'Sectloom',
+    title: siteConfig.name,
   },
   manifest: '/site.webmanifest',
 };
