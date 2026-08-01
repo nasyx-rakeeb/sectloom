@@ -3,11 +3,31 @@
   "version": "0.1.0",
   "description": "Sectloom CLI for installing React components",
   "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nasyx-rakeeb/sectloom.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/nasyx-rakeeb/sectloom/issues"
+  },
+  "homepage": "https://sectloom.vercel.app",
+  "keywords": [
+    "react",
+    "nextjs",
+    "tailwindcss",
+    "components",
+    "ui"
+  ],
   "publishConfig": {
     "access": "public"
   },
   "bin": {
-    "sectloom": "./dist/index.js"
+    "sectloom": "dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
   },
   "files": [
     "dist"
