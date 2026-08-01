@@ -3,6 +3,7 @@ import { siteConfig } from '@/config/site';
 import { Button } from '@/components/ui/button';
 import { WebSiteJsonLd, SoftwareApplicationJsonLd } from '@/lib/seo/json-ld';
 import { ArrowRight, Terminal, Paintbrush, Shield, Code } from 'lucide-react';
+import { CardCopyButton } from '@/components/catalog/card-copy-button';
 
 export const metadata = {
   title: {
@@ -39,14 +40,18 @@ export default function HomePage() {
             </Button>
           </div>
 
+
           <div className="mt-8 flex w-full flex-col items-center justify-center p-6 bg-muted/50 rounded-lg border border-border max-w-xl mx-auto">
             <p className="text-sm text-muted-foreground mb-4 font-medium">
               Quick start
             </p>
-            <code className="text-sm sm:text-base font-mono p-4 bg-background rounded-md border border-border w-full text-center flex items-center justify-center text-foreground">
-              <Terminal className="mr-2 h-4 w-4 text-muted-foreground" />
-              npx sectloom init && npx sectloom add hero-efficiency
-            </code>
+            <div className="flex w-full items-center justify-between bg-background rounded-md border border-border p-3 pl-4">
+              <code className="text-sm sm:text-base font-mono flex items-center text-foreground overflow-hidden">
+                <Terminal className="mr-2 h-4 w-4 shrink-0 text-muted-foreground" />
+                <span className="truncate">npx sectloom init && npx sectloom add hero-efficiency</span>
+              </code>
+              <CardCopyButton text="npx sectloom init && npx sectloom add hero-efficiency" />
+            </div>
           </div>
         </section>
 
