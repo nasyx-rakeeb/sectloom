@@ -31,18 +31,7 @@ async function buildRegistry() {
 
   await fs.mkdir(publicDir, { recursive: true });
 
-  // Copy images from data/images to public/images for previews
-  const dataImagesDir = path.join(rootDir, 'data/images');
-  const publicImagesDir = path.join(publicDir, 'images');
-  
-  try {
-    await fs.access(dataImagesDir);
-    await fs.cp(dataImagesDir, publicImagesDir, { recursive: true, force: true }).catch(() => {
-      console.warn('Warning: Could not copy images from data/images');
-    });
-  } catch (err) {
-    // dataImagesDir does not exist, safe to skip
-  }
+  // Images are hosted on Cloudflare R2, no need to copy them locally
 
   const index: any[] = [];
   const processedNames = new Set<string>();
