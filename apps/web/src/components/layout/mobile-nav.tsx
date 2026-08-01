@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { Button } from '@/components/ui/button';
@@ -30,9 +31,10 @@ export function MobileNav() {
         <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
         <Link
           href="/"
-          className="flex items-center"
+          className="flex items-center space-x-2 pl-6"
           onClick={() => setOpen(false)}
         >
+          <Image src="/logo.png" alt="Sectloom Logo" width={24} height={24} className="rounded-sm" />
           <span className="font-bold">{siteConfig.name}</span>
         </Link>
         <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
