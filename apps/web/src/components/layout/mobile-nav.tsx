@@ -30,7 +30,7 @@ export function MobileNav() {
         <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
         <Link
           href="/"
-          className="flex items-center space-x-2 pl-6"
+          className="flex items-center space-x-2 pl-6 pt-4"
           onClick={() => setOpen(false)}
         >
           <span className="font-bold">{siteConfig.name}</span>
