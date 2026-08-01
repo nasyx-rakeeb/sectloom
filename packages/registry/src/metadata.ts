@@ -15,7 +15,7 @@ export interface ComponentSourceMeta {
   registryDependencies: string[];
   requiredTokens: string[];
   propsDocumentation: Record<string, string>;
-  supportedNextJsRange: string;
+  requires?: Record<string, string>;
   files: {
     path: string; // The relative path in the package (e.g. sections/hero/hero-efficiency.tsx)
     target: string; // The target path where CLI will place it (e.g. components/sectloom/hero-efficiency.tsx)
@@ -37,8 +37,13 @@ export const registryComponents: ComponentSourceMeta[] = [
       sourceTitle: '1inch Efficiency Hero Design',
       sourceLocalPath: 'data/images/hero/001_1inch_efficiency_hero_design.jpg',
     },
-    dependencies: ['next', 'react', 'react-dom'],
+    dependencies: [],
     registryDependencies: [],
+    requires: {
+      next: '>=14.0.0',
+      react: '>=18.0.0',
+      'react-dom': '>=18.0.0',
+    },
     requiredTokens: [
       'background',
       'foreground',
@@ -63,7 +68,7 @@ export const registryComponents: ComponentSourceMeta[] = [
       secondaryCta: 'Secondary button label and href',
       stats: 'Array of { label, value } for bottom grid',
     },
-    supportedNextJsRange: '>=14.0.0',
+
     files: [
       {
         path: 'sections/hero/hero-efficiency.tsx',
@@ -85,8 +90,13 @@ export const registryComponents: ComponentSourceMeta[] = [
       sourceTitle: '1inch Apis CTA Design',
       sourceLocalPath: 'data/images/cta/001_1inch_apis_cta_design.jpg',
     },
-    dependencies: ['next', 'react', 'react-dom', 'lucide-react'],
+    dependencies: ['lucide-react'],
     registryDependencies: [],
+    requires: {
+      next: '>=14.0.0',
+      react: '>=18.0.0',
+      'react-dom': '>=18.0.0',
+    },
     requiredTokens: [
       'background',
       'foreground',
@@ -101,7 +111,7 @@ export const registryComponents: ComponentSourceMeta[] = [
       heading: 'CTA Headline',
       cta: 'Button label and href',
     },
-    supportedNextJsRange: '>=14.0.0',
+
     files: [
       {
         path: 'sections/cta/cta-apis.tsx',
@@ -124,8 +134,13 @@ export const registryComponents: ComponentSourceMeta[] = [
       sourceLocalPath:
         'data/images/contact/002_after_now_contact_grid_design.jpg',
     },
-    dependencies: ['next', 'react', 'react-dom', 'lucide-react'],
+    dependencies: ['lucide-react'],
     registryDependencies: [],
+    requires: {
+      next: '>=14.0.0',
+      react: '>=18.0.0',
+      'react-dom': '>=18.0.0',
+    },
     requiredTokens: [
       'background',
       'foreground',
@@ -143,7 +158,7 @@ export const registryComponents: ComponentSourceMeta[] = [
       careers: 'Careers link',
       socials: 'Social media links list',
     },
-    supportedNextJsRange: '>=14.0.0',
+
     files: [
       {
         path: 'sections/contact/contact-grid.tsx',
@@ -166,8 +181,13 @@ export const registryComponents: ComponentSourceMeta[] = [
       sourceLocalPath:
         'data/images/footer/002_1inch_products_footer_design.jpg',
     },
-    dependencies: ['next', 'react', 'react-dom', 'lucide-react'],
+    dependencies: ['lucide-react'],
     registryDependencies: [],
+    requires: {
+      next: '>=14.0.0',
+      react: '>=18.0.0',
+      'react-dom': '>=18.0.0',
+    },
     requiredTokens: [
       'background',
       'foreground',
@@ -187,7 +207,7 @@ export const registryComponents: ComponentSourceMeta[] = [
       linkGroups: 'Columns of navigational links',
       legal: 'Privacy, terms, and copyright text',
     },
-    supportedNextJsRange: '>=14.0.0',
+
     files: [
       {
         path: 'sections/footer/footer-products.tsx',

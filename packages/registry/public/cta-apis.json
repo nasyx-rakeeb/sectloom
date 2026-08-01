@@ -5,15 +5,17 @@
   "title": "APIs CTA",
   "description": "Solid color call to action block with abstract geometric graphic.",
   "dependencies": [
-    "next",
-    "react",
-    "react-dom",
     "lucide-react"
   ],
   "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
   "files": [
     {
-      "name": "components/sectloom/cta-apis.tsx",
+      "path": "components/sectloom/cta-apis.tsx",
       "content": "import * as React from 'react';\nimport Link from 'next/link';\nimport { Zap } from 'lucide-react';\n\nexport interface CtaApisProps {\n  heading: string;\n  cta?: {\n    label: string;\n    href: string;\n  };\n}\n\nexport function CtaApis({\n  heading = 'Power your app with enterprise-grade APIs',\n  cta = { label: 'Contact sales', href: '/contact' },\n}: CtaApisProps) {\n  return (\n    <section className=\"w-full bg-background px-4 py-8 sm:py-16\">\n      <div className=\"mx-auto max-w-[var(--container-xl)]\">\n        <div className=\"relative overflow-hidden rounded-[var(--radius-lg)] bg-primary text-primary-foreground px-8 py-16 sm:px-16 sm:py-24 grid md:grid-cols-2 gap-12 items-center\">\n          <div className=\"relative z-10 flex flex-col items-start gap-8\">\n            <h2 className=\"text-3xl sm:text-5xl font-bold tracking-tight leading-tight max-w-lg\">\n              {heading}\n            </h2>\n            {cta && (\n              <Link\n                href={cta.href}\n                className=\"inline-flex h-12 items-center justify-center rounded-[var(--radius-full)] bg-background px-8 text-sm font-medium text-foreground transition-colors hover:bg-background/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-primary\"\n              >\n                {cta.label}\n              </Link>\n            )}\n          </div>\n\n          <div className=\"relative z-0 flex justify-center md:justify-end opacity-20 md:opacity-100\">\n            {/* Abstract geometric graphic replacing the specific branded dots */}\n            <div className=\"grid grid-cols-4 sm:grid-cols-6 gap-2 sm:gap-4 animate-pulse duration-3000\">\n              {Array.from({ length: 24 }).map((_, i) => (\n                <div\n                  key={i}\n                  className=\"w-4 h-4 sm:w-6 sm:h-6 rounded-sm bg-primary-foreground/30 flex items-center justify-center\"\n                  style={{\n                    opacity: Math.random() * 0.5 + 0.2,\n                    transform: `scale(${Math.random() * 0.5 + 0.5})`,\n                  }}\n                >\n                  {i % 5 === 0 && (\n                    <Zap className=\"w-full h-full text-primary-foreground/50\" />\n                  )}\n                </div>\n              ))}\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  );\n}\n",
       "type": "registry:section",
       "checksum": "b695c75bfafe103d4b35373e6f5c8d0534eca6c2498b8fff43004dcd0f3f80aa"
@@ -48,7 +50,6 @@
     "cta": "Button label and href",
     "heading": "CTA Headline"
   },
-  "supportedNextJsRange": ">=14.0.0",
   "previewAssets": [
     {
       "type": "image",
@@ -56,5 +57,5 @@
     }
   ],
   "version": "0.1.0",
-  "checksum": "77f634967c5a9c1bd32c34ee7b7696ceb7e6c9c10fdf6666d1c6b8c49a146b15"
+  "checksum": "14075a108fddaf2bda1a5c327c9328bf7e3262d55c96590f46fa5e1c5af5622f"
 }

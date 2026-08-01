@@ -55,7 +55,7 @@ async function buildRegistry() {
 
         const content = await fs.readFile(filePath, 'utf-8');
         return {
-          name: f.target,
+          path: f.target,
           content,
           type: 'registry:section' as const,
           checksum: hashContent(content),
@@ -84,7 +84,7 @@ async function buildRegistry() {
       designProfiles: [designProfile],
       sourceReferenceMetadata: meta.sourceReferenceMetadata,
       propsDocumentation: meta.propsDocumentation,
-      supportedNextJsRange: meta.supportedNextJsRange,
+      requires: meta.requires,
       previewAssets: [
         {
           type: 'image',

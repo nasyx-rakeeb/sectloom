@@ -1,12 +1,8 @@
 [
   {
     "category": "hero",
-    "checksum": "bdfcbf4887fa5105458561d30c903ea51cad76b56532e4ed863cb4e6ca2309ab",
-    "dependencies": [
-      "next",
-      "react",
-      "react-dom"
-    ],
+    "checksum": "57fabfa4f500cdc25ca549168e7eba30acc74dca8e5ca591bc9bbff300df6289",
+    "dependencies": [],
     "description": "A dark-themed minimal hero with a responsive statistics grid.",
     "name": "hero-efficiency",
     "previewAssets": [
@@ -22,11 +18,8 @@
   },
   {
     "category": "cta",
-    "checksum": "77f634967c5a9c1bd32c34ee7b7696ceb7e6c9c10fdf6666d1c6b8c49a146b15",
+    "checksum": "14075a108fddaf2bda1a5c327c9328bf7e3262d55c96590f46fa5e1c5af5622f",
     "dependencies": [
-      "next",
-      "react",
-      "react-dom",
       "lucide-react"
     ],
     "description": "Solid color call to action block with abstract geometric graphic.",
@@ -44,11 +37,8 @@
   },
   {
     "category": "contact",
-    "checksum": "62958b0f667dd2a8bebcc97ba5cd8902956f267e5647b181d070ed4c8c245fce",
+    "checksum": "6bf81ca0e6b75dac6b9793e77d2c875e2b15c33e90b121f45fda89a5c0f53d54",
     "dependencies": [
-      "next",
-      "react",
-      "react-dom",
       "lucide-react"
     ],
     "description": "An interactive, multi-card contact section using safe standard link behaviors.",
@@ -66,11 +56,8 @@
   },
   {
     "category": "footer",
-    "checksum": "c2daa34759eaa4748be9d6b36f321abe6f08a8269d56c7c5a9e0da0c59ff36c5",
+    "checksum": "c114f24272060570ca5565d4f128858e1226003ec39e5c7cc50652609edb7812",
     "dependencies": [
-      "next",
-      "react",
-      "react-dom",
       "lucide-react"
     ],
     "description": "A dense, responsive multi-column layout for brand and navigation.",
