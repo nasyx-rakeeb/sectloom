@@ -2,8 +2,6 @@ import fs from "fs/promises";
 import path from "path";
 import Image from "next/image";
 import Link from "next/link";
-import { FooterProducts } from "@sectloom/components/src/sections/footer/footer-products";
-
 export const metadata = {
   title: "Components - Sectloom",
   description: "Browse the Sectloom component gallery.",
@@ -63,22 +61,18 @@ export default async function ComponentsPage() {
         </div>
       </main>
 
-      <FooterProducts
-        brand={{
-          name: "Sectloom",
-          description: "Distributing production-ready sections for modern React applications.",
-          certification: "Built for Next.js"
-        }}
-        navigation={[
-          { label: "Components", href: "/components" },
-          { label: "Documentation", href: "/docs" },
-          { label: "GitHub", href: "https://github.com/nasyx-rakeeb/sectloom" },
-        ]}
-        enterpriseCta={{ label: "Contact", href: "/contact" }}
-        linkGroups={[]}
-        socials={[]}
-        legal={{ copyright: "© 2026 Sectloom. All rights reserved." }}
-      />
+      {/* Simple Footer */}
+      <footer className="border-t border-border/40 py-8 px-6 mt-auto">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-6">
+            <span className="font-semibold">Sectloom</span>
+            <Link href="/components" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Components</Link>
+            <Link href="/docs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Documentation</Link>
+            <Link href="https://github.com/nasyx-rakeeb/sectloom" className="text-sm text-muted-foreground hover:text-foreground transition-colors">GitHub</Link>
+          </div>
+          <span className="text-sm text-muted-foreground">© 2026 Sectloom. All rights reserved.</span>
+        </div>
+      </footer>
     </div>
   );
 }
