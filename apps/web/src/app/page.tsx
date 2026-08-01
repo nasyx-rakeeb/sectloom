@@ -50,10 +50,10 @@ export default function Home() {
           { label: "Documentation", href: "/docs" },
           { label: "GitHub", href: "https://github.com/nasyx-rakeeb/sectloom" },
         ]}
-        enterpriseCta={{ label: "Contact Sales", href: "/contact" }}
+        enterpriseCta={{ label: "Contact", href: "/contact" }}
         linkGroups={[]}
         socials={[]}
-        legal={{ privacyHref: "/privacy", termsHref: "/terms", copyright: "© 2026 Sectloom. All rights reserved." }}
+        legal={{ copyright: "© 2026 Sectloom. All rights reserved." }}
       />
     </main>
   );
