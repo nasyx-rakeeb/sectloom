@@ -2,8 +2,9 @@ import { z } from 'zod';
 import { DesignProfileSchema } from './profiles.js';
 
 export const RegistryFileSchema = z.object({
-  name: z.string(),
-  content: z.string(),
+  path: z.string(),
+  content: z.string().optional(),
+  url: z.string().optional(),
   type: z.enum([
     'registry:ui',
     'registry:component',
@@ -34,6 +35,7 @@ export const RegistryItemSchema = z.object({
   description: z.string().optional(),
   dependencies: z.array(z.string()).default([]),
   registryDependencies: z.array(z.string()).default([]),
+  requires: z.record(z.string(), z.string()).optional(),
   files: z.array(RegistryFileSchema),
   tailwind: z
     .object({

@@ -1,6 +1,6 @@
 {
   "name": "sectloom",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Sectloom CLI for installing React components",
   "type": "module",
   "license": "MIT",

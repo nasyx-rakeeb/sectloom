@@ -4,15 +4,16 @@
   "category": "hero",
   "title": "Efficiency Hero",
   "description": "A dark-themed minimal hero with a responsive statistics grid.",
-  "dependencies": [
-    "next",
-    "react",
-    "react-dom"
-  ],
+  "dependencies": [],
   "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
   "files": [
     {
-      "name": "components/sectloom/hero-efficiency.tsx",
+      "path": "components/sectloom/hero-efficiency.tsx",
       "content": "import * as React from 'react';\nimport Link from 'next/link';\n\nexport interface HeroEfficiencyStat {\n  label: string;\n  value: string;\n}\n\nexport interface HeroEfficiencyProps {\n  overline?: string;\n  heading: string;\n  primaryCta?: {\n    label: string;\n    href: string;\n  };\n  secondaryCta?: {\n    label: string;\n    href: string;\n  };\n  stats?: HeroEfficiencyStat[];\n}\n\nexport function HeroEfficiency({\n  overline = 'Enterprise-grade DeFi APIs',\n  heading = 'Institutional scale. Agentic efficiency.',\n  primaryCta = { label: 'Start building', href: '#' },\n  secondaryCta = { label: 'View Docs', href: '#' },\n  stats = [\n    { label: 'Latency', value: '196 ms' },\n    { label: 'Total calls', value: '208B+' },\n    { label: 'Swap Volume', value: '$808B+' },\n  ],\n}: HeroEfficiencyProps) {\n  return (\n    <section className=\"bg-background text-foreground py-24 sm:py-32 flex flex-col items-center justify-center min-h-[80vh] px-6\">\n      <div className=\"max-w-[var(--container-md)] mx-auto text-center flex flex-col items-center\">\n        {overline && (\n          <p className=\"text-muted-foreground text-sm font-medium tracking-wide uppercase mb-4\">\n            {overline}\n          </p>\n        )}\n        <h1 className=\"text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-8\">\n          {heading}\n        </h1>\n\n        <div className=\"flex flex-col sm:flex-row items-center gap-4 mb-24\">\n          {primaryCta && (\n            <Link\n              href={primaryCta.href}\n              className=\"px-6 py-3 rounded-[var(--radius-full)] bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n            >\n              {primaryCta.label}\n            </Link>\n          )}\n          {secondaryCta && (\n            <Link\n              href={secondaryCta.href}\n              className=\"px-6 py-3 rounded-[var(--radius-full)] bg-secondary text-secondary-foreground font-medium hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring border border-border/50\"\n            >\n              {secondaryCta.label}\n            </Link>\n          )}\n        </div>\n\n        {stats && stats.length > 0 && (\n          <div className=\"grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-24 text-left w-full max-w-[var(--container-lg)] mt-auto pt-12 border-t border-border/10\">\n            {stats.map((stat, i) => (\n              <div key={i} className=\"flex flex-col gap-1\">\n                <span className=\"text-muted-foreground text-sm\">\n                  {stat.label}\n                </span>\n                <span className=\"text-3xl sm:text-5xl font-semibold\">\n                  {stat.value}\n                </span>\n              </div>\n            ))}\n          </div>\n        )}\n      </div>\n    </section>\n  );\n}\n",
       "type": "registry:section",
       "checksum": "9c2347da3ae1b1c90511751861cf8517174f4b3669630c193c92bac2643a19e3"
@@ -57,7 +58,6 @@
     "secondaryCta": "Secondary button label and href",
     "stats": "Array of { label, value } for bottom grid"
   },
-  "supportedNextJsRange": ">=14.0.0",
   "previewAssets": [
     {
       "type": "image",
@@ -65,5 +65,5 @@
     }
   ],
   "version": "0.1.0",
-  "checksum": "bdfcbf4887fa5105458561d30c903ea51cad76b56532e4ed863cb4e6ca2309ab"
+  "checksum": "57fabfa4f500cdc25ca549168e7eba30acc74dca8e5ca591bc9bbff300df6289"
 }

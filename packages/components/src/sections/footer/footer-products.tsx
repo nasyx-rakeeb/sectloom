@@ -38,8 +38,8 @@ export interface FooterProductsProps {
   }[];
   linkGroups?: FooterLinkGroup[];
   legal?: {
-    privacyHref: string;
-    termsHref: string;
+    privacyHref?: string;
+    termsHref?: string;
     copyright: string;
   };
 }
@@ -223,18 +223,22 @@ export function FooterProducts({
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 text-sm text-muted-foreground">
             {legal && (
               <>
-                <Link
-                  href={legal.privacyHref}
-                  className="hover:text-foreground transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  href={legal.termsHref}
-                  className="hover:text-foreground transition-colors"
-                >
-                  Terms of Use
-                </Link>
+                {legal.privacyHref && (
+                  <Link
+                    href={legal.privacyHref}
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Privacy Policy
+                  </Link>
+                )}
+                {legal.termsHref && (
+                  <Link
+                    href={legal.termsHref}
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Terms of Use
+                  </Link>
+                )}
                 <span>{legal.copyright}</span>
               </>
             )}

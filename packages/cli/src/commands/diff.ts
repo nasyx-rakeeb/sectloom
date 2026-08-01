@@ -33,7 +33,7 @@ export const diff = new Command('diff')
       let diffFound = false;
 
       for (const file of item.files) {
-        let relativeTarget = file.name;
+        let relativeTarget = file.path;
         if (hasSrc && relativeTarget.startsWith('components/')) {
           relativeTarget = 'src/' + relativeTarget;
         }
@@ -45,6 +45,11 @@ export const diff = new Command('diff')
         } catch {
           logger.warn(`File ${relativeTarget} is missing locally.`);
           diffFound = true;
+          continue;
+        }
+
+        if (!file.content) {
+          logger.warn(`Skipping diff for ${file.path}: No content in registry.`);
           continue;
         }
 

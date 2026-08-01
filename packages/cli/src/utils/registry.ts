@@ -80,11 +80,11 @@ export async function fetchRegistryItem(
 
     // Verify file checksums
     for (const file of parsed.files) {
-      if (file.checksum) {
+      if (file.checksum && file.content) {
         const fileHash = hashContent(file.content);
         if (fileHash !== file.checksum) {
           throw new Error(
-            `Checksum mismatch for file '${file.name}' in component '${name}'. Tampering detected.`
+            `Checksum mismatch for file '${file.path}' in component '${name}'. Tampering detected.`
           );
         }
       }

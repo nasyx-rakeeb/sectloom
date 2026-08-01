@@ -60,7 +60,7 @@ export const add = new Command('add')
       const filesToWrite: { absolutePath: string; content: string }[] = [];
 
       for (const file of item.files) {
-        let relativeTarget = file.name;
+        let relativeTarget = file.path;
         if (hasSrc && !relativeTarget.startsWith('src/')) {
           // simple heuristic: if it starts with 'components/', prepend 'src/'
           if (relativeTarget.startsWith('components/')) {
@@ -74,6 +74,9 @@ export const add = new Command('add')
           throw new Error(`Unsafe target path detected: ${relativeTarget}`);
         }
 
+        if (!file.content) {
+          throw new Error(`File ${file.path} is missing content in the registry.`);
+        }
         filesToWrite.push({ absolutePath, content: file.content });
       }
 
