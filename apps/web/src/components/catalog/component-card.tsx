@@ -18,7 +18,7 @@ export function ComponentCard({ item }: { item: RegistryIndexItem }) {
 
   return (
     <Link href={`/components/${item.category}/${item.name}`}>
-      <Card className="group h-full overflow-hidden transition-colors hover:border-primary">
+      <Card className="group h-full overflow-hidden p-0 gap-0 transition-colors hover:border-primary">
         {imageUrl && (
           <div className="aspect-video w-full overflow-hidden border-b bg-muted relative">
             <Image
