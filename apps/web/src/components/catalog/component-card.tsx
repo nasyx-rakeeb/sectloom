@@ -10,9 +10,11 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Terminal } from 'lucide-react';
+import { CardCopyButton } from './card-copy-button';
 
 export function ComponentCard({ item }: { item: RegistryIndexItem }) {
   const imageUrl = item.previewAssets[0]?.url;
+  const command = `npx sectloom add ${item.name}`;
 
   return (
     <Link href={`/components/${item.category}/${item.name}`}>
@@ -44,9 +46,12 @@ export function ComponentCard({ item }: { item: RegistryIndexItem }) {
           </CardDescription>
         </CardHeader>
         <CardContent className="p-4 pt-0">
-          <div className="flex items-center gap-2 rounded-md bg-muted px-2 py-1.5 text-xs text-muted-foreground">
-            <Terminal className="h-3 w-3" />
-            <span className="font-mono">npx sectloom add {item.name}</span>
+          <div className="flex items-center justify-between gap-2 rounded-md bg-muted px-3 py-2 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2 min-w-0">
+              <Terminal className="h-3 w-3 shrink-0" />
+              <span className="font-mono truncate">{command}</span>
+            </div>
+            <CardCopyButton text={command} />
           </div>
         </CardContent>
       </Card>

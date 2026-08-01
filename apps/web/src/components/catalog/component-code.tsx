@@ -16,17 +16,15 @@ export async function ComponentCode({ code, className }: ComponentCodeProps) {
 
   return (
     <div
-      className={cn('relative group rounded-lg border bg-zinc-950', className)}
+      className={cn('relative group rounded-lg border bg-zinc-950 overflow-hidden', className)}
     >
       <div className="absolute right-4 top-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
         <CopyButton text={code} />
       </div>
-      <div className="flex min-w-0 max-w-full">
-        <div
-          className="w-full overflow-x-auto text-sm"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      </div>
+      <div
+        className="overflow-x-auto p-4 text-sm [&_pre]:!m-0 [&_pre]:!bg-transparent [&_pre]:!p-0 [&_pre]:min-w-max [&_code]:!bg-transparent"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
     </div>
   );
 }
