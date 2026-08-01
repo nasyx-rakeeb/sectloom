@@ -66,7 +66,7 @@
   },
   {
     "category": "footer",
-    "checksum": "98d71b91e8ace1d5b73679177b7240344c5b0b87551d9467372fa54bd16f1920",
+    "checksum": "c2daa34759eaa4748be9d6b36f321abe6f08a8269d56c7c5a9e0da0c59ff36c5",
     "dependencies": [
       "next",
       "react",

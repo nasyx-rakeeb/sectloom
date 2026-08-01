@@ -34,9 +34,15 @@ async function buildRegistry() {
   // Copy images from data/images to public/images for previews
   const dataImagesDir = path.join(rootDir, 'data/images');
   const publicImagesDir = path.join(publicDir, 'images');
-  await fs.cp(dataImagesDir, publicImagesDir, { recursive: true, force: true }).catch(() => {
-    console.warn('Warning: Could not copy images from data/images');
-  });
+  
+  try {
+    await fs.access(dataImagesDir);
+    await fs.cp(dataImagesDir, publicImagesDir, { recursive: true, force: true }).catch(() => {
+      console.warn('Warning: Could not copy images from data/images');
+    });
+  } catch (err) {
+    // dataImagesDir does not exist, safe to skip
+  }
 
   const index: any[] = [];
   const processedNames = new Set<string>();
