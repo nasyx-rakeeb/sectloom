@@ -22,7 +22,7 @@
   },
   {
     "category": "cta",
-    "checksum": "77f634967c5a9c1bd32c34ee7b7696ceb7e6c9c10fdf6666d1c6b8c49a146b15",
+    "checksum": "f322adcb6f91b8f723ec39ea9f82d00e01c97a49ccd716ed6bb4173dc3091f61",
     "dependencies": [
       "next",
       "react",
