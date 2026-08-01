@@ -4,7 +4,7 @@ Production-ready section UI distribution platform for React applications.
 
 ## Packages and Apps
 
-- `apps/web`: Public Next.js website and registry delivery (https://sectloom.dev)
+- `apps/web`: Public Next.js website and registry delivery (https://sectloom.vercel.app)
 - `packages/cli`: Published npm CLI (`sectloom`)
 - `packages/components`: Canonical source for React sections
 - `packages/contracts`: Runtime schemas and shared types

@@ -148,7 +148,7 @@ export const init = new Command('init')
       }
 
       const config: Config = {
-        $schema: 'https://sectloom.dev/schema.json',
+        $schema: 'https://sectloom.vercel.app/schema.json',
         style: 'default',
         tailwind: {
           css: globalCssPath,

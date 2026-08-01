@@ -1,5 +1,5 @@
 {
-  "$schema": "https://sectloom.dev/schema.json",
+  "$schema": "https://sectloom.vercel.app/schema.json",
   "style": "default",
   "tailwind": {
     "css": "/Users/nasyxrakeeb/Development/Platform/fixtures/next-app/src/app/globals.css",

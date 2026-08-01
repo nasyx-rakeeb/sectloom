@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     template: '%s — Sectloom',
   },
   description: siteConfig.description,
-  metadataBase: new URL('https://sectloom.dev'),
+  metadataBase: new URL('https://sectloom.vercel.app'),
   openGraph: {
     title: 'Sectloom',
     description: siteConfig.description,
-    url: 'https://sectloom.dev',
+    url: 'https://sectloom.vercel.app',
     siteName: 'Sectloom',
     locale: 'en_US',
     type: 'website',

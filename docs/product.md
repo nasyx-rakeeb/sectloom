@@ -9,7 +9,7 @@ Sectloom is a section UI distribution platform for React applications.
 - **Product / Brand Name:** Sectloom
 - **Desired npm Package Name:** sectloom
 - **CLI Executable Command:** sectloom
-- **Intended Public Domain:** https://sectloom.dev
+- **Intended Public Domain:** https://sectloom.vercel.app
 - **Temporary Local Registry:** http://localhost:3000/registry
 
 ### Core Components
