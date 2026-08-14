@@ -1,6 +1,6 @@
 {
   "name": "sectloom",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Sectloom CLI for installing React components",
   "type": "module",
   "license": "MIT",
@@ -36,22 +36,27 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/index.js --banner:js=\"#!/usr/bin/env node\" --external:commander --external:@clack/prompts --external:picocolors --external:zod --external:diff",
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/index.js --banner:js=\"#!/usr/bin/env node\" --external:commander --external:@clack/prompts --external:picocolors --external:zod --external:diff --external:jsonc-parser --external:semver && node scripts/copy-tokens.mjs",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "pnpm run build && tsx --test test/*.test.ts"
   },
   "dependencies": {
     "commander": "^12.1.0",
     "@clack/prompts": "^0.7.0",
     "picocolors": "^1.0.0",
     "zod": "^3.23.8",
-    "diff": "^5.2.0"
+    "diff": "^5.2.0",
+    "jsonc-parser": "^3.3.1",
+    "semver": "^7.7.2"
   },
   "devDependencies": {
     "@sectloom/contracts": "workspace:*",
     "@types/node": "^20.0.0",
     "@types/diff": "^5.2.1",
+    "@types/semver": "^7.7.1",
     "esbuild": "^0.23.0",
+    "tsx": "^4.20.0",
     "typescript": "^5.4.5"
   }
 }

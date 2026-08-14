@@ -10,7 +10,8 @@
     "build": "tsc",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "validate-fixtures": "node scripts/validate.mjs"
+    "validate-fixtures": "node scripts/validate.mjs",
+    "test": "pnpm run build && pnpm run validate-fixtures"
   },
   "dependencies": {
     "zod": "^3.23.8"

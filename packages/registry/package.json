@@ -8,7 +8,8 @@
     "build": "tsx src/build.ts",
     "serve": "tsx src/serve.ts",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "tsx --test test/*.test.ts"
   },
   "dependencies": {
     "@sectloom/contracts": "workspace:*",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "prettier": "^3.0.0",
     "tsx": "^4.9.3",
     "typescript": "^5.4.5"
   }

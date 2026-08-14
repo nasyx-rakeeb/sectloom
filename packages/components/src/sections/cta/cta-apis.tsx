@@ -10,6 +10,13 @@ export interface CtaApisProps {
   };
 }
 
+function getDotStyle(index: number): React.CSSProperties {
+  return {
+    opacity: 0.2 + ((index * 37) % 51) / 100,
+    transform: `scale(${0.5 + ((index * 29) % 51) / 100})`,
+  };
+}
+
 export function CtaApis({
   heading = 'Power your app with enterprise-grade APIs',
   cta = { label: 'Contact sales', href: '/contact' },
@@ -39,10 +46,7 @@ export function CtaApis({
                 <div
                   key={i}
                   className="w-4 h-4 sm:w-6 sm:h-6 rounded-sm bg-primary-foreground/30 flex items-center justify-center"
-                  style={{
-                    opacity: Math.random() * 0.5 + 0.2,
-                    transform: `scale(${Math.random() * 0.5 + 0.5})`,
-                  }}
+                  style={getDotStyle(i)}
                 >
                   {i % 5 === 0 && (
                     <Zap className="w-full h-full text-primary-foreground/50" />

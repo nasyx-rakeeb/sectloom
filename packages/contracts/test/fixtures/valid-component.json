@@ -1,13 +1,14 @@
 {
   "name": "example-hero",
   "type": "registry:section",
+  "category": "hero",
   "title": "Example Hero",
   "description": "A valid example hero component",
   "dependencies": ["lucide-react"],
   "registryDependencies": [],
   "files": [
     {
-      "name": "example-hero.tsx",
+      "path": "components/sectloom/example-hero.tsx",
       "content": "export default function Hero() { return <div>Hero</div> }",
       "type": "registry:section"
     }

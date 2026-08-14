@@ -1,7 +1,7 @@
 # Sectloom Platform Stabilization Design
 
 **Date:** 2026-08-14
-**Status:** Awaiting written-spec review
+**Status:** Approved for implementation
 
 ## Objective
 
@@ -131,7 +131,7 @@ The stabilization is complete when:
 - Root format, lint, typecheck, test, and production build commands pass.
 - Direct web builds prepare and consume the current registry.
 - Registry outputs are deterministic, synchronized, and formatting-clean.
-- The CLI reports version `0.2.0` from its package authority.
+- The CLI reports the release version from its package authority.
 - The Next.js 16/Tailwind 4 fixture is detected correctly.
 - Custom aliases install to their configured physical directory.
 - Malicious paths and dependency strings cannot escape containment or reach a shell.

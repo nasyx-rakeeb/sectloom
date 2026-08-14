@@ -5,8 +5,14 @@ import path from 'node:path';
 import pc from 'picocolors';
 import { fetchRegistryItem } from '../utils/registry.js';
 import { getConfig, writeConfig } from '../utils/config.js';
-import { detectProject, installDependencies } from '../utils/project.js';
+import {
+  assertValidDependencySpecifier,
+  detectProject,
+  installDependencies,
+  resolveComponentsDirectory,
+} from '../utils/project.js';
 import { logger } from '../utils/logger.js';
+import { resolveInside } from '../utils/path.js';
 
 export const add = new Command('add')
   .description('Add a component to your project')
@@ -41,38 +47,22 @@ export const add = new Command('add')
       if (!options.yes && !options.dryRun)
         spinner.stop(`Found component: ${item.title}`);
 
-      // Resolve destination
-      // Using config.aliases.components but resolving it physically.
-      // Usually aliases look like "@/components", we translate it to src/components or components.
-      // For a robust implementation, we check if src/components exists.
-      const hasSrc = await fs
-        .stat(path.join(cwd, 'src'))
-        .then((s) => s.isDirectory())
-        .catch(() => false);
-
-      // We will place components into `componentsBase/sectloom/[file.name]` or similar based on `file.name`.
-      // Actually `file.name` in the registry output from Phase 04 is `components/sectloom/hero-efficiency.tsx`.
-      // We should strip the `components/` prefix if we are resolving against componentsBase, or just resolve from root?
-      // Wait, in Phase 04: target is `components/sectloom/hero-efficiency.tsx`.
-      // If `hasSrc` is true, we should probably put it in `src/components/sectloom/...`
-      // Let's just resolve relative to cwd + target, but handle `src` properly.
-
+      item.dependencies.forEach(assertValidDependencySpecifier);
+      const componentsDir = await resolveComponentsDirectory(
+        cwd,
+        config.aliases.components
+      );
       const filesToWrite: { absolutePath: string; content: string }[] = [];
 
       for (const file of item.files) {
-        let relativeTarget = file.path;
-        if (hasSrc && !relativeTarget.startsWith('src/')) {
-          // simple heuristic: if it starts with 'components/', prepend 'src/'
-          if (relativeTarget.startsWith('components/')) {
-            relativeTarget = 'src/' + relativeTarget;
-          }
-        }
-        const absolutePath = path.resolve(cwd, relativeTarget);
-
-        // Prevent path traversal
-        if (!absolutePath.startsWith(cwd)) {
-          throw new Error(`Unsafe target path detected: ${relativeTarget}`);
-        }
+        const componentPrefix = 'components/';
+        const absolutePath = file.path.startsWith(componentPrefix)
+          ? resolveInside(
+              componentsDir,
+              file.path.slice(componentPrefix.length),
+              `component target '${file.path}'`
+            )
+          : resolveInside(cwd, file.path, `registry target '${file.path}'`);
 
         if (!file.content) {
           throw new Error(
@@ -89,26 +79,6 @@ export const add = new Command('add')
           logger.info(`Would write: ${f.absolutePath}`)
         );
         return;
-      }
-
-      // Check overwrites
-      for (const file of filesToWrite) {
-        const exists = await fs
-          .stat(file.absolutePath)
-          .then(() => true)
-          .catch(() => false);
-        if (exists) {
-          if (!options.yes) {
-            const proceed = await p.confirm({
-              message: `File ${file.absolutePath} already exists. Overwrite?`,
-              initialValue: false,
-            });
-            if (p.isCancel(proceed) || !proceed) {
-              p.cancel('Installation aborted.');
-              process.exit(0);
-            }
-          }
-        }
       }
 
       // Dependencies
@@ -150,8 +120,8 @@ export const add = new Command('add')
       } else {
         logger.success(`Component ${name} added successfully.`);
       }
-    } catch (err: any) {
-      logger.error(err.message);
-      process.exit(1);
+    } catch (err: unknown) {
+      logger.error(err instanceof Error ? err.message : String(err));
+      process.exitCode = 1;
     }
   });

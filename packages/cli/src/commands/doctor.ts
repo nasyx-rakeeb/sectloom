@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import path from 'node:path';
 import pc from 'picocolors';
-import { detectProject } from '../utils/project.js';
+import { detectProject, getCompatibilityErrors } from '../utils/project.js';
 import { getConfig } from '../utils/config.js';
 import { logger } from '../utils/logger.js';
 
@@ -14,30 +14,21 @@ export const doctor = new Command('doctor')
       logger.text(pc.bold('Sectloom Environment Check\n'));
 
       const project = await detectProject(cwd);
+      const errors = getCompatibilityErrors(project);
 
-      if (project.isNextJs)
-        logger.success(
-          `Next.js detected (${project.nextVersion || 'unknown version'})`
-        );
-      else logger.error('Next.js not detected. Actionable: Install next.');
+      if (project.isNextJs && project.nextMajor !== null)
+        logger.success(`Next.js detected (${project.nextVersion})`);
+      else logger.error('Next.js 14+ with a recognizable version is required.');
 
       if (project.isAppRouter) logger.success('App Router detected');
-      else
-        logger.warn(
-          'App Router not detected. Sectloom components heavily rely on RSC and App Router.'
-        );
+      else logger.error('App Router not detected.');
 
       if (project.isTypeScript) logger.success('TypeScript detected');
-      else
-        logger.error(
-          'TypeScript not detected. Actionable: Initialize TypeScript with `npx tsc --init`.'
-        );
+      else logger.error('TypeScript not detected.');
 
-      if (project.tailwindVersion === 4)
-        logger.success('Tailwind CSS v4 detected');
-      else if (project.tailwindVersion === 3)
-        logger.warn('Tailwind CSS v3 detected. Sectloom requires v4.');
-      else logger.error('Tailwind CSS not detected.');
+      if (project.tailwindMajor === 4)
+        logger.success(`Tailwind CSS v4 detected (${project.tailwindVersion})`);
+      else logger.error('Tailwind CSS v4 not detected.');
 
       if (project.globalCssPath)
         logger.success(`Global CSS found at ${project.globalCssPath}`);
@@ -46,15 +37,15 @@ export const doctor = new Command('doctor')
       logger.info(`Detected Package Manager: ${project.packageManager}`);
 
       const config = await getConfig(cwd);
-      if (config) {
-        logger.success('sectloom.json is present and valid.');
-      } else {
-        logger.warn(
-          'sectloom.json is missing. Run `sectloom init` to create it.'
-        );
+      if (config) logger.success('sectloom.json is present and valid.');
+      else logger.warn('sectloom.json is missing. Run `sectloom init`.');
+
+      if (errors.length > 0) {
+        errors.forEach((error) => logger.error(error));
+        process.exitCode = 1;
       }
-    } catch (err: any) {
-      logger.error(err.message);
-      process.exit(1);
+    } catch (err: unknown) {
+      logger.error(err instanceof Error ? err.message : String(err));
+      process.exitCode = 1;
     }
   });

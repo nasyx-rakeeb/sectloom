@@ -4,13 +4,14 @@ import { add } from './commands/add.js';
 import { list } from './commands/list.js';
 import { diff } from './commands/diff.js';
 import { doctor } from './commands/doctor.js';
+import { getCliVersion } from './utils/version.js';
 
 const program = new Command();
 
 program
   .name('sectloom')
   .description('Sectloom CLI for installing React components')
-  .version('0.1.0');
+  .version(getCliVersion());
 
 program.addCommand(init);
 program.addCommand(add);

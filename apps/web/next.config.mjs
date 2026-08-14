@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    // ESLint 9 flat config is enforced by the workspace lint task.
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {

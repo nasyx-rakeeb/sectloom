@@ -1,8 +1,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+import { format } from 'prettier';
 import { registryComponents } from './metadata.js';
-import { RegistryItemSchema, RegistryItem } from '@sectloom/contracts';
+import { RegistryItemSchema, type RegistryItem } from '@sectloom/contracts';
+import type { ComponentSourceMeta } from './metadata.js';
 
 // Helper for deep stable sorting of objects
 function sortKeys(obj: any): any {
@@ -24,10 +27,43 @@ function hashContent(content: string): string {
   return crypto.createHash('sha256').update(content, 'utf8').digest('hex');
 }
 
-async function buildRegistry() {
-  const rootDir = path.resolve(import.meta.dirname, '../../..');
-  const componentsDir = path.join(rootDir, 'packages/components/src');
-  const publicDir = path.join(rootDir, 'packages/registry/public');
+function isPathInside(rootDir: string, candidatePath: string): boolean {
+  const relative = path.relative(rootDir, candidatePath);
+  return (
+    relative === '' ||
+    (!path.isAbsolute(relative) &&
+      relative !== '..' &&
+      !relative.startsWith(`..${path.sep}`))
+  );
+}
+
+async function writeJson(filePath: string, value: unknown): Promise<void> {
+  const json = await format(JSON.stringify(value), { parser: 'json' });
+  const temporaryPath = `${filePath}.${process.pid}.tmp`;
+  await fs.writeFile(temporaryPath, json, 'utf8');
+  await fs.rename(temporaryPath, filePath);
+}
+
+export interface BuildRegistryOptions {
+  rootDir?: string;
+  componentsDir?: string;
+  publicDir?: string;
+  components?: ComponentSourceMeta[];
+}
+
+export async function buildRegistry(
+  options: BuildRegistryOptions = {}
+): Promise<string[]> {
+  const rootDir =
+    options.rootDir ??
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+  const componentsDir =
+    options.componentsDir ?? path.join(rootDir, 'packages/components/src');
+  const publicDir =
+    options.publicDir ?? path.join(rootDir, 'packages/registry/public');
+  const components = [...(options.components ?? registryComponents)].sort(
+    (a, b) => a.name.localeCompare(b.name)
+  );
 
   await fs.mkdir(publicDir, { recursive: true });
 
@@ -36,7 +72,7 @@ async function buildRegistry() {
   const index: any[] = [];
   const processedNames = new Set<string>();
 
-  for (const meta of registryComponents) {
+  for (const meta of components) {
     if (processedNames.has(meta.name)) {
       throw new Error(`Duplicate component name detected: ${meta.name}`);
     }
@@ -46,10 +82,10 @@ async function buildRegistry() {
 
     const files = await Promise.all(
       meta.files.map(async (f) => {
-        const filePath = path.join(componentsDir, f.path);
+        const filePath = path.resolve(componentsDir, f.path);
 
         // Prevent path traversal
-        if (!filePath.startsWith(componentsDir)) {
+        if (!isPathInside(componentsDir, filePath)) {
           throw new Error(`Unsafe file path: ${f.path}`);
         }
 
@@ -98,14 +134,17 @@ async function buildRegistry() {
     const sortedItem = sortKeys(item);
     const itemJson = JSON.stringify(sortedItem);
     const itemChecksum = hashContent(itemJson);
-    sortedItem.checksum = itemChecksum;
+    const itemWithChecksum = sortKeys({
+      ...sortedItem,
+      checksum: itemChecksum,
+    });
 
     // Validate
-    const validated = RegistryItemSchema.parse(sortedItem);
+    const validated = RegistryItemSchema.parse(itemWithChecksum);
 
     // Write individual item JSON
     const outputPath = path.join(publicDir, `${meta.name}.json`);
-    await fs.writeFile(outputPath, JSON.stringify(validated, null, 2), 'utf-8');
+    await writeJson(outputPath, sortKeys(validated));
 
     // Add shallow representation to index
     index.push({
@@ -130,12 +169,30 @@ async function buildRegistry() {
   // Write index JSON deterministically
   const sortedIndex = sortKeys(index);
   const indexPath = path.join(publicDir, 'index.json');
-  await fs.writeFile(indexPath, JSON.stringify(sortedIndex, null, 2), 'utf-8');
+  await writeJson(indexPath, sortedIndex);
+
+  const expectedFiles = new Set([
+    'index.json',
+    ...components.map((component) => `${component.name}.json`),
+  ]);
+  const generatedFiles = await fs.readdir(publicDir);
+  await Promise.all(
+    generatedFiles
+      .filter((file) => file.endsWith('.json') && !expectedFiles.has(file))
+      .map((file) => fs.unlink(path.join(publicDir, file)))
+  );
 
   console.log(`Registry built successfully: ${index.length} components.`);
+  return [...expectedFiles].sort();
 }
 
-buildRegistry().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+const isMainModule =
+  process.argv[1] !== undefined &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+
+if (isMainModule) {
+  buildRegistry().catch((err) => {
+    console.error(err);
+    process.exitCode = 1;
+  });
+}

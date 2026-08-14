@@ -1,39 +1,84 @@
 import crypto from 'node:crypto';
-import { RegistryItem, RegistryItemSchema } from '@sectloom/contracts';
-import { logger } from './logger.js';
+import { z } from 'zod';
+import { type RegistryItem, RegistryItemSchema } from '@sectloom/contracts';
 
-// Shallow index item type
-export interface RegistryIndexItem {
-  name: string;
-  category: string;
-  title: string;
-  description?: string;
-  dependencies: string[];
-  registryDependencies: string[];
-  version: string;
-  checksum: string;
-}
+const COMPONENT_NAME = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+const RegistryIndexItemSchema = z.object({
+  name: z.string().regex(COMPONENT_NAME),
+  category: z.string(),
+  title: z.string(),
+  description: z.string().optional(),
+  dependencies: z.array(z.string()).default([]),
+  registryDependencies: z.array(z.string()).default([]),
+  version: z.string(),
+  checksum: z.string().min(1),
+});
+
+export type RegistryIndexItem = z.infer<typeof RegistryIndexItemSchema>;
 
 export function hashContent(content: string): string {
   return crypto.createHash('sha256').update(content, 'utf8').digest('hex');
+}
+
+export function validateComponentName(name: string): void {
+  if (!COMPONENT_NAME.test(name)) {
+    throw new Error(`Invalid component name '${name}'.`);
+  }
+}
+
+function createRegistryUrl(registryUrl: string, file: string): URL {
+  const base = new URL(
+    registryUrl.endsWith('/') ? registryUrl : `${registryUrl}/`
+  );
+  if (base.protocol !== 'https:' && base.protocol !== 'http:') {
+    throw new Error('Registry URL must use HTTP or HTTPS.');
+  }
+  return new URL(file, base);
+}
+
+export function verifyRegistryItem(item: RegistryItem): RegistryItem {
+  if (!item.checksum) {
+    throw new Error(`Component '${item.name}' is missing its checksum.`);
+  }
+
+  const clone = { ...item };
+  delete clone.checksum;
+  const actualChecksum = hashContent(JSON.stringify(sortKeys(clone)));
+  if (actualChecksum !== item.checksum) {
+    throw new Error(
+      `Checksum mismatch for component metadata '${item.name}'. Tampering detected.`
+    );
+  }
+
+  for (const file of item.files) {
+    if (file.content && !file.checksum) {
+      throw new Error(`File '${file.path}' is missing its checksum.`);
+    }
+    if (file.content && hashContent(file.content) !== file.checksum) {
+      throw new Error(
+        `Checksum mismatch for file '${file.path}' in component '${item.name}'. Tampering detected.`
+      );
+    }
+  }
+
+  return item;
 }
 
 export async function fetchRegistryIndex(
   registryUrl: string
 ): Promise<RegistryIndexItem[]> {
   try {
-    const res = await fetch(`${registryUrl}/index.json`);
-    if (!res.ok) {
+    const response = await fetch(createRegistryUrl(registryUrl, 'index.json'));
+    if (!response.ok) {
       throw new Error(
-        `Registry responded with ${res.status} ${res.statusText}`
+        `Registry responded with ${response.status} ${response.statusText}`
       );
     }
-    const data = await res.json();
-    return data as RegistryIndexItem[];
-  } catch (error: any) {
-    throw new Error(
-      `Failed to fetch registry index: ${error.message}. Are you offline?`
-    );
+    return z.array(RegistryIndexItemSchema).parse(await response.json());
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to fetch registry index: ${message}`);
   }
 }
 
@@ -42,69 +87,39 @@ export async function fetchRegistryItem(
   name: string
 ): Promise<RegistryItem> {
   try {
-    const res = await fetch(`${registryUrl}/${name}.json`);
-    if (!res.ok) {
-      if (res.status === 404) {
+    validateComponentName(name);
+    const response = await fetch(
+      createRegistryUrl(registryUrl, `${name}.json`)
+    );
+    if (!response.ok) {
+      if (response.status === 404) {
         throw new Error(`Component '${name}' not found in registry.`);
       }
       throw new Error(
-        `Registry responded with ${res.status} ${res.statusText}`
+        `Registry responded with ${response.status} ${response.statusText}`
       );
     }
-    const data = await res.json();
 
-    // Schema validation
-    const parsed = RegistryItemSchema.parse(data);
-
-    // Verify checksum
-    const expectedChecksum = parsed.checksum;
-
-    // We clone parsed, remove checksum, sort keys deeply, and hash it
-    // just like the registry builder does.
-    const clone = { ...parsed };
-    delete clone.checksum;
-
-    const sorted = sortKeys(clone);
-    const actualChecksum = hashContent(JSON.stringify(sorted));
-
-    if (expectedChecksum && actualChecksum !== expectedChecksum) {
-      logger.warn(
-        `Checksum mismatch for component metadata '${name}'. This might indicate tampering, but we will proceed. (Expected: ${expectedChecksum}, Actual: ${actualChecksum})`
-      );
-      // Optionally we could throw an error here, but typically we want to be strict.
-      // Since Phase 05 says "Verify registry and file checksums", we throw.
+    const item = RegistryItemSchema.parse(await response.json());
+    if (item.name !== name) {
       throw new Error(
-        `Checksum mismatch for component metadata '${name}'. Tampering detected.`
+        `Registry returned component '${item.name}' when '${name}' was requested.`
       );
     }
-
-    // Verify file checksums
-    for (const file of parsed.files) {
-      if (file.checksum && file.content) {
-        const fileHash = hashContent(file.content);
-        if (fileHash !== file.checksum) {
-          throw new Error(
-            `Checksum mismatch for file '${file.path}' in component '${name}'. Tampering detected.`
-          );
-        }
-      }
-    }
-
-    return parsed;
-  } catch (error: any) {
-    throw new Error(`Failed to fetch component '${name}': ${error.message}`);
+    return verifyRegistryItem(item);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to fetch component '${name}': ${message}`);
   }
 }
 
-function sortKeys(obj: any): any {
-  if (Array.isArray(obj)) {
-    return obj.map(sortKeys);
-  }
+function sortKeys(obj: unknown): unknown {
+  if (Array.isArray(obj)) return obj.map(sortKeys);
   if (obj !== null && typeof obj === 'object') {
     return Object.keys(obj)
       .sort()
-      .reduce((result: any, key) => {
-        result[key] = sortKeys(obj[key]);
+      .reduce<Record<string, unknown>>((result, key) => {
+        result[key] = sortKeys((obj as Record<string, unknown>)[key]);
         return result;
       }, {});
   }

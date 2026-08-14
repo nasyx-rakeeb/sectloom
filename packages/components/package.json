@@ -9,7 +9,8 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "tsx --test test/*.test.tsx"
   },
   "dependencies": {
     "lucide-react": "^0.378.0",
@@ -21,6 +22,7 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
+    "tsx": "^4.20.0",
     "typescript": "^5.4.5"
   }
 }

@@ -1,6 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { execSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
+import { parse as parseJsonc } from 'jsonc-parser';
+import { minVersion } from 'semver';
+import { resolveInside } from './path.js';
 
 export interface ProjectInfo {
   isNextJs: boolean;
@@ -8,19 +11,134 @@ export interface ProjectInfo {
   isTypeScript: boolean;
   packageManager: 'npm' | 'yarn' | 'pnpm' | 'bun';
   globalCssPath: string | null;
-  tailwindVersion: 3 | 4 | null;
+  nextVersion: string | null;
+  nextMajor: number | null;
+  tailwindVersion: string | null;
+  tailwindMajor: number | null;
   hasTailwindConfig: boolean;
   componentsAlias: string | null;
   utilsAlias: string | null;
-  nextVersion: string | null;
+}
+
+interface ParsedTsConfig {
+  baseUrl: string;
+  paths: Record<string, string[]>;
+}
+
+const DEPENDENCY_SPECIFIER =
+  /^(?:@[a-z0-9][a-z0-9._-]*\/[a-z0-9][a-z0-9._-]*|[a-z0-9][a-z0-9._-]*)(?:@[a-zA-Z0-9.*^~<>=|+_-]+)?$/;
+
+function normalizeVersionSpec(spec: string): string | null {
+  let normalized = spec.trim();
+
+  if (normalized.startsWith('workspace:')) {
+    normalized = normalized.slice('workspace:'.length);
+  }
+
+  if (normalized.startsWith('npm:')) {
+    const aliasMatch = normalized.match(/^npm:(?:@[^/]+\/[^@]+|[^@]+)@(.+)$/);
+    if (!aliasMatch) return null;
+    normalized = aliasMatch[1];
+  }
+
+  return normalized === '' || normalized === '*' ? null : normalized;
+}
+
+export function getMinimumMajor(versionSpec: string | null): number | null {
+  if (!versionSpec) return null;
+  const normalized = normalizeVersionSpec(versionSpec);
+  if (!normalized) return null;
+
+  try {
+    const minimum = minVersion(normalized, { loose: true });
+    return minimum?.major ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function readTsConfig(cwd: string): Promise<ParsedTsConfig> {
+  try {
+    const raw = await fs.readFile(path.join(cwd, 'tsconfig.json'), 'utf8');
+    const parsed = parseJsonc(raw) as {
+      compilerOptions?: {
+        baseUrl?: string;
+        paths?: Record<string, string[]>;
+      };
+    };
+    return {
+      baseUrl: parsed.compilerOptions?.baseUrl ?? '.',
+      paths: parsed.compilerOptions?.paths ?? {},
+    };
+  } catch {
+    return { baseUrl: '.', paths: {} };
+  }
+}
+
+function resolveAliasFromPaths(
+  alias: string,
+  paths: Record<string, string[]>
+): string | null {
+  for (const [pattern, targets] of Object.entries(paths)) {
+    const target = targets[0];
+    if (!target) continue;
+
+    const wildcardIndex = pattern.indexOf('*');
+    if (wildcardIndex === -1) {
+      if (pattern === alias) return target;
+      continue;
+    }
+
+    const prefix = pattern.slice(0, wildcardIndex);
+    const suffix = pattern.slice(wildcardIndex + 1);
+    if (!alias.startsWith(prefix) || !alias.endsWith(suffix)) continue;
+
+    const wildcardValue = alias.slice(
+      prefix.length,
+      alias.length - suffix.length
+    );
+    return target.replace('*', wildcardValue);
+  }
+
+  return null;
+}
+
+export async function resolveComponentsDirectory(
+  cwd: string,
+  alias: string
+): Promise<string> {
+  const tsconfig = await readTsConfig(cwd);
+  const mappedPath = resolveAliasFromPaths(alias, tsconfig.paths);
+
+  if (mappedPath) {
+    return resolveInside(
+      cwd,
+      path.resolve(cwd, tsconfig.baseUrl, mappedPath.replace(/\/\*$/, '')),
+      `components alias '${alias}'`
+    );
+  }
+
+  if (alias === '@/components') {
+    const hasSrc = await fs
+      .stat(path.join(cwd, 'src'))
+      .then((stat) => stat.isDirectory())
+      .catch(() => false);
+    return path.join(cwd, hasSrc ? 'src/components' : 'components');
+  }
+
+  throw new Error(
+    `Unable to resolve components alias '${alias}' from tsconfig.json paths.`
+  );
 }
 
 export async function detectProject(cwd: string): Promise<ProjectInfo> {
   const pkgPath = path.join(cwd, 'package.json');
-  let pkg: any = {};
+  let pkg: {
+    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
+  };
   try {
-    const pkgContent = await fs.readFile(pkgPath, 'utf-8');
-    pkg = JSON.parse(pkgContent);
+    pkg = JSON.parse(await fs.readFile(pkgPath, 'utf8'));
   } catch {
     throw new Error(
       `Failed to read package.json in ${cwd}. Are you in a project root?`
@@ -28,70 +146,53 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
   }
 
   const nextVersion =
-    pkg.dependencies?.next || pkg.devDependencies?.next || null;
-  const isNextJs = !!nextVersion;
+    pkg.dependencies?.next ?? pkg.devDependencies?.next ?? null;
+  const tailwindVersion =
+    pkg.dependencies?.tailwindcss ?? pkg.devDependencies?.tailwindcss ?? null;
 
-  // Check for app router
-  const hasAppDir = await fs
-    .stat(path.join(cwd, 'app'))
-    .then((s) => s.isDirectory())
-    .catch(() => false);
-  const hasSrcAppDir = await fs
-    .stat(path.join(cwd, 'src', 'app'))
-    .then((s) => s.isDirectory())
-    .catch(() => false);
-  const isAppRouter = hasAppDir || hasSrcAppDir;
+  const [hasAppDir, hasSrcAppDir, isTypeScript] = await Promise.all([
+    fs
+      .stat(path.join(cwd, 'app'))
+      .then((stat) => stat.isDirectory())
+      .catch(() => false),
+    fs
+      .stat(path.join(cwd, 'src/app'))
+      .then((stat) => stat.isDirectory())
+      .catch(() => false),
+    fs
+      .stat(path.join(cwd, 'tsconfig.json'))
+      .then((stat) => stat.isFile())
+      .catch(() => false),
+  ]);
 
-  const isTypeScript = await fs
-    .stat(path.join(cwd, 'tsconfig.json'))
-    .then((s) => s.isFile())
-    .catch(() => false);
-
-  // Package manager
-  let packageManager: 'npm' | 'yarn' | 'pnpm' | 'bun' = 'npm';
-  if (
-    await fs
-      .stat(path.join(cwd, 'pnpm-lock.yaml'))
+  let packageManager: ProjectInfo['packageManager'] = 'npm';
+  const lockfiles: [string, ProjectInfo['packageManager']][] = [
+    ['pnpm-lock.yaml', 'pnpm'],
+    ['yarn.lock', 'yarn'],
+    ['bun.lock', 'bun'],
+    ['bun.lockb', 'bun'],
+  ];
+  for (const [lockfile, manager] of lockfiles) {
+    const exists = await fs
+      .stat(path.join(cwd, lockfile))
       .then(() => true)
-      .catch(() => false)
-  )
-    packageManager = 'pnpm';
-  else if (
-    await fs
-      .stat(path.join(cwd, 'yarn.lock'))
-      .then(() => true)
-      .catch(() => false)
-  )
-    packageManager = 'yarn';
-  else if (
-    await fs
-      .stat(path.join(cwd, 'bun.lockb'))
-      .then(() => true)
-      .catch(() => false)
-  )
-    packageManager = 'bun';
-
-  // Tailwind Version
-  const twVersionRaw =
-    pkg.dependencies?.tailwindcss || pkg.devDependencies?.tailwindcss;
-  let tailwindVersion: 3 | 4 | null = null;
-  if (twVersionRaw) {
-    if (twVersionRaw.includes('4.')) tailwindVersion = 4;
-    else if (twVersionRaw.includes('3.')) tailwindVersion = 3;
-    else tailwindVersion = 3; // fallback guessing 3 for others
+      .catch(() => false);
+    if (exists) {
+      packageManager = manager;
+      break;
+    }
   }
 
-  const hasTailwindConfig =
-    (await fs
-      .stat(path.join(cwd, 'tailwind.config.ts'))
-      .then(() => true)
-      .catch(() => false)) ||
-    (await fs
-      .stat(path.join(cwd, 'tailwind.config.js'))
-      .then(() => true)
-      .catch(() => false));
+  const hasTailwindConfig = await Promise.all(
+    ['tailwind.config.ts', 'tailwind.config.js', 'tailwind.config.mjs'].map(
+      (file) =>
+        fs
+          .stat(path.join(cwd, file))
+          .then(() => true)
+          .catch(() => false)
+    )
+  ).then((results) => results.some(Boolean));
 
-  // Global CSS candidates
   const cssCandidates = [
     'app/globals.css',
     'src/app/globals.css',
@@ -101,65 +202,102 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
     'src/app/global.css',
   ];
   let globalCssPath: string | null = null;
-  for (const c of cssCandidates) {
-    const full = path.join(cwd, c);
-    if (
-      await fs
-        .stat(full)
-        .then(() => true)
-        .catch(() => false)
-    ) {
-      globalCssPath = full;
+  for (const candidate of cssCandidates) {
+    const exists = await fs
+      .stat(path.join(cwd, candidate))
+      .then((stat) => stat.isFile())
+      .catch(() => false);
+    if (exists) {
+      globalCssPath = candidate;
       break;
     }
   }
 
-  // Check tsconfig for aliases
-  let componentsAlias = null;
-  let utilsAlias = null;
-  try {
-    const tsconfigRaw = await fs.readFile(
-      path.join(cwd, 'tsconfig.json'),
-      'utf-8'
-    );
-    // VERY primitive JSON parsing to bypass comments
-    const cleaned = tsconfigRaw.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '');
-    const tsconfig = JSON.parse(cleaned);
-    const paths = tsconfig.compilerOptions?.paths || {};
-    if (paths['@/components/*']) componentsAlias = '@/components';
-    if (paths['@/utils/*'] || paths['@/lib/utils/*'])
-      utilsAlias = paths['@/utils/*'] ? '@/utils' : '@/lib/utils';
-  } catch {
-    // ignore
-  }
+  const tsconfig = await readTsConfig(cwd);
+  const componentsAlias =
+    Object.keys(tsconfig.paths)
+      .find((alias) => alias.startsWith('@/components'))
+      ?.replace(/\/\*$/, '') ?? null;
+  const utilsAlias =
+    Object.keys(tsconfig.paths)
+      .find((alias) => alias.includes('/utils') || alias.includes('/lib/utils'))
+      ?.replace(/\/\*$/, '') ?? null;
 
   return {
-    isNextJs,
-    isAppRouter,
+    isNextJs: nextVersion !== null,
+    isAppRouter: hasAppDir || hasSrcAppDir,
     isTypeScript,
     packageManager,
     globalCssPath,
+    nextVersion,
+    nextMajor: getMinimumMajor(nextVersion),
     tailwindVersion,
+    tailwindMajor: getMinimumMajor(tailwindVersion),
     hasTailwindConfig,
     componentsAlias,
     utilsAlias,
-    nextVersion,
   };
+}
+
+export function getCompatibilityErrors(project: ProjectInfo): string[] {
+  const errors: string[] = [];
+  if (!project.isNextJs) errors.push('Next.js is not installed.');
+  else if (project.nextMajor === null)
+    errors.push(
+      `Unable to determine Next.js version '${project.nextVersion}'.`
+    );
+  else if (project.nextMajor < 14)
+    errors.push('Sectloom requires Next.js 14 or newer.');
+
+  if (!project.isAppRouter) errors.push('Next.js App Router was not detected.');
+  if (!project.isTypeScript) errors.push('TypeScript was not detected.');
+
+  if (project.tailwindVersion === null)
+    errors.push('Tailwind CSS is not installed.');
+  else if (project.tailwindMajor === null)
+    errors.push(
+      `Unable to determine Tailwind CSS version '${project.tailwindVersion}'.`
+    );
+  else if (project.tailwindMajor !== 4)
+    errors.push('Sectloom requires Tailwind CSS 4.');
+
+  return errors;
+}
+
+export function assertValidDependencySpecifier(dependency: string): void {
+  if (!DEPENDENCY_SPECIFIER.test(dependency)) {
+    throw new Error(`Unsafe dependency specifier: ${dependency}`);
+  }
+}
+
+export function createDependencyInstallCommand(
+  packageManager: ProjectInfo['packageManager'],
+  dependencies: string[]
+): { command: string; args: string[] } {
+  dependencies.forEach(assertValidDependencySpecifier);
+  const action = packageManager === 'npm' ? 'install' : 'add';
+  return { command: packageManager, args: [action, ...dependencies] };
 }
 
 export function installDependencies(
   cwd: string,
-  pm: 'npm' | 'yarn' | 'pnpm' | 'bun',
-  deps: string[]
-) {
-  if (deps.length === 0) return;
-  const cmd =
-    pm === 'npm'
-      ? 'npm install'
-      : pm === 'yarn'
-        ? 'yarn add'
-        : pm === 'bun'
-          ? 'bun add'
-          : 'pnpm install';
-  execSync(`${cmd} ${deps.join(' ')}`, { cwd, stdio: 'inherit' });
+  packageManager: ProjectInfo['packageManager'],
+  dependencies: string[]
+): void {
+  if (dependencies.length === 0) return;
+  const { command, args } = createDependencyInstallCommand(
+    packageManager,
+    dependencies
+  );
+  const result = spawnSync(command, args, {
+    cwd,
+    stdio: 'inherit',
+    shell: false,
+  });
+  if (result.error) throw result.error;
+  if (result.status !== 0) {
+    throw new Error(
+      `${command} ${args[0]} failed with exit code ${result.status ?? 'unknown'}.`
+    );
+  }
 }

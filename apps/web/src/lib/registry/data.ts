@@ -212,9 +212,7 @@ export function generateComponentParams(): {
 }
 
 /** Generates sitemap entries for all registry-backed routes. */
-export function getSitemapEntries(
-  baseUrl: string
-): {
+export function getSitemapEntries(baseUrl: string): {
   url: string;
   lastModified: Date;
   changeFrequency: string;

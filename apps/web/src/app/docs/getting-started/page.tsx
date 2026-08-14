@@ -77,9 +77,9 @@ export default function GettingStartedPage() {
 
         <h3>Step 2: Browse Available Sections</h3>
         <p>
-          Visit <a href="/components">sectloom.vercel.app/components</a> to browse our
-          collection of sections and find what you need for your page. You can
-          also use the CLI to list components:
+          Visit <a href="/components">sectloom.vercel.app/components</a> to
+          browse our collection of sections and find what you need for your
+          page. You can also use the CLI to list components:
         </p>
         <pre>
           <code>npx sectloom list</code>

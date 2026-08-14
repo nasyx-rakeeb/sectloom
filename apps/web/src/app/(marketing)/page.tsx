@@ -40,7 +40,6 @@ export default function HomePage() {
             </Button>
           </div>
 
-
           <div className="mt-8 flex w-full flex-col items-center justify-center p-6 bg-muted/50 rounded-lg border border-border max-w-xl mx-auto">
             <p className="text-sm text-muted-foreground mb-4 font-medium">
               Quick start
@@ -48,7 +47,9 @@ export default function HomePage() {
             <div className="flex w-full items-center justify-between bg-background rounded-md border border-border p-3 pl-4">
               <code className="text-sm sm:text-base font-mono flex items-center text-foreground overflow-hidden">
                 <Terminal className="mr-2 h-4 w-4 shrink-0 text-muted-foreground" />
-                <span className="truncate">npx sectloom init && npx sectloom add hero-efficiency</span>
+                <span className="truncate">
+                  npx sectloom init && npx sectloom add hero-efficiency
+                </span>
               </code>
               <CardCopyButton text="npx sectloom init && npx sectloom add hero-efficiency" />
             </div>
