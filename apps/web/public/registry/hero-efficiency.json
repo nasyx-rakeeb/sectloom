@@ -1,20 +1,20 @@
 {
   "category": "hero",
-  "checksum": "57fabfa4f500cdc25ca549168e7eba30acc74dca8e5ca591bc9bbff300df6289",
+  "checksum": "1dc8e857934a986053c3877f74ae3a8f0da2edd8a9dc365b06b2c6b2a1de75b5",
   "dependencies": [],
-  "description": "A dark-themed minimal hero with a responsive statistics grid.",
+  "description": "An exact-fidelity black hero with oversized typography, pill actions, and a three-column statistics row.",
   "designProfiles": [
     {
       "complexity": "Medium",
       "style": "Modern",
       "tags": ["minimal-dark"],
-      "theme": "System"
+      "theme": "Dark"
     }
   ],
   "files": [
     {
-      "checksum": "9c2347da3ae1b1c90511751861cf8517174f4b3669630c193c92bac2643a19e3",
-      "content": "import * as React from 'react';\nimport Link from 'next/link';\n\nexport interface HeroEfficiencyStat {\n  label: string;\n  value: string;\n}\n\nexport interface HeroEfficiencyProps {\n  overline?: string;\n  heading: string;\n  primaryCta?: {\n    label: string;\n    href: string;\n  };\n  secondaryCta?: {\n    label: string;\n    href: string;\n  };\n  stats?: HeroEfficiencyStat[];\n}\n\nexport function HeroEfficiency({\n  overline = 'Enterprise-grade DeFi APIs',\n  heading = 'Institutional scale. Agentic efficiency.',\n  primaryCta = { label: 'Start building', href: '#' },\n  secondaryCta = { label: 'View Docs', href: '#' },\n  stats = [\n    { label: 'Latency', value: '196 ms' },\n    { label: 'Total calls', value: '208B+' },\n    { label: 'Swap Volume', value: '$808B+' },\n  ],\n}: HeroEfficiencyProps) {\n  return (\n    <section className=\"bg-background text-foreground py-24 sm:py-32 flex flex-col items-center justify-center min-h-[80vh] px-6\">\n      <div className=\"max-w-[var(--container-md)] mx-auto text-center flex flex-col items-center\">\n        {overline && (\n          <p className=\"text-muted-foreground text-sm font-medium tracking-wide uppercase mb-4\">\n            {overline}\n          </p>\n        )}\n        <h1 className=\"text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-8\">\n          {heading}\n        </h1>\n\n        <div className=\"flex flex-col sm:flex-row items-center gap-4 mb-24\">\n          {primaryCta && (\n            <Link\n              href={primaryCta.href}\n              className=\"px-6 py-3 rounded-[var(--radius-full)] bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n            >\n              {primaryCta.label}\n            </Link>\n          )}\n          {secondaryCta && (\n            <Link\n              href={secondaryCta.href}\n              className=\"px-6 py-3 rounded-[var(--radius-full)] bg-secondary text-secondary-foreground font-medium hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring border border-border/50\"\n            >\n              {secondaryCta.label}\n            </Link>\n          )}\n        </div>\n\n        {stats && stats.length > 0 && (\n          <div className=\"grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-24 text-left w-full max-w-[var(--container-lg)] mt-auto pt-12 border-t border-border/10\">\n            {stats.map((stat, i) => (\n              <div key={i} className=\"flex flex-col gap-1\">\n                <span className=\"text-muted-foreground text-sm\">\n                  {stat.label}\n                </span>\n                <span className=\"text-3xl sm:text-5xl font-semibold\">\n                  {stat.value}\n                </span>\n              </div>\n            ))}\n          </div>\n        )}\n      </div>\n    </section>\n  );\n}\n",
+      "checksum": "a82858bd696528ff5c00506344cc9e51e8ca75b15310e16053b063eba184a692",
+      "content": "import * as React from 'react';\nimport Link from 'next/link';\n\nexport interface HeroEfficiencyStat {\n  label: string;\n  value: string;\n}\n\nexport interface HeroEfficiencyProps {\n  overline?: string;\n  heading?: string;\n  primaryCta?: {\n    label: string;\n    href: string;\n  } | null;\n  secondaryCta?: {\n    label: string;\n    href: string;\n  } | null;\n  stats?: HeroEfficiencyStat[];\n}\n\nconst DEFAULT_PRIMARY_CTA = { label: 'Start building', href: '#' };\nconst DEFAULT_SECONDARY_CTA = { label: 'View Docs', href: '#' };\nconst DEFAULT_STATS: HeroEfficiencyStat[] = [\n  { label: 'Latency', value: '196 ms' },\n  { label: 'Total calls', value: '208B+' },\n  { label: 'Swap Volume', value: '$808B+' },\n];\n\nexport function HeroEfficiency({\n  overline = 'Enterprise-grade DeFi APIs',\n  heading = 'Institutional scale. Agentic efficiency.',\n  primaryCta = DEFAULT_PRIMARY_CTA,\n  secondaryCta = DEFAULT_SECONDARY_CTA,\n  stats = DEFAULT_STATS,\n}: HeroEfficiencyProps) {\n  return (\n    <section className=\"flex min-h-[760px] w-full overflow-hidden bg-black px-5 py-20 text-white sm:min-h-[900px] sm:px-10 sm:py-24 lg:min-h-[980px] lg:px-[4.5vw]\">\n      <div className=\"mx-auto flex w-full max-w-[1640px] flex-1 flex-col\">\n        <div className=\"flex flex-1 flex-col items-center justify-center pb-20 pt-8 text-center sm:pb-28 lg:pt-16\">\n          {overline ? (\n            <p className=\"mb-5 text-sm font-normal tracking-[-0.01em] text-[#8b8b91] sm:text-lg\">\n              {overline}\n            </p>\n          ) : null}\n\n          <h1 className=\"max-w-[1500px] text-balance text-[clamp(2.45rem,6.1vw,6.9rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-white\">\n            {heading}\n          </h1>\n\n          {primaryCta || secondaryCta ? (\n            <div className=\"mt-10 flex flex-col items-stretch gap-3 min-[420px]:flex-row min-[420px]:items-center\">\n              {primaryCta ? (\n                <Link\n                  href={primaryCta.href}\n                  className=\"inline-flex min-h-14 items-center justify-center rounded-full bg-white px-8 text-base font-semibold text-black transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black\"\n                >\n                  {primaryCta.label}\n                </Link>\n              ) : null}\n              {secondaryCta ? (\n                <Link\n                  href={secondaryCta.href}\n                  className=\"inline-flex min-h-14 items-center justify-center rounded-full bg-[#202023] px-8 text-base font-semibold text-white transition-colors hover:bg-[#2c2c30] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black\"\n                >\n                  {secondaryCta.label}\n                </Link>\n              ) : null}\n            </div>\n          ) : null}\n        </div>\n\n        {stats.length > 0 ? (\n          <dl className=\"grid w-full grid-cols-1 gap-8 border-t border-white/10 pt-8 sm:grid-cols-3 sm:border-0 sm:pt-0\">\n            {stats.map((stat) => (\n              <div key={stat.label} className=\"flex flex-col gap-1\">\n                <dt className=\"text-sm text-[#929298] sm:text-base\">\n                  {stat.label}\n                </dt>\n                <dd className=\"text-[clamp(2.7rem,4.4vw,5rem)] font-medium leading-none tracking-[-0.045em] text-white\">\n                  {stat.value}\n                </dd>\n              </div>\n            ))}\n          </dl>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n",
       "path": "components/sectloom/hero-efficiency.tsx",
       "type": "registry:section"
     }
@@ -34,23 +34,6 @@
     "stats": "Array of { label, value } for bottom grid"
   },
   "registryDependencies": [],
-  "requiredTokens": [
-    "background",
-    "foreground",
-    "muted",
-    "muted-foreground",
-    "primary",
-    "primary-foreground",
-    "secondary",
-    "secondary-foreground",
-    "border",
-    "ring",
-    "radius-full",
-    "radius-lg",
-    "container-md",
-    "container-lg",
-    "container-xl"
-  ],
   "requires": {
     "next": ">=14.0.0",
     "react": ">=18.0.0",
@@ -63,5 +46,5 @@
   },
   "title": "Efficiency Hero",
   "type": "registry:section",
-  "version": "0.1.0"
+  "version": "0.2.0"
 }

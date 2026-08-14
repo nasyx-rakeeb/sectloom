@@ -109,8 +109,9 @@ export default function DocsPage() {
           <code>npx sectloom init</code>
         </pre>
         <p>
-          This configures your project, sets up the token architecture, and
-          creates a <code>sectloom.json</code> file.
+          This validates your project, configures the section destination, and
+          creates a <code>sectloom.json</code> file without modifying global
+          styles.
         </p>
 
         <pre>
@@ -118,8 +119,8 @@ export default function DocsPage() {
         </pre>
         <p>
           This command downloads the requested section, installs any necessary
-          npm dependencies (like Lucide React), and places the code in your
-          components directory.
+          npm dependencies when required, and places the exact preview-matching
+          source in your components directory.
         </p>
 
         <Separator className="my-8" />

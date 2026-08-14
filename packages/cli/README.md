@@ -20,7 +20,6 @@ npx sectloom add hero-efficiency
 Initializes your Next.js project with Sectloom. This command:
 
 - Ensures you have a compatible Next.js and Tailwind CSS v4 setup.
-- Injects the required Sectloom semantic CSS tokens into your global stylesheet.
 - Creates a local `sectloom.json` configuration file.
 
 ```bash
@@ -42,6 +41,7 @@ Installs a component from the registry into your local project. This command:
 - Downloads the exact `.tsx` source code for the component.
 - Automatically installs any required third-party dependencies (like `lucide-react`).
 - Writes the component to your configured components directory.
+- Preserves the section's reference-specific styling without adding a global Sectloom theme.
 
 ```bash
 npx sectloom add contact-grid

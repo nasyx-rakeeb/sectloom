@@ -45,10 +45,9 @@ test('registry builds repeatably and removes stale JSON', async (t) => {
   assert.deepEqual(second, first);
   await assert.rejects(fs.stat(path.join(publicDir, 'stale.json')));
   for (const file of Object.keys(second)) {
-    assert.equal(
-      (await fs.readFile(path.join(publicDir, file), 'utf8')).endsWith('\n'),
-      true
-    );
+    const content = await fs.readFile(path.join(publicDir, file), 'utf8');
+    assert.equal(content.endsWith('\n'), true);
+    assert.doesNotMatch(content, /requiredTokens|"tailwind"\s*:\s*\{/);
   }
 });
 

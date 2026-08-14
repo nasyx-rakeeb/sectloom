@@ -10,7 +10,7 @@ packages/components  -----> packages/registry -----> public registry routes
        +-------------------------+-------------------------+----> website
 
 Consumer project:
-public registry -> published CLI -> local TSX + semantic tokens + dependencies
+public registry -> published CLI -> exact section source + dependencies
 ```
 
 ## Monorepo Structure
@@ -18,8 +18,9 @@ public registry -> published CLI -> local TSX + semantic tokens + dependencies
 - `apps/web/`: Public Next.js website and public registry delivery.
 - `packages/components/`: Canonical source for manually crafted sections.
 - `packages/contracts/`: Runtime schemas and shared types.
-- `packages/tokens/`: Tailwind v4 semantic token contract.
 - `packages/registry/`: Deterministic registry builder and generated artifacts.
 - `packages/cli/`: Published npm CLI.
 - `fixtures/next-app/`: Disposable/manual Next.js compatibility project.
 - `data/`: Source manifests and images.
+
+Distributed sections do not depend on the public website's internal theme. Their concrete styling travels with their source files.

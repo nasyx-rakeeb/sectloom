@@ -4,12 +4,6 @@ import path from 'node:path';
 
 export const ConfigSchema = z.object({
   $schema: z.string().optional(),
-  style: z.string().default('default'),
-  tailwind: z.object({
-    css: z.string(),
-    config: z.string().optional(), // Tailwind v4 doesn't have a config file usually, but we keep it optional
-    baseColor: z.string().default('slate'),
-  }),
   aliases: z.object({
     components: z.string(),
     utils: z.string().optional(),

@@ -6,6 +6,7 @@ export interface ComponentSourceMeta {
   category: string;
   type?: string;
   designProfile: string;
+  version: string;
   sourceReferenceMetadata: {
     sourceId: string;
     sourceTitle: string;
@@ -13,7 +14,6 @@ export interface ComponentSourceMeta {
   };
   dependencies: string[];
   registryDependencies: string[];
-  requiredTokens: string[];
   propsDocumentation: Record<string, string>;
   requires?: Record<string, string>;
   files: {
@@ -29,9 +29,10 @@ export const registryComponents: ComponentSourceMeta[] = [
     name: 'hero-efficiency',
     title: 'Efficiency Hero',
     description:
-      'A dark-themed minimal hero with a responsive statistics grid.',
+      'An exact-fidelity black hero with oversized typography, pill actions, and a three-column statistics row.',
     category: 'hero',
     designProfile: 'minimal-dark',
+    version: '0.2.0',
     sourceReferenceMetadata: {
       sourceId: '1',
       sourceTitle: '1inch Efficiency Hero Design',
@@ -44,23 +45,6 @@ export const registryComponents: ComponentSourceMeta[] = [
       react: '>=18.0.0',
       'react-dom': '>=18.0.0',
     },
-    requiredTokens: [
-      'background',
-      'foreground',
-      'muted',
-      'muted-foreground',
-      'primary',
-      'primary-foreground',
-      'secondary',
-      'secondary-foreground',
-      'border',
-      'ring',
-      'radius-full',
-      'radius-lg',
-      'container-md',
-      'container-lg',
-      'container-xl',
-    ],
     propsDocumentation: {
       overline: 'Optional small text above heading',
       heading: 'Main large text',
@@ -83,31 +67,22 @@ export const registryComponents: ComponentSourceMeta[] = [
     name: 'cta-apis',
     title: 'APIs CTA',
     description:
-      'Solid color call to action block with abstract geometric graphic.',
+      'A vivid blue API callout with a white pill action and dotted geometric illustration.',
     category: 'cta',
     designProfile: 'bold-solid',
+    version: '0.2.0',
     sourceReferenceMetadata: {
       sourceId: '1',
       sourceTitle: '1inch Apis CTA Design',
       sourceLocalPath: 'data/images/cta/001_1inch_apis_cta_design.jpg',
     },
-    dependencies: ['lucide-react'],
+    dependencies: [],
     registryDependencies: [],
     requires: {
       next: '>=14.0.0',
       react: '>=18.0.0',
       'react-dom': '>=18.0.0',
     },
-    requiredTokens: [
-      'background',
-      'foreground',
-      'primary',
-      'primary-foreground',
-      'radius-lg',
-      'radius-full',
-      'ring',
-      'container-xl',
-    ],
     propsDocumentation: {
       heading: 'CTA Headline',
       cta: 'Button label and href',
@@ -127,32 +102,23 @@ export const registryComponents: ComponentSourceMeta[] = [
     name: 'contact-grid',
     title: 'Contact Grid',
     description:
-      'An interactive, multi-card contact section using safe standard link behaviors.',
+      'An asymmetric black contact section with muted olive cards, compact actions, address details, and social links.',
     category: 'contact',
     designProfile: 'card-grid',
+    version: '0.2.0',
     sourceReferenceMetadata: {
       sourceId: '2',
       sourceTitle: 'After Now Contact Grid Design',
       sourceLocalPath:
         'data/images/contact/002_after_now_contact_grid_design.jpg',
     },
-    dependencies: ['lucide-react'],
+    dependencies: [],
     registryDependencies: [],
     requires: {
       next: '>=14.0.0',
       react: '>=18.0.0',
       'react-dom': '>=18.0.0',
     },
-    requiredTokens: [
-      'background',
-      'foreground',
-      'muted',
-      'muted-foreground',
-      'border',
-      'radius-lg',
-      'ring',
-      'container-xl',
-    ],
     propsDocumentation: {
       heading: 'Left side large heading',
       inquiries: 'List of actionable contact methods',
@@ -175,33 +141,23 @@ export const registryComponents: ComponentSourceMeta[] = [
     name: 'footer-products',
     title: 'Products Footer',
     description:
-      'A dense, responsive multi-column layout for brand and navigation.',
+      'A high-density black footer with oversized branding, a stepped social grid, and product and chain navigation.',
     category: 'footer',
     designProfile: 'multi-column',
+    version: '0.2.0',
     sourceReferenceMetadata: {
       sourceId: '2',
       sourceTitle: '1inch Products Footer Design',
       sourceLocalPath:
         'data/images/footer/002_1inch_products_footer_design.jpg',
     },
-    dependencies: ['lucide-react'],
+    dependencies: [],
     registryDependencies: [],
     requires: {
       next: '>=14.0.0',
       react: '>=18.0.0',
       'react-dom': '>=18.0.0',
     },
-    requiredTokens: [
-      'background',
-      'foreground',
-      'muted',
-      'muted-foreground',
-      'primary',
-      'border',
-      'radius-full',
-      'ring',
-      'container-xl',
-    ],
     propsDocumentation: {
       brand: 'Brand name, description, and certification',
       navigation: 'Quick nav links under brand',

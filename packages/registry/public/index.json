@@ -1,9 +1,9 @@
 [
   {
     "category": "contact",
-    "checksum": "6bf81ca0e6b75dac6b9793e77d2c875e2b15c33e90b121f45fda89a5c0f53d54",
-    "dependencies": ["lucide-react"],
-    "description": "An interactive, multi-card contact section using safe standard link behaviors.",
+    "checksum": "320e793cd7c306b389fbf9c5a1616ad6a1712dfea831f09b7ebdb1477ecc7009",
+    "dependencies": [],
+    "description": "An asymmetric black contact section with muted olive cards, compact actions, address details, and social links.",
     "name": "contact-grid",
     "previewAssets": [
       {
@@ -14,13 +14,13 @@
     "registryDependencies": [],
     "title": "Contact Grid",
     "type": "registry:section",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   {
     "category": "cta",
-    "checksum": "eb9df709f94141a18c8b12f35cda51a39bb4e99d063ee2bc630ccc20abd4967a",
-    "dependencies": ["lucide-react"],
-    "description": "Solid color call to action block with abstract geometric graphic.",
+    "checksum": "040fe57fa59f8bc33b95f9710a8443c40c81194e880283aed635f70bfb926274",
+    "dependencies": [],
+    "description": "A vivid blue API callout with a white pill action and dotted geometric illustration.",
     "name": "cta-apis",
     "previewAssets": [
       {
@@ -31,13 +31,13 @@
     "registryDependencies": [],
     "title": "APIs CTA",
     "type": "registry:section",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   {
     "category": "footer",
-    "checksum": "c114f24272060570ca5565d4f128858e1226003ec39e5c7cc50652609edb7812",
-    "dependencies": ["lucide-react"],
-    "description": "A dense, responsive multi-column layout for brand and navigation.",
+    "checksum": "58a12f78583d317debada81a90a63e33950379f7484156de5bfea35df90bb5dd",
+    "dependencies": [],
+    "description": "A high-density black footer with oversized branding, a stepped social grid, and product and chain navigation.",
     "name": "footer-products",
     "previewAssets": [
       {
@@ -48,13 +48,13 @@
     "registryDependencies": [],
     "title": "Products Footer",
     "type": "registry:section",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   {
     "category": "hero",
-    "checksum": "57fabfa4f500cdc25ca549168e7eba30acc74dca8e5ca591bc9bbff300df6289",
+    "checksum": "1dc8e857934a986053c3877f74ae3a8f0da2edd8a9dc365b06b2c6b2a1de75b5",
     "dependencies": [],
-    "description": "A dark-themed minimal hero with a responsive statistics grid.",
+    "description": "An exact-fidelity black hero with oversized typography, pill actions, and a three-column statistics row.",
     "name": "hero-efficiency",
     "previewAssets": [
       {
@@ -65,6 +65,6 @@
     "registryDependencies": [],
     "title": "Efficiency Hero",
     "type": "registry:section",
-    "version": "0.1.0"
+    "version": "0.2.0"
   }
 ]

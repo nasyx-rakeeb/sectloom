@@ -43,9 +43,9 @@ export default function CliReferencePage() {
 
         <h2>init</h2>
         <p>
-          Initializes a new project by detecting your environment, setting up
-          the necessary base styles, and creating a <code>sectloom.json</code>{' '}
-          configuration file.
+          Initializes a project by validating its environment, resolving the
+          component destination, and creating a <code>sectloom.json</code>{' '}
+          configuration file. It does not modify your global stylesheet.
         </p>
         <pre>
           <code>npx sectloom init [options]</code>
@@ -61,13 +61,6 @@ export default function CliReferencePage() {
             values for everything.
           </li>
         </ul>
-        <p>
-          The initialization process looks for your global CSS file (like{' '}
-          <code>src/app/globals.css</code>) and your{' '}
-          <code>tailwind.config</code> (or v4 equivalents) to correctly inject
-          CSS variables.
-        </p>
-
         <Separator className="my-8" />
 
         <h2>add</h2>
@@ -76,16 +69,20 @@ export default function CliReferencePage() {
           It will automatically resolve and install any required dependencies.
         </p>
         <pre>
-          <code>npx sectloom add [components...] [options]</code>
+          <code>npx sectloom add &lt;name&gt; [options]</code>
         </pre>
         <h3>Arguments</h3>
         <ul>
           <li>
-            <code>[components...]</code>: One or more component names to install
-            (e.g., <code>hero-split</code>, <code>feature-grid</code>). If
-            omitted, an interactive list will be presented.
+            <code>&lt;name&gt;</code>: The section name to install, such as{' '}
+            <code>hero-efficiency</code>.
           </li>
         </ul>
+        <p>
+          Adding a section overwrites its managed files by default. Run{' '}
+          <code>sectloom diff &lt;name&gt;</code> and commit local changes
+          before reinstalling a customized section.
+        </p>
         <h3>Options</h3>
         <ul>
           <li>

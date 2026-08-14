@@ -6,12 +6,19 @@
 - **Package Name:** `sectloom`
 - **Description:** Official command-line interface for the Sectloom component platform.
 - **Key Features:**
-  - `init`: Setup Next.js App Router projects with Tailwind CSS v4 tokens.
+  - `init`: Setup Next.js App Router projects for section installation.
   - `list`: Browse available components in the registry.
   - `add <name>`: Download and install component source code into your project.
   - `diff <name>`: Preview component changes before writing.
   - `doctor`: Validate Next.js project setup compatibility.
 - **Registry Endpoint:** `https://sectloom.vercel.app/registry/index.json`
+
+## v0.3.0 (Planned)
+
+- Removes global stylesheet mutation and the legacy Sectloom theme package.
+- Installs exact-fidelity section source with reference-specific styling.
+- Migrates legacy configuration files by dropping obsolete theme fields on write.
+- Keeps `add` overwrite behavior explicit and source-owned.
 
 ## Rollback & Deprecation Steps
 

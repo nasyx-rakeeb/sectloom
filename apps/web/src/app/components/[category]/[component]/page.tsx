@@ -217,25 +217,6 @@ export default function ComponentPage({ params }: ComponentPageProps) {
         <ComponentCode code={sourceCode} />
       </div>
 
-      {component.requiredTokens.length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold tracking-tight">
-            Required Tokens
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {component.requiredTokens.map((token) => (
-              <Badge
-                key={token}
-                variant="outline"
-                className="font-mono text-xs"
-              >
-                {token}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      )}
-
       <hr className="my-8" />
       <ComponentPrevNext prev={prev} next={next} />
     </div>

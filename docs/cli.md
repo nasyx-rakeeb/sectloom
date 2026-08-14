@@ -17,8 +17,8 @@ npx sectloom init
 Initializes a new Sectloom configuration (`sectloom.json`) in your project.
 
 - Detects your Next.js App Router, TypeScript, and Tailwind CSS v4 environment.
-- Safely injects missing semantic CSS variables into your global CSS.
-- Preserves existing variables idempotently.
+- Resolves the component destination and import aliases.
+- Leaves global stylesheets unchanged.
 
 ```bash
 npx sectloom init
@@ -68,4 +68,4 @@ npx sectloom doctor
 
 - **Path Traversal Protection:** The CLI strictly resolves paths relative to your working directory and components alias, refusing any absolute path escapes or traversal payloads.
 - **Checksum Verification:** Every registry artifact downloaded is hashed and compared against the registry manifest's expected checksum.
-- **No Silent Overwrites:** The `add` command will always prompt before overwriting an existing local file unless forced.
+- **Predictable Overwrites:** `add` replaces the section's managed files by default. Use `diff` and commit local changes before reinstalling.

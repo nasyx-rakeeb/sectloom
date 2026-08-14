@@ -30,10 +30,6 @@ export const doctor = new Command('doctor')
         logger.success(`Tailwind CSS v4 detected (${project.tailwindVersion})`);
       else logger.error('Tailwind CSS v4 not detected.');
 
-      if (project.globalCssPath)
-        logger.success(`Global CSS found at ${project.globalCssPath}`);
-      else logger.warn('Global CSS not found in standard paths.');
-
       logger.info(`Detected Package Manager: ${project.packageManager}`);
 
       const config = await getConfig(cwd);

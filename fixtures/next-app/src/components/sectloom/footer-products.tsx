@@ -1,14 +1,5 @@
 import * as React from 'react';
 import Link from 'next/link';
-import {
-  Globe,
-  MessageSquare,
-  Briefcase,
-  Video,
-  Rss,
-  Hexagon,
-  Activity,
-} from 'lucide-react'; // Using generic lucide icons for socials
 
 export interface FooterLink {
   label: string;
@@ -16,7 +7,7 @@ export interface FooterLink {
 }
 
 export interface FooterLinkGroup {
-  title: string;
+  title?: string;
   links: FooterLink[];
 }
 
@@ -30,7 +21,7 @@ export interface FooterProductsProps {
   enterpriseCta?: {
     label: string;
     href: string;
-  };
+  } | null;
   socials?: {
     icon: React.ReactNode;
     href: string;
@@ -40,210 +31,269 @@ export interface FooterProductsProps {
   legal?: {
     privacyHref?: string;
     termsHref?: string;
+    commercialTermsHref?: string;
     copyright: string;
   };
 }
 
+const DEFAULT_BRAND = {
+  name: '1inch"',
+  description: 'Built on infrastructure licensed by Degensoft Ltd,',
+  certification: 'operated under ISO/IEC 27001:2022-certified ISM.',
+};
+
+const DEFAULT_NAVIGATION: FooterLink[] = [
+  { label: 'Documentation', href: '/docs' },
+  { label: 'Help Center', href: '/help' },
+  { label: 'Talk to us', href: '/contact' },
+  { label: 'Documentation for LLMs', href: '/llms.txt' },
+];
+
+const DEFAULT_SOCIALS = [
+  {
+    icon: <span className="text-xs font-bold">YT</span>,
+    href: '#',
+    label: 'YouTube',
+  },
+  {
+    icon: <span className="text-xs font-bold">IG</span>,
+    href: '#',
+    label: 'Instagram',
+  },
+  {
+    icon: <span className="text-xs font-bold">GH</span>,
+    href: '#',
+    label: 'GitHub',
+  },
+  {
+    icon: <span className="text-xs font-bold">TG</span>,
+    href: '#',
+    label: 'Telegram',
+  },
+  {
+    icon: <span className="text-xs font-bold">in</span>,
+    href: '#',
+    label: 'LinkedIn',
+  },
+  {
+    icon: <span className="font-serif text-xl font-bold">M</span>,
+    href: '#',
+    label: 'Medium',
+  },
+  {
+    icon: <span className="text-xs font-bold">R</span>,
+    href: '#',
+    label: 'Reddit',
+  },
+  {
+    icon: <span className="text-lg font-medium">X</span>,
+    href: '#',
+    label: 'X',
+  },
+  {
+    icon: <span className="text-xs font-bold">DC</span>,
+    href: '#',
+    label: 'Discord',
+  },
+];
+
+const DEFAULT_LINK_GROUPS: FooterLinkGroup[] = [
+  {
+    title: 'Products',
+    links: [
+      { label: 'Swap API', href: '#' },
+      { label: 'Spot Price API', href: '#' },
+      { label: 'Portfolio API', href: '#' },
+      { label: 'Traces API', href: '#' },
+      { label: 'Domain API', href: '#' },
+    ],
+  },
+  {
+    links: [
+      { label: 'Orderbook API', href: '#' },
+      { label: 'Token API', href: '#' },
+      { label: 'Gas Price API', href: '#' },
+      { label: 'History API', href: '#' },
+      { label: 'Token Details API', href: '#' },
+    ],
+  },
+  {
+    links: [
+      { label: 'Balance API', href: '#' },
+      { label: 'Transaction API', href: '#' },
+      { label: 'NFT API', href: '#' },
+      { label: 'Web3 RPC API', href: '#' },
+      { label: 'Charts API', href: '#' },
+    ],
+  },
+  {
+    title: 'Chains',
+    links: [
+      { label: 'Arbitrum', href: '#' },
+      { label: 'BNB Chain', href: '#' },
+      { label: 'Ethereum', href: '#' },
+      { label: 'Optimism', href: '#' },
+      { label: 'Solana', href: '#' },
+      { label: 'Robinhood', href: '#' },
+    ],
+  },
+  {
+    links: [
+      { label: 'Avalanche', href: '#' },
+      { label: 'Cronos', href: '#' },
+      { label: 'Gnosis', href: '#' },
+      { label: 'Polygon', href: '#' },
+      { label: 'Sonic', href: '#' },
+    ],
+  },
+  {
+    links: [
+      { label: 'Base', href: '#' },
+      { label: 'ZKsync', href: '#' },
+      { label: 'Monad', href: '#' },
+      { label: 'Linea', href: '#' },
+      { label: 'Unichain', href: '#' },
+    ],
+  },
+];
+
+const SOCIAL_POSITIONS = [
+  'col-start-1 row-start-1',
+  'col-start-2 row-start-1',
+  'col-start-1 row-start-2',
+  'col-start-2 row-start-2',
+  'col-start-3 row-start-2',
+  'col-start-1 row-start-3',
+  'col-start-2 row-start-3',
+  'col-start-3 row-start-3',
+  'col-start-4 row-start-3',
+];
+
 export function FooterProducts({
-  brand = {
-    name: 'Sectloom',
-    description: 'Built on infrastructure licensed by Sectloom Ltd.',
-    certification: 'operated under ISO/IEC 27001:2022-certified ISM.',
-  },
-  navigation = [
-    { label: 'Documentation', href: '/docs' },
-    { label: 'Help Center', href: '/help' },
-    { label: 'Talk to us', href: '/contact' },
-    { label: 'Documentation for LLMs', href: '/llms.txt' },
-  ],
-  enterpriseCta = {
-    label: 'Get Enterprise',
-    href: '/enterprise',
-  },
-  socials = [
-    { icon: <Video className="w-5 h-5" />, href: '#', label: 'YouTube' },
-    { icon: <Activity className="w-5 h-5" />, href: '#', label: 'Instagram' },
-    { icon: <Globe className="w-5 h-5" />, href: '#', label: 'GitHub' },
-    {
-      icon: <MessageSquare className="w-5 h-5" />,
-      href: '#',
-      label: 'Twitter',
-    },
-    { icon: <Briefcase className="w-5 h-5" />, href: '#', label: 'LinkedIn' },
-    { icon: <Rss className="w-5 h-5" />, href: '#', label: 'Blog' },
-    { icon: <Hexagon className="w-5 h-5" />, href: '#', label: 'Discord' },
-  ],
-  linkGroups = [
-    {
-      title: 'Products',
-      links: [
-        { label: 'Swap API', href: '#' },
-        { label: 'Spot Price API', href: '#' },
-        { label: 'Portfolio API', href: '#' },
-        { label: 'Traces API', href: '#' },
-        { label: 'Domain API', href: '#' },
-      ],
-    },
-    {
-      title: ' ', // empty title to align next column
-      links: [
-        { label: 'Orderbook API', href: '#' },
-        { label: 'Token API', href: '#' },
-        { label: 'Gas Price API', href: '#' },
-        { label: 'History API', href: '#' },
-        { label: 'Token Details API', href: '#' },
-      ],
-    },
-    {
-      title: ' ',
-      links: [
-        { label: 'Balance API', href: '#' },
-        { label: 'Transaction API', href: '#' },
-        { label: 'NFT API', href: '#' },
-        { label: 'Web3 RPC API', href: '#' },
-        { label: 'Charts API', href: '#' },
-      ],
-    },
-    {
-      title: 'Chains',
-      links: [
-        { label: 'Arbitrum', href: '#' },
-        { label: 'BNB Chain', href: '#' },
-        { label: 'Ethereum', href: '#' },
-        { label: 'Optimism', href: '#' },
-        { label: 'Solana', href: '#' },
-      ],
-    },
-    {
-      title: ' ',
-      links: [
-        { label: 'Avalanche', href: '#' },
-        { label: 'Cronos', href: '#' },
-        { label: 'Gnosis', href: '#' },
-        { label: 'Polygon', href: '#' },
-        { label: 'Sonic', href: '#' },
-      ],
-    },
-  ],
+  brand = DEFAULT_BRAND,
+  navigation = DEFAULT_NAVIGATION,
+  enterpriseCta = { label: 'Get Enterprise', href: '/enterprise' },
+  socials = DEFAULT_SOCIALS,
+  linkGroups = DEFAULT_LINK_GROUPS,
   legal = {
     privacyHref: '/privacy',
     termsHref: '/terms',
-    copyright: '© 2026 Sectloom',
+    commercialTermsHref: '/commercial-terms',
+    copyright: '© 2026 1inch',
   },
 }: FooterProductsProps) {
   return (
-    <footer className="bg-background text-foreground border-t border-border/20 pt-16 pb-8 px-6">
-      <div className="mx-auto max-w-[var(--container-xl)]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-24">
-          {/* Brand Column */}
-          <div className="lg:col-span-4 flex flex-col items-start gap-8">
-            <div>
-              <span className="text-5xl font-bold tracking-tight">
-                {brand?.name}
-              </span>
-            </div>
+    <footer className="w-full overflow-hidden bg-black px-5 pb-10 pt-20 text-white sm:px-10 sm:pt-28 lg:px-[4vw] lg:pt-[7vw]">
+      <div className="mx-auto max-w-[1880px]">
+        <div className="grid gap-20 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24">
+          <div className="flex flex-col items-start">
+            <p className="text-[clamp(5rem,10vw,10.5rem)] font-normal leading-[0.78] tracking-[-0.075em]">
+              {brand.name}
+            </p>
 
-            {(brand?.description || brand?.certification) && (
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-                {brand.description}
-                {brand.certification && (
-                  <span className="block text-primary mt-1">
-                    {brand.certification}
-                  </span>
-                )}
-              </p>
-            )}
+            <p className="mt-16 max-w-[330px] text-lg leading-[1.45] text-white sm:text-xl">
+              {brand.description}
+              {brand.certification ? (
+                <span className="block text-[#3f6cff]">
+                  {brand.certification}
+                </span>
+              ) : null}
+            </p>
 
-            {navigation && navigation.length > 0 && (
-              <ul className="flex flex-col gap-3 mt-4">
-                {navigation.map((link, i) => (
-                  <li key={i}>
+            {navigation.length > 0 ? (
+              <ul className="mt-12 flex flex-col gap-5 text-lg text-[#929298] sm:text-xl">
+                {navigation.map((item) => (
+                  <li key={item.label}>
                     <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                      href={item.href}
+                      className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                     >
-                      {link.label}
+                      {item.label}
                     </Link>
                   </li>
                 ))}
               </ul>
-            )}
+            ) : null}
 
-            {enterpriseCta && (
+            {enterpriseCta ? (
               <Link
                 href={enterpriseCta.href}
-                className="mt-4 px-6 py-3 rounded-[var(--radius-full)] bg-foreground text-background font-medium hover:bg-foreground/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-24 inline-flex min-h-16 min-w-[290px] items-center justify-center rounded-full bg-white px-10 text-lg font-semibold text-black transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black"
               >
                 {enterpriseCta.label}
               </Link>
-            )}
+            ) : null}
+
+            {socials.length > 0 ? (
+              <div className="mt-20 grid grid-cols-4 grid-rows-3">
+                {socials
+                  .slice(0, SOCIAL_POSITIONS.length)
+                  .map((social, index) => (
+                    <Link
+                      key={social.label}
+                      href={social.href}
+                      aria-label={social.label}
+                      className={`${SOCIAL_POSITIONS[index]} flex h-16 w-16 items-center justify-center border border-[#202024] bg-[#101014] text-white transition-colors hover:bg-[#1c1c21] focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white`}
+                    >
+                      {social.icon}
+                    </Link>
+                  ))}
+              </div>
+            ) : null}
           </div>
 
-          {/* Links Grid */}
-          <div className="lg:col-span-8">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
-              {linkGroups?.map((group, i) => (
-                <div key={i} className="flex flex-col gap-6">
-                  <span className="text-sm font-semibold h-5">
-                    {group.title.trim() ? group.title : null}
-                  </span>
-                  <ul className="flex flex-col gap-4">
-                    {group.links.map((link, j) => (
-                      <li key={j}>
+          <div className="grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3">
+            {linkGroups.map((group, index) => {
+              const startsNewRow = index === 3;
+              return (
+                <div
+                  key={`${group.title ?? 'links'}-${index}`}
+                  className={`${startsNewRow ? 'col-span-2 col-start-1 border-t border-[#242428] pt-10 sm:col-span-1 sm:col-start-1' : index > 3 ? 'border-t border-[#242428] pt-10' : ''}`}
+                >
+                  <h3 className="min-h-8 text-lg font-semibold">
+                    {group.title ?? <span className="sr-only">Links</span>}
+                  </h3>
+                  <ul className="mt-5 flex flex-col gap-5 text-lg text-[#929298] sm:text-xl">
+                    {group.links.map((item) => (
+                      <li key={item.label}>
                         <Link
-                          href={link.href}
-                          className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                          href={item.href}
+                          className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                         >
-                          {link.label}
+                          {item.label}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pt-8 border-t border-border/10">
-          <div className="flex flex-wrap gap-2">
-            {socials?.map((social, i) => (
-              <Link
-                key={i}
-                href={social.href}
-                aria-label={social.label}
-                className="w-10 h-10 flex items-center justify-center rounded-md bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {social.icon}
+        {legal ? (
+          <div className="mt-28 flex flex-col gap-5 border-t border-[#242428] pt-8 text-sm text-[#929298] sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 lg:border-0 lg:pt-0 lg:text-base">
+            {legal.privacyHref ? (
+              <Link className="hover:text-white" href={legal.privacyHref}>
+                Privacy Policy
               </Link>
-            ))}
+            ) : null}
+            {legal.termsHref ? (
+              <Link className="hover:text-white" href={legal.termsHref}>
+                Terms of Use
+              </Link>
+            ) : null}
+            {legal.commercialTermsHref ? (
+              <Link
+                className="hover:text-white"
+                href={legal.commercialTermsHref}
+              >
+                Commercial API Terms of Use
+              </Link>
+            ) : null}
+            <span className="sm:ml-auto">{legal.copyright}</span>
           </div>
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 text-sm text-muted-foreground">
-            {legal && (
-              <>
-                {legal.privacyHref && (
-                  <Link
-                    href={legal.privacyHref}
-                    className="hover:text-foreground transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                )}
-                {legal.termsHref && (
-                  <Link
-                    href={legal.termsHref}
-                    className="hover:text-foreground transition-colors"
-                  >
-                    Terms of Use
-                  </Link>
-                )}
-                <span>{legal.copyright}</span>
-              </>
-            )}
-          </div>
-        </div>
+        ) : null}
       </div>
     </footer>
   );

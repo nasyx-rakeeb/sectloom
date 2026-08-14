@@ -102,7 +102,7 @@ export async function buildRegistry(
     // Create Design Profile object based on meta
     const designProfile = {
       style: 'Modern', // Defaulting based on visual
-      theme: 'System',
+      theme: 'Dark',
       complexity: 'Medium',
       tags: [meta.designProfile],
     } as any;
@@ -116,7 +116,6 @@ export async function buildRegistry(
       dependencies: meta.dependencies,
       registryDependencies: meta.registryDependencies,
       files,
-      requiredTokens: meta.requiredTokens,
       designProfiles: [designProfile],
       sourceReferenceMetadata: meta.sourceReferenceMetadata,
       propsDocumentation: meta.propsDocumentation,
@@ -127,7 +126,7 @@ export async function buildRegistry(
           url: meta.previewAsset,
         },
       ],
-      version: '0.1.0',
+      version: meta.version,
     };
 
     // Calculate item checksum by hashing its deterministic JSON (without the checksum field itself)
@@ -155,7 +154,7 @@ export async function buildRegistry(
       description: meta.description,
       dependencies: meta.dependencies,
       registryDependencies: meta.registryDependencies,
-      version: '0.1.0',
+      version: meta.version,
       checksum: itemChecksum,
       previewAssets: [
         {

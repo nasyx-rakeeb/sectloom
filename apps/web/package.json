@@ -21,7 +21,6 @@
     "@sectloom/components": "workspace:*",
     "@sectloom/contracts": "workspace:*",
     "@sectloom/registry": "workspace:*",
-    "@sectloom/tokens": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.424.0",

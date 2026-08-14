@@ -1,6 +1,6 @@
 # Sectloom
 
-Production-ready section UI distribution platform for React applications.
+Exact-fidelity React sections installed as source code you fully own.
 
 ## Packages and Apps
 
@@ -9,7 +9,6 @@ Production-ready section UI distribution platform for React applications.
 - `packages/components`: Canonical source for React sections
 - `packages/contracts`: Runtime schemas and shared types
 - `packages/registry`: Deterministic registry builder
-- `packages/tokens`: Tailwind v4 semantic token contract
 
 ## Monorepo Commands
 

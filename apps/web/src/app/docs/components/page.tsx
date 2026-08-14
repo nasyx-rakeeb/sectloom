@@ -134,6 +134,12 @@ export default function ComponentsPage() {
           the <code>diff</code> command to compare your local file against the
           original version if you ever want to see what you modified.
         </p>
+        <p>
+          Each section intentionally keeps the concrete colors, typography,
+          spacing, and effects shown in its preview. Sectloom does not apply a
+          global theme or automatically make unrelated sections visually
+          consistent.
+        </p>
       </DocContent>
     </>
   );

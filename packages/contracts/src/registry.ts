@@ -37,12 +37,6 @@ export const RegistryItemSchema = z.object({
   registryDependencies: z.array(z.string()).default([]),
   requires: z.record(z.string(), z.string()).optional(),
   files: z.array(RegistryFileSchema),
-  tailwind: z
-    .object({
-      tokens: z.record(z.string(), z.string()).optional(),
-    })
-    .optional(),
-  requiredTokens: z.array(z.string()).default([]),
   designProfiles: z.array(DesignProfileSchema).default([]),
   sourceReferenceMetadata: SourceReferenceSchema.optional(),
   propsDocumentation: z.record(z.string(), z.string()).optional(),

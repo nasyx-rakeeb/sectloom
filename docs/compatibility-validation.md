@@ -7,10 +7,10 @@ This document records the exact validation steps and results for testing the Sec
 ## Test Environment
 
 - **Node.js**: `v24.18.0`
-- **Next.js**: `v14.2.35`
-- **React / React DOM**: `v18.3.1`
+- **Next.js**: `v16.2.12`
+- **React / React DOM**: `v19.2.4`
 - **TypeScript**: `v5.x`
-- **Tailwind CSS / PostCSS**: `v4.0.0-alpha.15`
+- **Tailwind CSS / PostCSS**: `v4.x`
 - **Package Manager**: `npm`
 
 ## Validation Script Command
@@ -29,29 +29,28 @@ All internal packages (`@sectloom/contracts`, `@sectloom/registry`, `@sectloom/c
 
 ### 2. CLI Packing
 
-Executed `pnpm pack` inside `packages/cli` yielding a clean tarball (`sectloom-0.1.0.tgz`) containing only `dist/index.js` (23.7kb) and `package.json`.
+Run `npm pack --dry-run` inside `packages/cli` and verify that the artifact contains the CLI bundle, package metadata, README, and license without a global stylesheet asset.
 
 ### 3. Disposable Fixture Initialization
 
 A minimal Next.js App Router consumer project was created at `disposable-fixture/`.
 
-- Defined `src/app/layout.tsx` and `src/app/globals.css`.
+- Defined `src/app/layout.tsx` and an ordinary app-owned `src/app/globals.css`.
 - Populated `tsconfig.json` with the `@/*` path alias mapping to `./src/*`.
 - Configured PostCSS with `@tailwindcss/postcss`.
 
 ### 4. CLI Initialization (`sectloom init`)
 
 - Successfully detected the Next.js framework, App Router architecture, TypeScript configuration, and Tailwind v4 environment via static file heuristic analysis.
-- Found the global CSS file at `src/app/globals.css`.
-- Idempotently injected the required Sectloom semantic `@theme inline` variables without duplicating the `@import "tailwindcss";` directive or mutating unrelated user CSS.
-- Wrote configuration to `sectloom.json` accurately capturing aliases (`@/components`) and package manager (`npm`).
+- Left `src/app/globals.css` byte-for-byte under application ownership.
+- Wrote configuration to `sectloom.json` with the registry URL, aliases, and installed-section state.
 
 ### 5. Component Addition (`sectloom add <component>`)
 
 - Fetched metadata for all four components (`hero-efficiency`, `cta-apis`, `contact-grid`, `footer-products`).
 - Checked registry SHA-256 hashes successfully.
 - Resolved correct local output paths `src/components/sectloom/*.tsx` using the standard `tsconfig.json` mappings.
-- Automatically installed third-party dependencies (like `lucide-react`) dynamically using the consumer's package manager (`npm`).
+- Confirmed the initial four exact-fidelity sections install without a shared styling package or external icon dependency.
 
 ### 6. Compilation & Integration Test
 
@@ -61,4 +60,4 @@ A minimal Next.js App Router consumer project was created at `disposable-fixture
 
 ## Conclusion
 
-The Sectloom CLI reliably supports strict Next.js App Router architectures. All tests indicate that it idempotently processes configurations, securely evaluates paths, respects component dependencies, and successfully creates statically buildable pages. Validation complete.
+The Sectloom CLI supports the validated Next.js App Router fixture without mutating global CSS. All four independently styled sections coexist, typecheck, and produce a successful static production build.

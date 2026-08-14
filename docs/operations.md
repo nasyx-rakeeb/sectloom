@@ -13,10 +13,10 @@ This document outlines the standard operating procedures for the Sectloom compon
 
 ## 1. Adding a New Component
 
-1. **Author the Component**: Create the `.tsx` file inside `packages/components/src/sections/<category>/`. Ensure it uses Tailwind CSS v4 semantic variables (no hardcoded colors except where absolutely necessary for branding) and strict TypeScript.
-2. **Take Preview Assets**: Render the component in a clean Next.js app, capture screenshots (1440px desktop, 390px mobile, light and dark themes).
+1. **Author the Section**: Create the source inside `packages/components/src/sections/<category>/`. Use strict TypeScript and concrete Tailwind styling that reproduces the approved visual reference.
+2. **Take Preview Assets**: Render the section in a clean Next.js app and capture screenshots at 1440px desktop and 390px mobile. Capture multiple themes only when the source design includes them.
 3. **Upload Assets**: Upload the images to the Cloudflare R2 bucket `sectloom-registry` at the path `/images/<category>/<image-name>.jpg`. Ensure headers are set to `Cache-Control: public, max-age=31536000, immutable`.
-4. **Register Metadata**: Edit `packages/registry/src/metadata.ts` and add a new entry to the `registryComponents` array. Ensure the `name` is URL-safe and unique. Add the explicit dependencies and required tokens.
+4. **Register Metadata**: Edit `packages/registry/src/metadata.ts` and add a new entry to the `registryComponents` array. Ensure the `name` is URL-safe and unique, then declare every dependency and distributed file.
 5. **Verify**: Run `npm run build` in the workspace root to ensure `packages/registry` builds without validation errors and schemas are correct.
 
 ## 2. Registry & Website Release

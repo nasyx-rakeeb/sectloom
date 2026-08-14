@@ -14,7 +14,7 @@ This document records the four component references selected for manual crafting
 - **Source ID:** 1
 - **Title:** 1inch Apis CTA Design
 - **Local Path:** `data/images/cta/001_1inch_apis_cta_design.jpg`
-- **Selection Rationale:** A bold, solid-color background with a simple two-column layout. It features a strong headline on the left with a contrasting button, and a visual element on the right. We will replace the complex dotted illustration with a clean, semantic placeholder graphic or icon arrangement.
+- **Selection Rationale:** A bold, solid-color background with a simple two-column layout. It features a strong headline on the left, a contrasting button, and a distinctive dotted illustration that the implementation must reproduce without relying on a shared theme.
 
 ## 3. Contact Section
 

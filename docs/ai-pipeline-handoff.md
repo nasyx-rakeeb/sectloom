@@ -23,7 +23,7 @@ The AI generation pipeline must produce exactly the following artifacts into the
    - Must use strict TypeScript.
    - Must be designed for Next.js App Router (Server Component by default, `'use client'` only where strictly necessary).
    - Must use Tailwind CSS v4 utility classes.
-   - Must use Sectloom semantic tokens (e.g., `text-muted-foreground`, `bg-background`). No hardcoded hex values!
+   - Must preserve the source reference's concrete styling. Exact Tailwind values and scoped supporting CSS are allowed; no Sectloom theme dependency may be introduced.
 
 2. **The Registry Metadata Entry**
    - The AI must output a JSON or TypeScript object matching the `RegistryComponent` Zod schema defined in `packages/contracts/src/registry.ts`.
@@ -35,7 +35,7 @@ The AI output cannot be deployed automatically. It must pass through the followi
 
 1. **Compilation**: Must pass `npm run typecheck`.
 2. **Linting**: Must pass the existing ESLint rules.
-3. **Visual Inspection**: A human developer must manually verify the layout at 1440px and 390px, and upload the final verified preview screenshot to Cloudflare R2.
+3. **Visual Inspection**: A human developer must compare the render with the source at 1440px and 390px, resolve material differences, and upload the final verified preview screenshot to Cloudflare R2.
 4. **Git Commit**: The human developer commits the AI-generated code to the `main` branch to trigger the standard registry deployment.
 
 ## Future Considerations

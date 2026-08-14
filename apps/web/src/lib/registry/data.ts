@@ -36,7 +36,6 @@ export interface RegistryComponent {
   registryDependencies: string[];
   requires?: Record<string, string>;
   files: RegistryFile[];
-  requiredTokens: string[];
   designProfiles: {
     style: string;
     theme: string;

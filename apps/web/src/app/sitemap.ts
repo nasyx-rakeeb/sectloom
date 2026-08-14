@@ -7,7 +7,7 @@ const docsPages = [
   '/docs/getting-started',
   '/docs/cli',
   '/docs/components',
-  '/docs/theming',
+  '/docs/customization',
   '/docs/registry',
 ];
 

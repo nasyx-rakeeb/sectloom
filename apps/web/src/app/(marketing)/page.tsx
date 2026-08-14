@@ -71,10 +71,10 @@ export default function HomePage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-lg border bg-primary/10 mb-4">
               <Paintbrush className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="font-bold mb-2">Semantic Tokens</h3>
+            <h3 className="font-bold mb-2">Exact Visual Fidelity</h3>
             <p className="text-sm text-muted-foreground">
-              Sections use semantic design tokens. Change your brand colors
-              once, every section updates.
+              Install the section shown in the preview, with its distinctive
+              styling preserved in editable source.
             </p>
           </div>
           <div className="relative overflow-hidden rounded-lg border bg-background p-6 hover:bg-muted/50 transition-colors">

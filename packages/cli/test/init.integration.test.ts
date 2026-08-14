@@ -6,7 +6,6 @@ import { spawn } from 'node:child_process';
 import test from 'node:test';
 import type { TestContext } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { SECTLOOM_TOKENS_MARKER } from '../src/utils/tokens.js';
 
 const packageDir = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -26,11 +25,15 @@ function runInit(projectDir: string): Promise<number | null> {
   });
 }
 
-async function createProject(t: TestContext, next = '^16.2.12') {
+async function createProject(
+  t: TestContext,
+  next = '^16.2.12',
+  withGlobalCss = false
+) {
   const projectDir = await fs.mkdtemp(path.join(os.tmpdir(), 'sectloom-init-'));
   t.after(() => fs.rm(projectDir, { recursive: true, force: true }));
   await fs.mkdir(path.join(projectDir, 'src/app'), { recursive: true });
-  await Promise.all([
+  const writes = [
     fs.writeFile(
       path.join(projectDir, 'package.json'),
       JSON.stringify({
@@ -42,32 +45,68 @@ async function createProject(t: TestContext, next = '^16.2.12') {
       path.join(projectDir, 'tsconfig.json'),
       JSON.stringify({ compilerOptions: { paths: { '@/*': ['./src/*'] } } })
     ),
-    fs.writeFile(
-      path.join(projectDir, 'src/app/globals.css'),
-      '@import "tailwindcss";\n'
-    ),
-  ]);
+  ];
+  if (withGlobalCss) {
+    writes.push(
+      fs.writeFile(
+        path.join(projectDir, 'src/app/globals.css'),
+        '@import "tailwindcss";\n/* user styles */\n'
+      )
+    );
+  }
+  await Promise.all(writes);
   return projectDir;
 }
 
-test('init injects canonical tokens idempotently with portable config paths', async (t) => {
+test('init succeeds without creating or modifying global CSS', async (t) => {
   const projectDir = await createProject(t);
   assert.equal(await runInit(projectDir), 0);
   assert.equal(await runInit(projectDir), 0);
 
-  const css = await fs.readFile(
-    path.join(projectDir, 'src/app/globals.css'),
-    'utf8'
-  );
-  assert.equal(css.split(SECTLOOM_TOKENS_MARKER).length - 1, 1);
+  await assert.rejects(fs.stat(path.join(projectDir, 'src/app/globals.css')));
   const config = JSON.parse(
     await fs.readFile(path.join(projectDir, 'sectloom.json'), 'utf8')
-  ) as { tailwind: { css: string } };
-  assert.equal(config.tailwind.css, 'src/app/globals.css');
+  ) as Record<string, unknown>;
+  assert.equal('style' in config, false);
+  assert.equal('tailwind' in config, false);
+  assert.deepEqual(config.aliases, {
+    components: '@/components',
+    utils: '@/lib/utils',
+  });
+});
+
+test('init accepts legacy config and removes obsolete theme fields', async (t) => {
+  const projectDir = await createProject(t, '^16.2.12', true);
+  const cssPath = path.join(projectDir, 'src/app/globals.css');
+  const before = await fs.readFile(cssPath, 'utf8');
+  await fs.writeFile(
+    path.join(projectDir, 'sectloom.json'),
+    JSON.stringify({
+      style: 'default',
+      tailwind: { css: 'src/app/globals.css', baseColor: 'slate' },
+      aliases: { components: '@/components', utils: '@/lib/utils' },
+      registry: 'https://example.test/registry',
+      components: {
+        existing: { version: '0.1.0', checksum: 'abc123' },
+      },
+    })
+  );
+
+  assert.equal(await runInit(projectDir), 0);
+  assert.equal(await fs.readFile(cssPath, 'utf8'), before);
+  const config = JSON.parse(
+    await fs.readFile(path.join(projectDir, 'sectloom.json'), 'utf8')
+  ) as Record<string, unknown>;
+  assert.equal('style' in config, false);
+  assert.equal('tailwind' in config, false);
+  assert.equal(config.registry, 'https://example.test/registry');
+  assert.deepEqual(config.components, {
+    existing: { version: '0.1.0', checksum: 'abc123' },
+  });
 });
 
 test('init rejects unsupported Next.js before mutating the project', async (t) => {
-  const projectDir = await createProject(t, '^13.5.0');
+  const projectDir = await createProject(t, '^13.5.0', true);
   const cssPath = path.join(projectDir, 'src/app/globals.css');
   const before = await fs.readFile(cssPath, 'utf8');
 

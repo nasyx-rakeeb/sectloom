@@ -1,6 +1,6 @@
 {
   "name": "sectloom",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Sectloom CLI for installing React components",
   "type": "module",
   "license": "MIT",
@@ -30,13 +30,13 @@
     ".": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist/index.js"
   ],
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/index.js --banner:js=\"#!/usr/bin/env node\" --external:commander --external:@clack/prompts --external:picocolors --external:zod --external:diff --external:jsonc-parser --external:semver && node scripts/copy-tokens.mjs",
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/index.js --banner:js=\"#!/usr/bin/env node\" --external:commander --external:@clack/prompts --external:picocolors --external:zod --external:diff --external:jsonc-parser --external:semver",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "pnpm run build && tsx --test test/*.test.ts"

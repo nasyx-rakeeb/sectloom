@@ -1,9 +1,0 @@
-{
-  "name": "@sectloom/tokens",
-  "private": true,
-  "version": "0.1.0",
-  "description": "Tailwind v4 semantic token contract",
-  "exports": {
-    "./tokens.css": "./tokens.css"
-  }
-}

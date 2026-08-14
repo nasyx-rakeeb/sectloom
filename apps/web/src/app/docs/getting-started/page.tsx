@@ -67,8 +67,8 @@ export default function GettingStartedPage() {
         </pre>
         <p>This command will:</p>
         <ul>
-          <li>Detect your project structure and CSS files.</li>
-          <li>Prompt you to configure your base styling options.</li>
+          <li>Detect your project structure and supported toolchain.</li>
+          <li>Configure the section destination and import aliases.</li>
           <li>
             Create a <code>sectloom.json</code> configuration file at your
             project root.
@@ -121,9 +121,9 @@ export default function GettingStartedPage() {
 export default function HomePage() {
   return (
     <main>
-      <HeroEfficiency 
-        title="Build faster" 
-        subtitle="With beautifully crafted sections." 
+      <HeroEfficiency
+        overline="Built for product teams"
+        heading="Build faster with a finished section."
       />
     </main>
   );
@@ -135,8 +135,8 @@ export default function HomePage() {
           The true power of source-code distribution is the ability to adapt the
           components completely. Open the file located at{' '}
           <code>src/components/sectloom/hero-efficiency.tsx</code> and modify
-          the Tailwind classes, change the semantic HTML elements, or extend the
-          prop interfaces as you see fit.
+          the exact Tailwind classes, change the semantic HTML elements, or
+          extend the prop interfaces as you see fit.
         </p>
         <p>
           It is <strong>your</strong> code now.

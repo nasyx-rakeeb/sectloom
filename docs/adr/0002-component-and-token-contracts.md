@@ -1,7 +1,7 @@
 # ADR 0002: Component and Token Contracts
 
 **Date:** 2026-07-31  
-**Status:** Accepted
+**Status:** Superseded by ADR 0004
 
 ## Context
 

@@ -21,7 +21,7 @@ export const docsNavigation: DocsNavSection[] = [
     items: [
       { title: 'CLI Reference', href: '/docs/cli' },
       { title: 'Using Components', href: '/docs/components' },
-      { title: 'Theming', href: '/docs/theming' },
+      { title: 'Customization', href: '/docs/customization' },
     ],
   },
   {

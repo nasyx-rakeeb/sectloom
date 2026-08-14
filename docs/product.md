@@ -14,9 +14,13 @@ Sectloom is a section UI distribution platform for React applications.
 
 ### Core Components
 
-1. **Component Registry:** Publicly hosted versioned source of truth for TSX files, metadata, dependencies, semantic tokens, and integrity hashes.
+1. **Section Registry:** Publicly hosted versioned source of truth for exact-fidelity TSX files, metadata, dependencies, preview assets, and integrity hashes.
 2. **Published npm CLI:** Allow users to install components directly into their Next.js projects via `npx sectloom init` and `npx sectloom add <name>`.
-3. **Public Website:** Browse, inspect, and copy installation commands for components.
+3. **Public Website:** Browse visual references, inspect installed source, and copy section installation commands.
+
+### Product Promise
+
+Install the section you see, with source code you fully own. Sectloom preserves each reference's individual visual identity instead of adapting every section to a shared theme.
 
 ### Initial Catalog
 

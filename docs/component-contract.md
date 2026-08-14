@@ -15,7 +15,7 @@ This document defines the strict standard for creating and distributing Sectloom
 ### 2. Props and Actions
 
 - Components must use typed props (e.g., `interface HeroProps`).
-- No hardcoded brand copy. All text, actions (buttons/links), and images must be overridable via props.
+- Reference-matching copy may be provided as the default. All meaningful text, actions, images, and repeatable content must remain overridable through typed props.
 - Use standard HTML tags for semantic structure. Allow consumer-provided `Link` components (from Next.js) or standard `<a>` tags via prop polymorphic rendering if possible.
 
 ### 3. Server/Client Compatibility
@@ -23,11 +23,13 @@ This document defines the strict standard for creating and distributing Sectloom
 - **Default:** All sections are React Server Components (RSC) by default. Do not use `"use client"` at the root of a section unless the entire section inherently relies on browser APIs (e.g., a complex interactive map).
 - **Interactive Leaves:** If a section requires interactive elements (e.g., a carousel or a dropdown), extract that specific interactive element into a sub-component with `"use client"` and import it into the server-rendered parent section.
 
-### 4. Forbidden Styling Patterns
+### 4. Exact-Fidelity Styling
 
-- **No `dark:` color utilities:** Rely on the semantic token system. Use `bg-background text-foreground`.
-- **No hardcoded hex/RGB colors:** Never use arbitrary values like `bg-[#ff0000]`.
-- **No global CSS side-effects:** Components must be self-contained.
+- Use concrete Tailwind utilities, including arbitrary values, when they reproduce the approved reference accurately.
+- Preserve the reference's colors, type scale, spacing, radii, shadows, imagery, and responsive composition.
+- Use colocated, section-scoped CSS only for effects that are substantially clearer or more accurate outside Tailwind.
+- Do not add unscoped global selectors or require a Sectloom theme provider.
+- Do not synthesize light or dark variants unless the approved reference includes them.
 
 ### 5. Dependency Policy
 

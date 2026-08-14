@@ -23,15 +23,19 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/registry/:path*",
+        source: '/registry/:path*',
         headers: [
-          { key: "Access-Control-Allow-Origin", value: "*" },
-          { key: "Access-Control-Allow-Methods", value: "GET, OPTIONS" },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
         ],
       },
     ];
   },
-  transpilePackages: ["@sectloom/components", "@sectloom/tokens", "@sectloom/contracts", "@sectloom/registry"],
+  transpilePackages: [
+    '@sectloom/components',
+    '@sectloom/contracts',
+    '@sectloom/registry',
+  ],
 };
 
 export default nextConfig;
