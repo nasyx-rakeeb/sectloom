@@ -12,6 +12,9 @@ packages/registry/public/images/
 .env*
 *.tgz
 
+# Local AI section-generation instructions
+docs/AI_SECTION_AGENT_PROMPT.md
+
 # Logs
 logs
 *.log
