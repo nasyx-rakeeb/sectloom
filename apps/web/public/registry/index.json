@@ -1,5 +1,39 @@
 [
   {
+    "category": "blog-header-section",
+    "checksum": "b540572d930eb001914001318b20a21181be30d0cd0b53a7f7b54d3769bf5b9f",
+    "dependencies": [],
+    "description": "A cyan editorial blog header with compressed display typography, checkerboard graphics, and oversized mission statements.",
+    "name": "blog-header-section-reevo-mission",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/blog-header-section/015_reevo_about_company_mission_blog_header_section_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Reevo Mission Blog Header",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "blog-section",
+    "checksum": "9c584544b2ec58e825f89c9769d4db578462d7025a371dc59dc9e4f355604202",
+    "dependencies": ["lucide-react"],
+    "description": "An airy editorial customer-story grid with oversized brand cards, serif headlines, and restrained metadata.",
+    "name": "blog-section-bronn-stories",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/blog-section/003_bronn_customer_stories_blog_list_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Bronn Customer Stories",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
     "category": "contact",
     "checksum": "320e793cd7c306b389fbf9c5a1616ad6a1712dfea831f09b7ebdb1477ecc7009",
     "dependencies": [],
@@ -17,6 +51,23 @@
     "version": "0.2.0"
   },
   {
+    "category": "contact",
+    "checksum": "fb63a0c2c50eb9b7b8137bd4c2f98f85245a55b3a05c714bfe43992e9deb3d73",
+    "dependencies": [],
+    "description": "A spacious contact directory with ruled service rows and an integrated press-kit machine illustration.",
+    "name": "contact-lab37-support",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/contact/050_lab37_support_contact_options_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Lab37 Support Contact Options",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
     "category": "cta",
     "checksum": "040fe57fa59f8bc33b95f9710a8443c40c81194e880283aed635f70bfb926274",
     "dependencies": [],
@@ -32,6 +83,74 @@
     "title": "APIs CTA",
     "type": "registry:section",
     "version": "0.2.0"
+  },
+  {
+    "category": "cta",
+    "checksum": "9ed920216e3ed39bcd732191ed29b806338741e7f171e357aeacc9d07efd7fb2",
+    "dependencies": [],
+    "description": "A centered ivory callout with refined serif typography, understated principles, and architectural linework.",
+    "name": "cta-rockfi-vision",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/cta/014_rockfi_vision_intro_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "RockFi Vision Intro",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "faq",
+    "checksum": "d0e6ecde8aca427095403c86dfdeea10aa3db24ab02de5c07ccfc40bbfc1b7cc",
+    "dependencies": ["lucide-react"],
+    "description": "A warm peach FAQ section with a large split headline, grouped native accordions, and a rounded action.",
+    "name": "faq-a-better-lou-support",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/faq/003_a_better_lou_support_accordion_faq_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "A Better Lou Support FAQ",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "feature",
+    "checksum": "35daca253dfb04bf201f0c5f7a245afc6e9e9705a8264631e51c0aa184d932f3",
+    "dependencies": [],
+    "description": "A dark workflow showcase with an oversized statement and a dense grid of branded automation cards.",
+    "name": "feature-deck-workflows",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/feature/011_deck_workflows_bento_grid_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Deck Workflows Bento Grid",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "footer",
+    "checksum": "89b59c3eb4a1225d98593648d88777c6d6dca8f36859779a099eba0e050b9853",
+    "dependencies": [],
+    "description": "A black report footer combining survey statistics, monumental branding, metadata, and compact navigation.",
+    "name": "footer-aiid-methodology",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/footer/010_aiid_methodology_statistics_footer_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "AiiD Methodology Statistics Footer",
+    "type": "registry:section",
+    "version": "0.1.0"
   },
   {
     "category": "footer",
@@ -66,5 +185,124 @@
     "title": "Efficiency Hero",
     "type": "registry:section",
     "version": "0.2.0"
+  },
+  {
+    "category": "hero",
+    "checksum": "367e8c0c76cb3d7e28e7410154b34c76eeab33a0b31e01c8a3e22fa15068e02f",
+    "dependencies": ["lucide-react"],
+    "description": "A geometric support-platform hero with announcement bar, responsive navigation, email capture, and customer grid.",
+    "name": "hero-pylon-support",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/hero/499_pylon_support_platform_hero_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Pylon Support Platform Hero",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "logo-section",
+    "checksum": "6abaa704bf28f7845d8ba78686f2a19d839b58bb3ff27d67f398808a722d57ed",
+    "dependencies": [],
+    "description": "An ivory indexed partner directory with monospaced typography, a rational grid, and oversized organization names.",
+    "name": "logo-section-eleos-partners",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/logo-section/007_eleos_partner_logo_cloud_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Eleos Partner Logo Cloud",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "navbar",
+    "checksum": "bd60738572f7a24a18c6413fda9c9435d291e3d8f3f4e6580bf5db625a8bf505",
+    "dependencies": [],
+    "description": "A cream typographic navigation bar with generous desktop spacing and a compact native mobile menu.",
+    "name": "navbar-grain-mortar",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/navbar/068_grain___mortar_site_navbar_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Grain & Mortar Site Navbar",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "portfolio",
+    "checksum": "413d2ef1564fe24af5e6c1bd8e17640cca0f15b98cf1cf05ed5168250e143dfc",
+    "dependencies": [],
+    "description": "A restrained split portfolio section pairing a compact introduction with a monumental serif company list.",
+    "name": "portfolio-nglm-companies",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/portfolio/043_nglm_our_companies_portfolio_list_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "NGLM Our Companies Portfolio",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "pricing",
+    "checksum": "4024d9195ccf8e70dd952b544545f0301e69ae1fb31688336a0e4f84e9b76dde",
+    "dependencies": ["lucide-react"],
+    "description": "A bold black pricing section with four tall package cards, expressive icon details, and a pink featured tier.",
+    "name": "pricing-poch-packages",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/pricing/088_poch_package_pricing_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Poch Package Pricing",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "team",
+    "checksum": "a2ada290f894f53e2a0b2a8529cb79f61d2b1f87a78784e646e931a8531b0d87",
+    "dependencies": [],
+    "description": "A black editorial team section with a compact maker label, large collaboration statement, and ruled credits table.",
+    "name": "team-aiid-project",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/team/004_aiid_project_team_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "AiiD Project Team",
+    "type": "registry:section",
+    "version": "0.1.0"
+  },
+  {
+    "category": "testimonial",
+    "checksum": "686cdb10ee42fb94de380cbe6244ec230e106df4b1dae1987ae11d808e832648",
+    "dependencies": ["lucide-react"],
+    "description": "A warm editorial testimonial carousel with oversized serif typography, accessible controls, and horizontal snap cards.",
+    "name": "testimonial-steno-carousel",
+    "previewAssets": [
+      {
+        "type": "image",
+        "url": "https://media.sectloom.dpdns.org/images/testimonial/014_steno_testimonials_carousel_design.jpg"
+      }
+    ],
+    "registryDependencies": [],
+    "title": "Steno Testimonials Carousel",
+    "type": "registry:section",
+    "version": "0.1.0"
   }
 ]

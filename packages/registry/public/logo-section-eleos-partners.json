@@ -1,0 +1,48 @@
+{
+  "category": "logo-section",
+  "checksum": "6abaa704bf28f7845d8ba78686f2a19d839b58bb3ff27d67f398808a722d57ed",
+  "dependencies": [],
+  "description": "An ivory indexed partner directory with monospaced typography, a rational grid, and oversized organization names.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["swiss-directory"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "ca0c600e3aeb93596d93757c9159bc1673c01838256206ce161d84ba4b16d037",
+      "content": "import * as React from 'react';\n\nexport interface LogoSectionEleosPartnersProps {\n  heading?: string;\n  description?: string;\n  partners?: string[];\n}\n\nconst DEFAULT_PARTNERS = [\n  'PATH',\n  'HEALTH NET',\n  'LACDA',\n  'BRILLIANT CORNERS',\n  'LA MAS',\n  'SELF HELP',\n  'CENTURY HOUSING',\n  'HOPICS',\n  'THE RIGHTWAY FOUNDATION',\n  'HACLA',\n];\n\nexport function LogoSectionEleosPartners({\n  heading = 'The partners who make it possible',\n  description = 'A network of private lenders and capital partners who understand that affordable housing, done right, is both a sound & meaningful investment.',\n  partners = DEFAULT_PARTNERS,\n}: LogoSectionEleosPartnersProps) {\n  return (\n    <section className=\"relative w-full overflow-hidden bg-[#f6f5ed] px-5 py-20 text-[#17141d] sm:px-10 sm:py-28 lg:min-h-[900px] lg:px-[4vw] lg:py-36\">\n      <div\n        aria-hidden=\"true\"\n        className=\"absolute inset-0 opacity-60\"\n        style={{\n          backgroundImage:\n            'linear-gradient(90deg, #deddd4 1px, transparent 1px)',\n          backgroundSize: '150px 100%',\n        }}\n      />\n      <div className=\"relative z-10 mx-auto grid max-w-[1800px] gap-16 lg:grid-cols-[1fr_1fr]\">\n        <div>\n          <h2 className=\"max-w-[650px] font-mono text-[clamp(2.7rem,4.8vw,6rem)] uppercase leading-[1.04] tracking-[-0.055em]\">\n            {heading}\n          </h2>\n          <p className=\"mt-8 max-w-[720px] font-mono text-base leading-7 text-black/70 sm:text-xl\">\n            {description}\n          </p>\n        </div>\n        <ol className=\"space-y-1 lg:pt-64\">\n          {partners.map((partner, index) => (\n            <li\n              key={partner}\n              className=\"grid grid-cols-[3rem_1fr] items-baseline gap-4 font-mono\"\n            >\n              <span className=\"text-sm text-black/35\">\n                {String(index + 1).padStart(2, '0')}\n              </span>\n              <span className=\"text-[clamp(2rem,4.1vw,5rem)] uppercase leading-[1.12] tracking-[-0.045em]\">\n                {partner}\n              </span>\n            </li>\n          ))}\n        </ol>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/logo-section-eleos-partners.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "logo-section-eleos-partners",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/logo-section/007_eleos_partner_logo_cloud_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "description": "Supporting partnership description",
+    "heading": "Primary partner-section statement",
+    "partners": "Ordered list of partner names"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "7",
+    "sourceLocalPath": "data/images/logo-section/007_eleos_partner_logo_cloud_design.jpg",
+    "sourceTitle": "Eleos Partner Logo Cloud Design"
+  },
+  "title": "Eleos Partner Logo Cloud",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

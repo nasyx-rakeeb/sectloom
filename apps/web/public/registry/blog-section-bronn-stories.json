@@ -1,0 +1,48 @@
+{
+  "category": "blog-section",
+  "checksum": "9c584544b2ec58e825f89c9769d4db578462d7025a371dc59dc9e4f355604202",
+  "dependencies": ["lucide-react"],
+  "description": "An airy editorial customer-story grid with oversized brand cards, serif headlines, and restrained metadata.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["editorial-light"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "280ff19471a221906c9146353322babc68abd73b33f8276493b98b16237e2e4e",
+      "content": "import * as React from 'react';\nimport Link from 'next/link';\nimport { ArrowRight } from 'lucide-react';\n\nexport interface BronnStory {\n  brand: string;\n  brandMark?: string;\n  date: string;\n  title: string;\n  description: string;\n  href: string;\n  accent?: string;\n}\n\nexport interface BlogSectionBronnStoriesProps {\n  heading?: string;\n  allPosts?: { label: string; href: string } | null;\n  stories?: BronnStory[];\n}\n\nconst DEFAULT_STORIES: BronnStory[] = [\n  {\n    brand: 'zaplar',\n    brandMark: 'Z',\n    date: 'Jun 22, 2026',\n    title:\n      'How Zaplar is building the AI operating system for hotels and event venues',\n    description:\n      'Axel, Jon, Douglas and Oscar founded Zaplar to build the AI operating system for hotels and event venues.',\n    href: '#',\n    accent: '#0d5f4c',\n  },\n  {\n    brand: 'ParkingAid',\n    brandMark: 'P',\n    date: 'Jun 17, 2026',\n    title:\n      'How ParkingAid connects parking, traffic and city planning on one data platform',\n    description:\n      'A shared data layer that helps cities, mobility operators and drivers move at the same pace.',\n    href: '#',\n    accent: '#2e9f99',\n  },\n  {\n    brand: 'ethira',\n    brandMark: 'E',\n    date: 'Jun 9, 2026',\n    title: 'How Ethira is building governance for the AI era',\n    description:\n      'Giving companies full control over every AI tool, agent and vendor as they scale.',\n    href: '#',\n    accent: '#111111',\n  },\n];\n\nexport function BlogSectionBronnStories({\n  heading = 'Latest',\n  allPosts = { label: 'All posts', href: '#' },\n  stories = DEFAULT_STORIES,\n}: BlogSectionBronnStoriesProps) {\n  return (\n    <section className=\"w-full bg-[#fafaf9] px-5 py-20 text-[#171717] sm:px-8 sm:py-28 lg:px-14 lg:py-36\">\n      <div className=\"mx-auto max-w-[1800px]\">\n        <div className=\"flex items-end justify-between gap-8\">\n          <h2 className=\"font-serif text-[clamp(3rem,4.4vw,5.5rem)] leading-none tracking-[-0.045em]\">\n            {heading}\n          </h2>\n          {allPosts ? (\n            <Link\n              href={allPosts.href}\n              className=\"text-base text-[#696969] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n            >\n              {allPosts.label}\n              <ArrowRight aria-hidden=\"true\" className=\"ml-1 inline size-4\" />\n            </Link>\n          ) : null}\n        </div>\n\n        <div className=\"mt-16 grid gap-12 md:grid-cols-3 md:gap-7 lg:mt-24\">\n          {stories.map((story) => (\n            <article key={`${story.brand}-${story.title}`} className=\"min-w-0\">\n              <Link\n                href={story.href}\n                className=\"group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4\"\n              >\n                <div className=\"flex aspect-[1.12/1] items-center justify-center rounded-[18px] bg-[#f2f1ed] px-8\">\n                  <div\n                    className=\"flex items-center gap-3 text-[clamp(2rem,3vw,4rem)] font-semibold tracking-[-0.05em]\"\n                    style={{ color: story.accent }}\n                  >\n                    <span aria-hidden=\"true\">{story.brandMark}</span>\n                    <span>{story.brand}</span>\n                  </div>\n                </div>\n                <p className=\"mt-5 font-mono text-xs uppercase tracking-[0.04em] text-[#707070] sm:text-sm\">\n                  Customer Stories · {story.date}\n                </p>\n                <h3 className=\"mt-3 font-serif text-[clamp(1.5rem,1.9vw,2.35rem)] leading-[1.2] tracking-[-0.025em] group-hover:underline\">\n                  {story.title}\n                </h3>\n                <p className=\"mt-4 text-base leading-7 text-[#696969] sm:text-lg\">\n                  {story.description}\n                </p>\n              </Link>\n            </article>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/blog-section-bronn-stories.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "blog-section-bronn-stories",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/blog-section/003_bronn_customer_stories_blog_list_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "allPosts": "Optional link with label and href for the complete story archive",
+    "heading": "Section heading",
+    "stories": "Customer stories with brand, mark, date, title, description, href, and accent color"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "3",
+    "sourceLocalPath": "data/images/blog-section/003_bronn_customer_stories_blog_list_design.jpg",
+    "sourceTitle": "Bronn Customer Stories Blog List Design"
+  },
+  "title": "Bronn Customer Stories",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

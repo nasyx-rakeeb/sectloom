@@ -1,0 +1,49 @@
+{
+  "category": "cta",
+  "checksum": "9ed920216e3ed39bcd732191ed29b806338741e7f171e357aeacc9d07efd7fb2",
+  "dependencies": [],
+  "description": "A centered ivory callout with refined serif typography, understated principles, and architectural linework.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["quiet-luxury"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "45f05392091474b24b8d1bf13ee8bc34b490a7b14cfe4ddb1e1d1c5649d275ad",
+      "content": "import * as React from 'react';\nimport Link from 'next/link';\n\nexport interface CtaRockfiVisionProps {\n  eyebrow?: string;\n  heading?: string;\n  principles?: string[];\n  cta?: { label: string; href: string } | null;\n}\n\nexport function CtaRockfiVision({\n  eyebrow = 'Our vision',\n  heading = 'A pricing set for objective advice.',\n  principles = [\n    'Objectivity of the Council',\n    'Transparency on fees',\n    'Alignment of interests',\n  ],\n  cta = { label: 'Discover our model', href: '#' },\n}: CtaRockfiVisionProps) {\n  return (\n    <section className=\"w-full bg-white p-3 text-[#5a5038] sm:p-5\">\n      <div className=\"relative mx-auto flex min-h-[620px] max-w-[1900px] items-center justify-center overflow-hidden rounded-[16px] border border-[#ddd8c8] bg-[#f8f7ef] px-6 py-20 sm:min-h-[760px] lg:min-h-[900px]\">\n        <div\n          aria-hidden=\"true\"\n          className=\"absolute inset-y-0 right-0 w-[36%] border-l border-[#e3dfd1] opacity-70\"\n          style={{\n            backgroundImage:\n              'linear-gradient(90deg, transparent 49.8%, #ded9c9 50%, transparent 50.2%), linear-gradient(45deg, transparent 49.8%, #ded9c9 50%, transparent 50.2%)',\n            backgroundSize: '260px 260px',\n          }}\n        />\n        <div className=\"relative z-10 flex max-w-[880px] flex-col items-center text-center\">\n          <span className=\"rounded-xl border border-[#cfc7ae] px-5 py-3 text-sm sm:text-base\">\n            {eyebrow}\n          </span>\n          <h2 className=\"mt-10 max-w-[740px] font-serif text-[clamp(3rem,5.5vw,7rem)] leading-[0.94] tracking-[-0.055em]\">\n            {heading}\n          </h2>\n          <ul className=\"mt-12 flex flex-col items-center gap-3 text-sm sm:flex-row sm:gap-5 sm:text-base\">\n            {principles.map((principle, index) => (\n              <React.Fragment key={principle}>\n                {index > 0 ? (\n                  <li\n                    aria-hidden=\"true\"\n                    className=\"size-1 rounded-full bg-current\"\n                  />\n                ) : null}\n                <li>{principle}</li>\n              </React.Fragment>\n            ))}\n          </ul>\n          {cta ? (\n            <Link\n              href={cta.href}\n              className=\"mt-14 inline-flex min-h-14 items-center justify-center rounded-full bg-[#51472f] px-8 text-base text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#51472f] focus-visible:ring-offset-4\"\n            >\n              {cta.label}\n            </Link>\n          ) : null}\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/cta-rockfi-vision.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "cta-rockfi-vision",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/cta/014_rockfi_vision_intro_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "cta": "Optional call-to-action label and href",
+    "eyebrow": "Small outlined label above the headline",
+    "heading": "Primary serif statement",
+    "principles": "Short principles separated by visual dots"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "14",
+    "sourceLocalPath": "data/images/cta/014_rockfi_vision_intro_design.jpg",
+    "sourceTitle": "RockFi Vision Intro Design"
+  },
+  "title": "RockFi Vision Intro",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

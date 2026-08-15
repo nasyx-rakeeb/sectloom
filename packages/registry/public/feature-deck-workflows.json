@@ -1,0 +1,47 @@
+{
+  "category": "feature",
+  "checksum": "35daca253dfb04bf201f0c5f7a245afc6e9e9705a8264631e51c0aa184d932f3",
+  "dependencies": [],
+  "description": "A dark workflow showcase with an oversized statement and a dense grid of branded automation cards.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["dark-product-grid"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "222574230f4316a72511d4bdabf4b054b611327ffc5c4cdfcf2cc7f99b544bc9",
+      "content": "import * as React from 'react';\n\nexport interface WorkflowCard {\n  company: string;\n  mark: string;\n  task: string;\n  status: 'Running' | 'Completed';\n  accent?: string;\n}\n\nexport interface FeatureDeckWorkflowsProps {\n  heading?: string;\n  workflows?: WorkflowCard[];\n}\n\nconst DEFAULT_WORKFLOWS: WorkflowCard[] = [\n  {\n    company: 'MyHSA',\n    mark: 'H',\n    task: 'Export contribution records',\n    status: 'Running',\n    accent: '#eb775a',\n  },\n  {\n    company: 'Comcast',\n    mark: 'X',\n    task: 'Fetch billing statements',\n    status: 'Running',\n    accent: '#9b20ff',\n  },\n  {\n    company: 'Duke Energy',\n    mark: 'D',\n    task: 'Download utility bills',\n    status: 'Running',\n    accent: '#31a59e',\n  },\n  {\n    company: 'Meta',\n    mark: '∞',\n    task: 'Sync ad campaigns',\n    status: 'Running',\n    accent: '#1684de',\n  },\n  {\n    company: 'SDG&E',\n    mark: 'S',\n    task: 'Pull billing statements',\n    status: 'Running',\n    accent: '#ef6da4',\n  },\n  {\n    company: 'Aetna',\n    mark: 'A',\n    task: 'Pull claims history',\n    status: 'Running',\n    accent: '#8c3b9d',\n  },\n  {\n    company: 'Cigna',\n    mark: 'C',\n    task: 'Export benefits summary',\n    status: 'Running',\n    accent: '#0062c7',\n  },\n  {\n    company: 'BambooHR',\n    mark: 'b',\n    task: 'Sync employee directory',\n    status: 'Running',\n    accent: '#79c33a',\n  },\n  {\n    company: 'Booking.com',\n    mark: 'B.',\n    task: 'Fetch reservation data',\n    status: 'Completed',\n    accent: '#064da7',\n  },\n  {\n    company: 'SAP',\n    mark: 'SAP',\n    task: 'Extract procurement data',\n    status: 'Running',\n    accent: '#1599ce',\n  },\n];\n\nexport function FeatureDeckWorkflows({\n  heading = 'Any workflow. Any application. Infinite agents.',\n  workflows = DEFAULT_WORKFLOWS,\n}: FeatureDeckWorkflowsProps) {\n  return (\n    <section className=\"w-full overflow-hidden bg-[#0d0f0e] px-5 py-20 text-[#f4f5f3] sm:px-10 sm:py-28 lg:px-[4vw] lg:py-36\">\n      <div className=\"mx-auto max-w-[1900px]\">\n        <h2 className=\"text-[clamp(3rem,6vw,7.5rem)] font-medium leading-[0.95] tracking-[-0.065em]\">\n          {heading}\n        </h2>\n        <div className=\"relative mt-20 lg:mt-28\">\n          <div className=\"pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#0d0f0e] to-transparent\" />\n          <div className=\"pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#0d0f0e] to-transparent\" />\n          <div className=\"grid min-w-[900px] grid-cols-4 gap-3 md:min-w-0 lg:grid-cols-5\">\n            {workflows.map((workflow) => (\n              <article\n                key={`${workflow.company}-${workflow.task}`}\n                className=\"rounded-2xl border border-white/10 bg-[#151817] p-5\"\n              >\n                <div className=\"flex items-center gap-3\">\n                  <span\n                    className=\"flex h-11 w-11 items-center justify-center rounded-xl bg-white font-bold text-black\"\n                    style={{ color: workflow.accent }}\n                  >\n                    {workflow.mark}\n                  </span>\n                  <div className=\"min-w-0\">\n                    <h3 className=\"truncate text-base font-semibold\">\n                      {workflow.company}\n                    </h3>\n                    <p className=\"truncate text-sm text-white/40\">\n                      {workflow.task}\n                    </p>\n                  </div>\n                </div>\n                <p className=\"mt-6 font-mono text-xs text-white/40\">\n                  <span\n                    aria-hidden=\"true\"\n                    className={`mr-1 inline-block size-2 rounded-full ${\n                      workflow.status === 'Completed'\n                        ? 'bg-[#79afa3]'\n                        : 'bg-[#d88c2d]'\n                    }`}\n                  />{' '}\n                  {workflow.status}\n                </p>\n                <div className=\"mt-6 h-px bg-white/10\" />\n              </article>\n            ))}\n          </div>\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/feature-deck-workflows.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "feature-deck-workflows",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/feature/011_deck_workflows_bento_grid_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "heading": "Oversized workflow statement",
+    "workflows": "Workflow cards with company, mark, task, status, and optional accent color"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "11",
+    "sourceLocalPath": "data/images/feature/011_deck_workflows_bento_grid_design.jpg",
+    "sourceTitle": "Deck Workflows Bento Grid Design"
+  },
+  "title": "Deck Workflows Bento Grid",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

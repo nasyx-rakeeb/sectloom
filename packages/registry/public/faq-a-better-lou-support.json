@@ -1,0 +1,48 @@
+{
+  "category": "faq",
+  "checksum": "d0e6ecde8aca427095403c86dfdeea10aa3db24ab02de5c07ccfc40bbfc1b7cc",
+  "dependencies": ["lucide-react"],
+  "description": "A warm peach FAQ section with a large split headline, grouped native accordions, and a rounded action.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["warm-editorial"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "b84c636eafaad8dfec8663e1659e179a6f36817c0931130264cc587c3d4d346c",
+      "content": "import * as React from 'react';\nimport Link from 'next/link';\nimport { ArrowUpRight, Plus } from 'lucide-react';\n\nexport interface FaqGroup {\n  title: string;\n  items: { question: string; answer: string }[];\n}\n\nexport interface FaqABetterLouSupportProps {\n  heading?: string;\n  groups?: FaqGroup[];\n  cta?: { label: string; href: string } | null;\n}\n\nconst DEFAULT_GROUPS: FaqGroup[] = [\n  {\n    title: 'How it works',\n    items: [\n      {\n        question: 'How do I get started?',\n        answer:\n          'Choose a plan and complete the short intake form. Our team will guide you from there.',\n      },\n      {\n        question: 'Do I need to visit a clinic?',\n        answer:\n          'Most appointments can be completed remotely, depending on your care needs and location.',\n      },\n      {\n        question: 'Is the plan the same for everyone?',\n        answer:\n          'No. Every plan is shaped around your goals, history, and ongoing progress.',\n      },\n      {\n        question: 'Where are your services available?',\n        answer:\n          'Availability varies by region. Contact the team to confirm coverage in your area.',\n      },\n    ],\n  },\n  {\n    title: 'Membership & Support',\n    items: [\n      {\n        question: 'What is included in my membership?',\n        answer:\n          'Membership includes consultations, ongoing support, and a personalized care plan.',\n      },\n      {\n        question: 'Can I cancel?',\n        answer:\n          'Yes. You can cancel according to the terms shown when you join.',\n      },\n      {\n        question: 'How does support work?',\n        answer:\n          'Members can contact the care team through the secure support channel.',\n      },\n    ],\n  },\n  {\n    title: 'Service & Details',\n    items: [\n      {\n        question: 'Will I know if I am a good fit before committing?',\n        answer:\n          'Yes. The initial assessment helps determine whether the service is appropriate for you.',\n      },\n      {\n        question: 'How soon can I expect to see progress?',\n        answer:\n          'Timelines vary, and your care team will set realistic milestones with you.',\n      },\n    ],\n  },\n];\n\nexport function FaqABetterLouSupport({\n  heading = 'Frequently Asked Questions',\n  groups = DEFAULT_GROUPS,\n  cta = { label: 'Explore All', href: '#' },\n}: FaqABetterLouSupportProps) {\n  return (\n    <section className=\"w-full bg-[#fff0dd] px-5 py-20 text-[#120900] sm:px-10 sm:py-28 lg:px-[4vw] lg:py-36\">\n      <div className=\"mx-auto grid max-w-[1800px] gap-16 lg:grid-cols-[0.9fr_1.35fr] lg:gap-24\">\n        <div>\n          <h2 className=\"max-w-[620px] text-[clamp(3.6rem,6vw,7.5rem)] font-medium leading-[0.95] tracking-[-0.065em]\">\n            {heading}\n          </h2>\n          {cta ? (\n            <Link\n              href={cta.href}\n              className=\"mt-10 inline-flex min-h-14 items-center gap-6 rounded-full bg-[#ffb33f] px-8 text-base font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n            >\n              {cta.label}\n              <ArrowUpRight aria-hidden=\"true\" className=\"size-5\" />\n            </Link>\n          ) : null}\n        </div>\n        <div className=\"space-y-16\">\n          {groups.map((group) => (\n            <div key={group.title}>\n              <h3 className=\"mb-5 text-3xl font-medium tracking-[-0.04em] sm:text-4xl\">\n                {group.title}\n              </h3>\n              <div className=\"border-t border-black/20\">\n                {group.items.map((item) => (\n                  <details\n                    key={item.question}\n                    className=\"group border-b border-black/20\"\n                  >\n                    <summary className=\"flex cursor-pointer list-none items-center justify-between gap-8 py-6 text-xl font-medium tracking-[-0.025em] marker:hidden sm:text-2xl\">\n                      {item.question}\n                      <Plus\n                        aria-hidden=\"true\"\n                        className=\"size-7 shrink-0 transition-transform group-open:rotate-45\"\n                      />\n                    </summary>\n                    <p className=\"max-w-2xl pb-6 pr-12 text-base leading-7 text-black/65 sm:text-lg\">\n                      {item.answer}\n                    </p>\n                  </details>\n                ))}\n              </div>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/faq-a-better-lou-support.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "faq-a-better-lou-support",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/faq/003_a_better_lou_support_accordion_faq_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "cta": "Optional supporting action with label and href",
+    "groups": "Question groups with titles and question-answer items",
+    "heading": "Large FAQ heading"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "3",
+    "sourceLocalPath": "data/images/faq/003_a_better_lou_support_accordion_faq_design.jpg",
+    "sourceTitle": "A Better Lou Support Accordion FAQ Design"
+  },
+  "title": "A Better Lou Support FAQ",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

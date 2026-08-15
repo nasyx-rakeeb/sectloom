@@ -1,0 +1,48 @@
+{
+  "category": "blog-header-section",
+  "checksum": "b540572d930eb001914001318b20a21181be30d0cd0b53a7f7b54d3769bf5b9f",
+  "dependencies": [],
+  "description": "A cyan editorial blog header with compressed display typography, checkerboard graphics, and oversized mission statements.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["editorial-brutalist"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "8adf1805ab497dbf98728df5d804b29fd170069f3a80600fcddc907fcd0c9bfa",
+      "content": "import * as React from 'react';\n\nexport interface BlogHeaderSectionReevoMissionProps {\n  eyebrow?: string;\n  heading?: string;\n  statements?: React.ReactNode[];\n}\n\nconst DEFAULT_STATEMENTS: React.ReactNode[] = [\n  <>\n    <strong>We didn&apos;t start Reevo because we love CRMs.</strong> We started\n    it because the way revenue teams are forced to work is{' '}\n    <strong>fundamentally broken.</strong>\n  </>,\n  <>\n    You&apos;ve been sold a &quot;modern tech stack.&quot; What you got is a{' '}\n    <strong>Frankenstack of point solutions,</strong> brittle APIs, and\n    overpriced databases.\n  </>,\n  <>\n    It&apos;s expensive. It&apos;s fragmented. And it forces your reps to work\n    for the software, <strong>instead of the software working for them.</strong>\n  </>,\n];\n\nfunction CheckerField() {\n  return (\n    <div\n      aria-hidden=\"true\"\n      className=\"h-24 w-full opacity-90 sm:h-32\"\n      style={{\n        backgroundColor: '#72d3e4',\n        backgroundImage:\n          'linear-gradient(45deg, white 25%, transparent 25%), linear-gradient(-45deg, white 25%, transparent 25%), linear-gradient(45deg, transparent 75%, white 75%), linear-gradient(-45deg, transparent 75%, white 75%)',\n        backgroundPosition: '0 0, 0 6px, 6px -6px, -6px 0px',\n        backgroundSize: '12px 12px',\n        clipPath:\n          'polygon(0 0, 18% 0, 18% 34%, 31% 34%, 31% 0, 48% 0, 48% 56%, 62% 56%, 62% 0, 76% 0, 76% 28%, 88% 28%, 88% 0, 100% 0, 100% 100%, 0 100%)',\n      }}\n    />\n  );\n}\n\nexport function BlogHeaderSectionReevoMission({\n  eyebrow = 'About us',\n  heading = 'The modern sales stack is a crime scene.',\n  statements = DEFAULT_STATEMENTS,\n}: BlogHeaderSectionReevoMissionProps) {\n  return (\n    <section className=\"w-full overflow-hidden bg-[#f7f7f5] text-[#090909]\">\n      <div className=\"mx-auto max-w-[1800px] px-5 py-6 sm:px-8 lg:px-12\">\n        <div className=\"bg-[#72d3e4] px-5 pb-0 pt-8 sm:px-10 sm:pt-12 lg:px-16 lg:pt-16\">\n          <p className=\"font-mono text-sm uppercase tracking-[-0.04em] sm:text-base\">\n            {eyebrow}\n          </p>\n          <h1 className=\"mt-7 max-w-[1450px] font-sans text-[clamp(3rem,8.4vw,9.5rem)] font-black uppercase leading-[0.82] tracking-[-0.075em]\">\n            {heading}\n          </h1>\n          <div className=\"mt-10 -mx-5 sm:-mx-10 lg:-mx-16\">\n            <CheckerField />\n          </div>\n        </div>\n\n        <div className=\"mx-auto max-w-[1500px] py-20 sm:py-28 lg:py-40\">\n          {statements.map((statement, index) => (\n            <p\n              key={index}\n              className=\"mb-16 text-[clamp(2rem,4.5vw,5.6rem)] font-normal leading-[1.08] tracking-[-0.055em] last:mb-0\"\n            >\n              {statement}\n            </p>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/blog-header-section-reevo-mission.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "blog-header-section-reevo-mission",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/blog-header-section/015_reevo_about_company_mission_blog_header_section_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "eyebrow": "Small label above the main headline",
+    "heading": "Primary compressed display headline",
+    "statements": "Editorial mission statements rendered below the checkerboard graphic"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "15",
+    "sourceLocalPath": "data/images/blog-header-section/015_reevo_about_company_mission_blog_header_section_design.jpg",
+    "sourceTitle": "Reevo About Company Mission Blog Header Section Design"
+  },
+  "title": "Reevo Mission Blog Header",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

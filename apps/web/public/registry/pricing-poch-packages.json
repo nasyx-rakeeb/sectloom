@@ -1,0 +1,47 @@
+{
+  "category": "pricing",
+  "checksum": "4024d9195ccf8e70dd952b544545f0301e69ae1fb31688336a0e4f84e9b76dde",
+  "dependencies": ["lucide-react"],
+  "description": "A bold black pricing section with four tall package cards, expressive icon details, and a pink featured tier.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["bold-card-pricing"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "0acb45c5fc80d5ac3cf95381a25af97da710702c517461f32ff8595791d9555e",
+      "content": "import * as React from 'react';\nimport Link from 'next/link';\nimport { Dices, Flame, Plus, Rocket, Smile } from 'lucide-react';\n\nexport type PochPlanIcon = 'flame' | 'rocket' | 'smile' | 'dice';\n\nexport interface PochPricingPlan {\n  name: string;\n  tagline: string;\n  features: string[];\n  price: string;\n  href: string;\n  icon?: PochPlanIcon;\n  featured?: boolean;\n  additions?: string[];\n}\n\nexport interface PricingPochPackagesProps {\n  heading?: string;\n  plans?: PochPricingPlan[];\n}\n\nconst DEFAULT_PLANS: PochPricingPlan[] = [\n  {\n    name: 'Sprint',\n    tagline: 'When your ass is on fire!',\n    icon: 'flame',\n    features: ['Base Identity', 'Zero Revisions'],\n    price: '$999',\n    href: '#',\n  },\n  {\n    name: 'Start-Up',\n    tagline: 'Start smart — go far.',\n    icon: 'rocket',\n    features: ['Base Identity', 'Landing Page', 'No-Code Development'],\n    additions: ['Social Media Content', '3D Visuals'],\n    price: '$2000',\n    href: '#',\n  },\n  {\n    name: 'The Identity',\n    tagline: 'All you (actually) need.',\n    icon: 'smile',\n    features: ['Full Brand Identity'],\n    additions: ['Landing Page', 'No-Code Development', 'Motion Design'],\n    price: '$3000',\n    href: '#',\n  },\n  {\n    name: 'Bombastic',\n    tagline: 'Get it all!',\n    icon: 'dice',\n    features: [\n      'Full Brand Identity',\n      'Full Brandbook',\n      'Multipage Website',\n      'Custom Development',\n      'Social Media Content',\n      'Motion Design',\n      '3D Visuals',\n    ],\n    price: '$6000+',\n    href: '#',\n    featured: true,\n  },\n];\n\nconst PLAN_ICONS = {\n  flame: Flame,\n  rocket: Rocket,\n  smile: Smile,\n  dice: Dices,\n};\n\nexport function PricingPochPackages({\n  heading = 'Pricing',\n  plans = DEFAULT_PLANS,\n}: PricingPochPackagesProps) {\n  return (\n    <section className=\"w-full bg-black px-5 py-20 text-white sm:px-8 sm:py-28 lg:px-[4vw] lg:py-36\">\n      <div className=\"mx-auto max-w-[1800px]\">\n        <h2 className=\"text-center font-mono text-lg uppercase tracking-[0.08em]\">\n          {heading}\n        </h2>\n        <div className=\"mt-16 grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-4\">\n          {plans.map((plan) => {\n            const PlanIcon = plan.icon ? PLAN_ICONS[plan.icon] : null;\n\n            return (\n              <article\n                key={plan.name}\n                className={`flex min-h-[620px] flex-col rounded-[28px] p-7 text-black ${plan.featured ? 'bg-[#f399c1]' : 'bg-[#fafafa]'}`}\n              >\n                <h3 className=\"text-3xl font-semibold tracking-[-0.05em] sm:text-4xl\">\n                  {plan.name}\n                </h3>\n                <p className=\"mt-3 flex items-center gap-2 border-b border-black/25 pb-5 font-serif text-lg\">\n                  {PlanIcon ? (\n                    <PlanIcon aria-hidden=\"true\" className=\"size-4 shrink-0\" />\n                  ) : null}\n                  {plan.tagline}\n                </p>\n                <ul className=\"mt-5 space-y-3\">\n                  {plan.features.map((feature) => (\n                    <li key={feature} className=\"text-lg font-semibold\">\n                      <span\n                        className={`mr-3 inline-block h-4 w-4 rounded-full ${plan.featured ? 'bg-white' : 'bg-[#f399c1]'}`}\n                      />\n                      {feature}\n                    </li>\n                  ))}\n                </ul>\n                {plan.additions?.length ? (\n                  <div className=\"mt-8 text-black/45\">\n                    <p className=\"font-semibold text-black/70\">\n                      Individually priced:\n                    </p>\n                    {plan.additions.map((addition) => (\n                      <p\n                        key={addition}\n                        className=\"mt-2 flex items-center gap-1.5\"\n                      >\n                        <Plus\n                          aria-hidden=\"true\"\n                          className=\"size-3.5 shrink-0\"\n                        />\n                        {addition}\n                      </p>\n                    ))}\n                  </div>\n                ) : null}\n                <p className=\"mt-auto pt-10 text-[clamp(4rem,5vw,7rem)] font-medium leading-none tracking-[-0.065em]\">\n                  {plan.price}\n                </p>\n                <Link\n                  href={plan.href}\n                  className=\"mt-6 inline-flex min-h-14 items-center justify-center rounded-full bg-white px-6 text-lg font-semibold shadow-[inset_0_0_0_1px_rgba(0,0,0,.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n                >\n                  Get This Package\n                </Link>\n              </article>\n            );\n          })}\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/pricing-poch-packages.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "pricing-poch-packages",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/pricing/088_poch_package_pricing_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "heading": "Pricing section label",
+    "plans": "Pricing plans with name, tagline, Lucide icon key, features, additions, price, href, and featured state"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "88",
+    "sourceLocalPath": "data/images/pricing/088_poch_package_pricing_design.jpg",
+    "sourceTitle": "Poch Package Pricing Design"
+  },
+  "title": "Poch Package Pricing",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

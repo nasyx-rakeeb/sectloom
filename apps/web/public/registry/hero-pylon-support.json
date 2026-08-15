@@ -1,0 +1,52 @@
+{
+  "category": "hero",
+  "checksum": "367e8c0c76cb3d7e28e7410154b34c76eeab33a0b31e01c8a3e22fa15068e02f",
+  "dependencies": ["lucide-react"],
+  "description": "A geometric support-platform hero with announcement bar, responsive navigation, email capture, and customer grid.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["swiss-product"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "a8a565a2a4505fba284703b16d7218294c807a5517603d5a57f69ac8c447b57c",
+      "content": "import * as React from 'react';\nimport Link from 'next/link';\nimport { ArrowRight } from 'lucide-react';\n\nexport interface HeroPylonSupportProps {\n  announcement?: React.ReactNode;\n  brand?: string;\n  navigation?: { label: string; href: string }[];\n  heading?: React.ReactNode;\n  description?: React.ReactNode;\n  form?: { placeholder: string; actionLabel: string; action: string } | null;\n  customerGroups?: { label: string; names: string[] }[];\n}\n\nconst DEFAULT_GROUPS = [\n  {\n    label: 'Migrated off Zendesk',\n    names: ['alchemy', 'AssemblyAI', 'HEX', 'ada'],\n  },\n  {\n    label: 'Migrated off Intercom',\n    names: ['baseten', 'Flatfile', 'hightouch', 'LOOP'],\n  },\n  { label: 'Others', names: ['Guru', 'deel.', 'Linear', 'WRITER'] },\n];\n\nexport function HeroPylonSupport({\n  announcement = (\n    <>\n      Register for our upcoming webinar\n      <ArrowRight aria-hidden=\"true\" className=\"mx-1 inline size-3.5\" />\n      <u>Support x Success: Building Collaborative Customer Workflows</u>\n    </>\n  ),\n  brand = 'Pylon',\n  navigation = ['Product', 'Customers', 'Resources', 'Pricing', 'Company'].map(\n    (label) => ({ label, href: '#' })\n  ),\n  heading = (\n    <>\n      The support platform\n      <br />\n      built for <span className=\"text-[#888]\">B2B</span>\n    </>\n  ),\n  description = (\n    <>\n      Resolve customer issues faster with AI.\n      <br />\n      Support customers across modern channels.\n    </>\n  ),\n  form = { placeholder: 'Enter Email', actionLabel: 'See Pylon', action: '#' },\n  customerGroups = DEFAULT_GROUPS,\n}: HeroPylonSupportProps) {\n  return (\n    <section className=\"w-full overflow-hidden bg-white text-[#101010]\">\n      <div className=\"bg-black px-4 py-3 text-center text-xs text-white sm:text-sm\">\n        {announcement}\n      </div>\n      <header className=\"flex min-h-24 items-center justify-between border-b border-black/25 px-5 sm:px-10 lg:px-[4vw]\">\n        <Link\n          href=\"#\"\n          className=\"text-3xl font-semibold tracking-[-0.055em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n        >\n          <span\n            aria-hidden=\"true\"\n            className=\"mr-2 inline-flex size-6 items-center justify-center rounded-full border-2 border-[#5c1be8] align-[-0.1em]\"\n          >\n            <span className=\"size-3 rounded-full bg-[#5c1be8]\" />\n          </span>\n          {brand}\n        </Link>\n        <nav aria-label=\"Primary\" className=\"hidden items-center gap-9 lg:flex\">\n          {navigation.map((item) => (\n            <Link\n              key={item.label}\n              href={item.href}\n              className=\"font-semibold hover:underline\"\n            >\n              {item.label}\n            </Link>\n          ))}\n        </nav>\n        <div className=\"hidden gap-3 sm:flex\">\n          <Link\n            href=\"#\"\n            className=\"border border-black px-6 py-4 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n          >\n            Sign in\n          </Link>\n          <Link\n            href=\"#\"\n            className=\"bg-black px-6 py-4 font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2\"\n          >\n            Book a Demo\n          </Link>\n        </div>\n        <details className=\"relative lg:hidden\">\n          <summary className=\"cursor-pointer list-none border border-black px-4 py-2 font-semibold\">\n            Menu\n          </summary>\n          <div className=\"absolute right-0 z-20 mt-2 w-52 border border-black bg-white p-4 shadow-xl\">\n            {navigation.map((item) => (\n              <Link key={item.label} href={item.href} className=\"block py-2\">\n                {item.label}\n              </Link>\n            ))}\n          </div>\n        </details>\n      </header>\n\n      <div className=\"relative px-5 pb-20 pt-20 sm:px-10 lg:px-[4vw] lg:pt-28\">\n        <div\n          aria-hidden=\"true\"\n          className=\"absolute inset-0 opacity-40\"\n          style={{\n            backgroundImage:\n              'linear-gradient(#888 1px, transparent 1px), linear-gradient(90deg, #888 1px, transparent 1px)',\n            backgroundSize: '130px 130px',\n          }}\n        />\n        <div className=\"relative z-10 mx-auto flex max-w-[1050px] flex-col items-center text-center\">\n          <h1 className=\"text-[clamp(3.6rem,7.5vw,9rem)] font-normal leading-[0.94] tracking-[-0.075em]\">\n            {heading}\n          </h1>\n          <p className=\"mt-8 text-xl leading-[1.35] tracking-[-0.025em] sm:text-2xl\">\n            {description}\n          </p>\n          {form ? (\n            <form\n              action={form.action}\n              className=\"mt-10 flex w-full max-w-[600px] border border-black bg-white text-left\"\n            >\n              <label className=\"sr-only\" htmlFor=\"pylon-email\">\n                Email\n              </label>\n              <input\n                id=\"pylon-email\"\n                name=\"email\"\n                type=\"email\"\n                required\n                placeholder={form.placeholder}\n                className=\"min-w-0 flex-1 bg-transparent px-5 py-5 text-lg outline-none\"\n              />\n              <button\n                type=\"submit\"\n                className=\"bg-black px-7 py-5 font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5c1be8] focus-visible:ring-inset\"\n              >\n                {form.actionLabel}\n              </button>\n            </form>\n          ) : null}\n        </div>\n        <div className=\"relative z-10 mx-auto mt-20 grid max-w-[1500px] border-l border-t border-black/20 md:grid-cols-3\">\n          {customerGroups.map((group) => (\n            <div\n              key={group.label}\n              className=\"border-b border-r border-black/20 bg-white/95 p-7\"\n            >\n              <h2 className=\"font-semibold\">{group.label}</h2>\n              <div className=\"mt-7 grid grid-cols-2 gap-x-5 gap-y-8\">\n                {group.names.map((name) => (\n                  <span\n                    key={name}\n                    className=\"text-xl font-semibold tracking-[-0.04em] sm:text-2xl\"\n                  >\n                    {name}\n                  </span>\n                ))}\n              </div>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/hero-pylon-support.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "hero-pylon-support",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/hero/499_pylon_support_platform_hero_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "announcement": "Announcement-bar content",
+    "brand": "Brand name in the primary navigation",
+    "customerGroups": "Grouped customer names shown below the hero content",
+    "description": "Supporting hero description",
+    "form": "Optional email form placeholder, action label, and action URL",
+    "heading": "Main hero heading content",
+    "navigation": "Primary navigation links"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "499",
+    "sourceLocalPath": "data/images/hero/499_pylon_support_platform_hero_design.jpg",
+    "sourceTitle": "Pylon Support Platform Hero Design"
+  },
+  "title": "Pylon Support Platform Hero",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

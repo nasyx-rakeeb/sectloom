@@ -1,0 +1,48 @@
+{
+  "category": "portfolio",
+  "checksum": "413d2ef1564fe24af5e6c1bd8e17640cca0f15b98cf1cf05ed5168250e143dfc",
+  "dependencies": [],
+  "description": "A restrained split portfolio section pairing a compact introduction with a monumental serif company list.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["editorial-portfolio"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "fec59f96b84a012dc214bfe43fdb196c489087ecaff71c5b5d0424b8c805be48",
+      "content": "import * as React from 'react';\n\nexport interface PortfolioNglmCompaniesProps {\n  eyebrow?: string;\n  description?: string;\n  companies?: string[];\n}\n\nconst DEFAULT_COMPANIES = [\n  'NORDISKA GALLERIET',\n  'LÄNNA MÖBLER',\n  'YLVA',\n  'DUSTY DECO',\n  'KAYO',\n  'THE NEW ERA',\n  'A. HUSEBY',\n];\n\nexport function PortfolioNglmCompanies({\n  eyebrow = 'Explore Our Companies',\n  description = 'A portfolio of design-led companies with the ambition to define their category.',\n  companies = DEFAULT_COMPANIES,\n}: PortfolioNglmCompaniesProps) {\n  return (\n    <section className=\"w-full bg-[#fafafa] px-5 py-20 text-[#323232] sm:px-10 sm:py-28 lg:min-h-[960px] lg:px-[4vw] lg:py-36\">\n      <div className=\"mx-auto grid max-w-[1800px] gap-16 lg:grid-cols-2 lg:gap-24\">\n        <p className=\"text-xl font-semibold tracking-[-0.035em] sm:text-2xl\">\n          {eyebrow}\n        </p>\n        <div>\n          <p className=\"max-w-[720px] font-serif text-[clamp(2.3rem,3.4vw,4.6rem)] leading-[1.05] tracking-[-0.035em]\">\n            {description}\n          </p>\n          <ul className=\"mt-20 lg:mt-28\">\n            {companies.map((company) => (\n              <li\n                key={company}\n                className=\"font-serif text-[clamp(3rem,5vw,7rem)] uppercase leading-[0.98] tracking-[-0.055em] text-[#3d3d3d] transition-colors hover:text-black\"\n              >\n                {company}\n              </li>\n            ))}\n          </ul>\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/portfolio-nglm-companies.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "portfolio-nglm-companies",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/portfolio/043_nglm_our_companies_portfolio_list_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "companies": "Company names shown as an oversized list",
+    "description": "Editorial portfolio introduction",
+    "eyebrow": "Small portfolio label"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "43",
+    "sourceLocalPath": "data/images/portfolio/043_nglm_our_companies_portfolio_list_design.jpg",
+    "sourceTitle": "NGLM Our Companies Portfolio List Design"
+  },
+  "title": "NGLM Our Companies Portfolio",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

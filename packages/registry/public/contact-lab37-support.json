@@ -1,0 +1,47 @@
+{
+  "category": "contact",
+  "checksum": "fb63a0c2c50eb9b7b8137bd4c2f98f85245a55b3a05c714bfe43992e9deb3d73",
+  "dependencies": [],
+  "description": "A spacious contact directory with ruled service rows and an integrated press-kit machine illustration.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["minimal-editorial"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "de1b725d79d552e7d74186aeabcf1b349ddc945b6d7b97d658f140d0dbc71700",
+      "content": "import * as React from 'react';\nimport Link from 'next/link';\n\nexport interface Lab37ContactOption {\n  label: string;\n  description: string;\n  action: string;\n  href: string;\n  showMachine?: boolean;\n}\n\nexport interface ContactLab37SupportProps {\n  heading?: string;\n  options?: Lab37ContactOption[];\n}\n\nconst DEFAULT_OPTIONS: Lab37ContactOption[] = [\n  {\n    label: 'Get Bowl Builder',\n    description:\n      \"Whether you're an established brand, new concept, food service provider or food production operator, we'd love to explore how Bowl Builder's automation technology can help you scale operations.\",\n    action: 'Reserve',\n    href: '#',\n  },\n  {\n    label: 'Careers',\n    description:\n      \"We're always looking for passionate problem-solvers who want to help shape the future of food automation.\",\n    action: 'View Roles',\n    href: '#',\n  },\n  {\n    label: 'Other Inquiries',\n    description:\n      \"Have questions about Lab37 or interested in exploring partnership opportunities? We'd love to hear from you.\",\n    action: 'Message',\n    href: '#',\n  },\n  {\n    label: 'Press',\n    description:\n      \"Access Lab37's brand assets, including high-resolution imagery, logos, and media resources.\",\n    action: 'Download Kit',\n    href: '#',\n    showMachine: true,\n  },\n];\n\nfunction MachineOutline() {\n  return (\n    <svg aria-hidden=\"true\" viewBox=\"0 0 640 460\" className=\"h-full w-full\">\n      <g fill=\"none\" stroke=\"white\" strokeOpacity=\".55\" strokeWidth=\"3\">\n        <path d=\"M230 86h190v250H230zM420 130h64v206h-64M196 336h278M245 116h150v44H245z\" />\n        <path d=\"M268 190h110c34 0 34 42 0 42h-78c-36 0-36 42 0 42h78c34 0 34 42 0 42H268\" />\n        <circle cx=\"252\" cy=\"354\" r=\"18\" />\n        <circle cx=\"448\" cy=\"354\" r=\"18\" />\n      </g>\n    </svg>\n  );\n}\n\nexport function ContactLab37Support({\n  heading = 'Get In Touch',\n  options = DEFAULT_OPTIONS,\n}: ContactLab37SupportProps) {\n  return (\n    <section className=\"w-full bg-white px-5 py-20 text-black sm:px-10 sm:py-28 lg:px-[4vw] lg:py-36\">\n      <div className=\"mx-auto max-w-[1800px]\">\n        <h2 className=\"text-[clamp(4rem,8vw,10rem)] font-normal leading-none tracking-[-0.065em]\">\n          {heading}\n        </h2>\n        <div className=\"mt-20 border-b border-black/20 lg:mt-28\">\n          {options.map((option) => (\n            <div\n              key={option.label}\n              className=\"grid gap-7 border-t border-black/20 py-10 md:grid-cols-[1fr_1fr] md:py-12\"\n            >\n              <h3 className=\"text-2xl tracking-[-0.035em] sm:text-3xl\">\n                {option.label}\n              </h3>\n              <div className=\"max-w-[620px]\">\n                <p className=\"text-lg leading-[1.25] tracking-[-0.025em] sm:text-2xl\">\n                  {option.description}\n                </p>\n                <Link\n                  href={option.href}\n                  className=\"mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-[#eeeeee] px-7 text-base transition-colors hover:bg-[#dedede] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n                >\n                  {option.action}\n                </Link>\n                {option.showMachine ? (\n                  <div className=\"mt-7 aspect-square w-full max-w-[360px] bg-black\">\n                    <MachineOutline />\n                  </div>\n                ) : null}\n              </div>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/contact-lab37-support.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "contact-lab37-support",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/contact/050_lab37_support_contact_options_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "heading": "Main contact heading",
+    "options": "Contact rows with label, description, action, href, and optional press artwork"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "50",
+    "sourceLocalPath": "data/images/contact/050_lab37_support_contact_options_design.jpg",
+    "sourceTitle": "Lab37 Support Contact Options Design"
+  },
+  "title": "Lab37 Support Contact Options",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

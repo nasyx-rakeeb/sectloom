@@ -1,0 +1,47 @@
+{
+  "category": "navbar",
+  "checksum": "bd60738572f7a24a18c6413fda9c9435d291e3d8f3f4e6580bf5db625a8bf505",
+  "dependencies": [],
+  "description": "A cream typographic navigation bar with generous desktop spacing and a compact native mobile menu.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["minimal-navigation"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "439e1d2a193eec08b1d8043267f1d64e85f8945d6e6966fb24f3b45d9987609c",
+      "content": "import * as React from 'react';\nimport Link from 'next/link';\n\nexport interface NavbarGrainMortarProps {\n  brand?: string;\n  links?: { label: string; href: string }[];\n}\n\nexport function NavbarGrainMortar({\n  brand = 'Grain & Mortar',\n  links = ['Work', 'Brand', 'Web', 'About', 'Contact'].map((label) => ({\n    label,\n    href: '#',\n  })),\n}: NavbarGrainMortarProps) {\n  return (\n    <header className=\"w-full bg-[#f7f4ed] px-5 py-7 text-black sm:px-8 lg:px-[3vw] lg:py-10\">\n      <div className=\"mx-auto flex max-w-[1900px] items-center justify-between gap-8\">\n        <Link\n          href=\"#\"\n          className=\"text-[clamp(1.8rem,2.6vw,3.5rem)] font-semibold tracking-[-0.06em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n        >\n          {brand}\n        </Link>\n        <nav\n          aria-label=\"Primary\"\n          className=\"hidden items-center gap-[clamp(2rem,4vw,5rem)] md:flex\"\n        >\n          {links.map((link) => (\n            <Link\n              key={link.label}\n              href={link.href}\n              className=\"text-xl font-semibold tracking-[-0.04em] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black lg:text-2xl\"\n            >\n              {link.label}\n            </Link>\n          ))}\n        </nav>\n        <details className=\"relative md:hidden\">\n          <summary className=\"cursor-pointer list-none text-lg font-semibold\">\n            Menu\n          </summary>\n          <nav\n            aria-label=\"Mobile\"\n            className=\"absolute right-0 z-20 mt-3 w-48 bg-black p-4 text-white shadow-xl\"\n          >\n            {links.map((link) => (\n              <Link\n                key={link.label}\n                href={link.href}\n                className=\"block py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white\"\n              >\n                {link.label}\n              </Link>\n            ))}\n          </nav>\n        </details>\n      </div>\n    </header>\n  );\n}\n",
+      "path": "components/sectloom/navbar-grain-mortar.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "navbar-grain-mortar",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/navbar/068_grain___mortar_site_navbar_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "brand": "Brand name linked from the left side",
+    "links": "Primary navigation links with labels and hrefs"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "68",
+    "sourceLocalPath": "data/images/navbar/068_grain___mortar_site_navbar_design.jpg",
+    "sourceTitle": "Grain & Mortar Site Navbar Design"
+  },
+  "title": "Grain & Mortar Site Navbar",
+  "type": "registry:section",
+  "version": "0.1.0"
+}

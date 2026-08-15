@@ -1,0 +1,53 @@
+{
+  "category": "testimonial",
+  "checksum": "686cdb10ee42fb94de380cbe6244ec230e106df4b1dae1987ae11d808e832648",
+  "dependencies": ["lucide-react"],
+  "description": "A warm editorial testimonial carousel with oversized serif typography, accessible controls, and horizontal snap cards.",
+  "designProfiles": [
+    {
+      "complexity": "Medium",
+      "style": "Modern",
+      "tags": ["editorial-carousel"],
+      "theme": "Dark"
+    }
+  ],
+  "files": [
+    {
+      "checksum": "fc445c4373c075e4083aff7f78003192222713963f71279d153add592d373b23",
+      "content": "import * as React from 'react';\nimport {\n  StenoCarouselContent,\n  type StenoQuote,\n} from './testimonial-steno-carousel.client';\n\nexport interface TestimonialStenoCarouselProps {\n  heading?: string;\n  quotes?: StenoQuote[];\n}\n\nconst DEFAULT_QUOTES: StenoQuote[] = [\n  {\n    author: 'Steno.ai User',\n    quote:\n      'This is the greatest application of AI I have experienced to date. It is incredibly interactive and conversational.',\n  },\n  {\n    author: 'Steno.ai User',\n    quote:\n      'Amazing technology. I have the most amazing coach at my fingertips whenever I need him, with practical coaching that addresses real issues.',\n  },\n  { author: 'Steno.ai User', quote: 'Probably the best AI tool I have used.' },\n  {\n    author: 'Steno.ai User',\n    quote:\n      'The responses were clear and organized. It was a sincere virtual experience that felt like a real live conversation.',\n  },\n];\n\nexport function TestimonialStenoCarousel({\n  heading = 'Powering millions of connections, daily',\n  quotes = DEFAULT_QUOTES,\n}: TestimonialStenoCarouselProps) {\n  return (\n    <section className=\"w-full overflow-hidden bg-[#eeecdc] px-5 py-20 text-[#302f2b] sm:px-10 sm:py-28 lg:px-[4vw] lg:py-36\">\n      <div className=\"mx-auto max-w-[1900px]\">\n        <StenoCarouselContent heading={heading} quotes={quotes} />\n      </div>\n    </section>\n  );\n}\n",
+      "path": "components/sectloom/testimonial-steno-carousel.tsx",
+      "type": "registry:section"
+    },
+    {
+      "checksum": "660ba1515e7bb6ce8038f795ef0aa4893f02cd0ba7362b6004a03eea5ca273c6",
+      "content": "'use client';\n\nimport * as React from 'react';\nimport { ArrowLeft, ArrowRight } from 'lucide-react';\n\nexport interface StenoQuote {\n  quote: string;\n  author: string;\n}\n\nexport interface StenoCarouselContentProps {\n  heading: string;\n  quotes: StenoQuote[];\n}\n\nexport function StenoCarouselContent({\n  heading,\n  quotes,\n}: StenoCarouselContentProps) {\n  const trackRef = React.useRef<HTMLDivElement>(null);\n\n  const move = (direction: -1 | 1) => {\n    trackRef.current?.scrollBy({\n      left: direction * Math.min(window.innerWidth * 0.72, 620),\n      behavior: 'smooth',\n    });\n  };\n\n  return (\n    <div>\n      <div className=\"flex flex-col justify-between gap-10 sm:flex-row sm:items-end\">\n        <h2 className=\"max-w-[1000px] font-serif text-[clamp(3.5rem,6.3vw,8rem)] leading-[1.02] tracking-[-0.055em]\">\n          {heading}\n        </h2>\n        <div className=\"flex shrink-0 gap-3\">\n          <button\n            type=\"button\"\n            onClick={() => move(-1)}\n            aria-label=\"Previous testimonials\"\n            className=\"flex h-16 w-20 items-center justify-center rounded-2xl border border-[#c9c6b3] text-3xl text-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n          >\n            <ArrowLeft aria-hidden=\"true\" className=\"size-7\" />\n          </button>\n          <button\n            type=\"button\"\n            onClick={() => move(1)}\n            aria-label=\"Next testimonials\"\n            className=\"flex h-16 w-20 items-center justify-center rounded-2xl border border-[#c9c6b3] text-3xl text-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black\"\n          >\n            <ArrowRight aria-hidden=\"true\" className=\"size-7\" />\n          </button>\n        </div>\n      </div>\n      <div\n        ref={trackRef}\n        className=\"mt-16 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden\"\n      >\n        {quotes.map((quote, index) => (\n          <article\n            key={`${quote.author}-${index}`}\n            className=\"min-h-[480px] w-[84vw] max-w-[560px] shrink-0 snap-center rounded-[18px] border border-[#d5d1bd] bg-[#efeddd] p-5 sm:min-h-[560px]\"\n          >\n            <p className=\"flex items-center gap-2 text-sm text-black/50\">\n              <span className=\"flex h-8 w-8 items-center justify-center rounded-full bg-[#b3ff43] font-bold text-black\">\n                S\n              </span>\n              {quote.author}\n            </p>\n            <blockquote className=\"mt-5 min-h-[380px] rounded-[16px] bg-[#faf8ed] p-8 font-serif text-[clamp(1.55rem,2vw,2.25rem)] leading-[1.2] tracking-[-0.025em] sm:min-h-[450px] sm:p-10\">\n              “{quote.quote}”\n            </blockquote>\n          </article>\n        ))}\n      </div>\n    </div>\n  );\n}\n",
+      "path": "components/sectloom/testimonial-steno-carousel.client.tsx",
+      "type": "registry:section"
+    }
+  ],
+  "name": "testimonial-steno-carousel",
+  "previewAssets": [
+    {
+      "type": "image",
+      "url": "https://media.sectloom.dpdns.org/images/testimonial/014_steno_testimonials_carousel_design.jpg"
+    }
+  ],
+  "propsDocumentation": {
+    "heading": "Large testimonial heading",
+    "quotes": "Testimonial quote and author entries"
+  },
+  "registryDependencies": [],
+  "requires": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "sourceReferenceMetadata": {
+    "sourceId": "14",
+    "sourceLocalPath": "data/images/testimonial/014_steno_testimonials_carousel_design.jpg",
+    "sourceTitle": "Steno Testimonials Carousel Design"
+  },
+  "title": "Steno Testimonials Carousel",
+  "type": "registry:section",
+  "version": "0.1.0"
+}
