@@ -32,6 +32,8 @@ export function CatalogMobileNav({
 }: CatalogMobileNavProps) {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
+  const activeCategory = currentCategory ?? pathname.split('/')[2];
+  const activeComponent = currentComponent ?? pathname.split('/')[3];
 
   React.useEffect(() => {
     setOpen(false);
@@ -42,15 +44,23 @@ export function CatalogMobileNav({
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
+          className="mr-3 size-10 border border-border bg-background px-0 hover:bg-muted md:hidden"
         >
           <Menu className="h-6 w-6" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="pr-0">
-        <SheetHeader>
-          <SheetTitle className="text-left">Navigation</SheetTitle>
+      <SheetContent
+        side="left"
+        className="w-[88vw] max-w-sm border-r border-border bg-background pr-0"
+      >
+        <SheetHeader className="border-b border-border pb-5 pr-6 text-left">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            Library
+          </p>
+          <SheetTitle className="font-display text-4xl font-normal">
+            Browse sections
+          </SheetTitle>
         </SheetHeader>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
           <div className="flex flex-col space-y-2">
@@ -59,15 +69,15 @@ export function CatalogMobileNav({
                 Categories
               </h4>
               {categories.map((category) => {
-                const isActive = currentCategory === category.slug;
+                const isActive = activeCategory === category.slug;
                 return (
                   <Link
                     key={category.slug}
                     href={`/components/${category.slug}`}
                     className={cn(
-                      'flex w-full items-center justify-between rounded-md px-3 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground',
+                      'flex w-full items-center justify-between border-b border-border px-0 py-3 text-sm transition-colors',
                       isActive
-                        ? 'bg-accent text-accent-foreground font-medium'
+                        ? 'font-semibold text-foreground underline decoration-accent decoration-[3px] underline-offset-4'
                         : 'text-muted-foreground'
                     )}
                   >
@@ -77,17 +87,17 @@ export function CatalogMobileNav({
               })}
             </div>
 
-            {components.length > 0 && currentCategory && (
+            {components.length > 0 && activeCategory && (
               <div className="flex flex-col space-y-1 pt-6">
                 <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold capitalize">
-                  {currentCategory} Components
+                  {activeCategory} Components
                 </h4>
                 {components.map((component) => {
-                  const isActive = currentComponent === component.name;
+                  const isActive = activeComponent === component.name;
                   return (
                     <Link
                       key={component.name}
-                      href={`/components/${currentCategory}/${component.name}`}
+                      href={`/components/${activeCategory}/${component.name}`}
                       className={cn(
                         'flex w-full items-center justify-between rounded-md px-3 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground',
                         isActive

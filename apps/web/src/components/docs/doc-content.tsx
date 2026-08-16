@@ -18,19 +18,24 @@ export function DocContent({
   const { prev, next } = getDocsPrevNext(href);
 
   return (
-    <div className="flex flex-col space-y-8">
-      <div className="space-y-2">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+    <article className="flex flex-col">
+      <header className="border-b border-foreground pb-8">
+        <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          Sectloom manual
+        </p>
+        <h1 className="max-w-4xl font-display text-5xl font-normal leading-[0.94] tracking-[-0.035em] sm:text-7xl">
           {title}
         </h1>
         {description && (
-          <p className="text-lg text-muted-foreground">{description}</p>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+            {description}
+          </p>
         )}
-      </div>
-      <div className="pb-12 pt-8 docs-content prose dark:prose-invert max-w-none">
+      </header>
+      <div className="docs-content prose max-w-none py-10 dark:prose-invert">
         {children}
       </div>
       <PrevNextNav prev={prev} next={next} />
-    </div>
+    </article>
   );
 }

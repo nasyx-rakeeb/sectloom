@@ -65,6 +65,15 @@ export interface Category {
 // ---------------------------------------------------------------------------
 
 const CATEGORY_META: Record<string, { title: string; description: string }> = {
+  'blog-header-section': {
+    title: 'Blog Headers',
+    description: 'Editorial mastheads that give articles a confident opening.',
+  },
+  'blog-section': {
+    title: 'Blog Sections',
+    description:
+      'Article grids and story feeds built for thoughtful publishing.',
+  },
   hero: {
     title: 'Hero',
     description:
@@ -83,6 +92,42 @@ const CATEGORY_META: Record<string, { title: string; description: string }> = {
     title: 'Footer',
     description:
       'Multi-column footer layouts with navigation, branding, and legal links.',
+  },
+  faq: {
+    title: 'FAQ',
+    description:
+      'Clear question-and-answer layouts that reduce buying friction.',
+  },
+  feature: {
+    title: 'Features',
+    description:
+      'Product storytelling sections for capabilities and workflows.',
+  },
+  'logo-section': {
+    title: 'Logo Clouds',
+    description:
+      'Social-proof sections for customers, partners, and press marks.',
+  },
+  navbar: {
+    title: 'Navigation',
+    description:
+      'Distinctive site headers for clear wayfinding and conversion.',
+  },
+  portfolio: {
+    title: 'Portfolio',
+    description: 'Project showcases that let the work carry the narrative.',
+  },
+  pricing: {
+    title: 'Pricing',
+    description: 'Plan comparisons that make the next decision feel obvious.',
+  },
+  team: {
+    title: 'Team',
+    description: 'People-focused layouts for teams, studios, and collectives.',
+  },
+  testimonial: {
+    title: 'Testimonials',
+    description: 'Customer stories and quotes designed to build trust quickly.',
   },
 };
 
@@ -143,6 +188,11 @@ export function getCategories(): Category[] {
       componentCount: categoryMap.get(slug) ?? 0,
     };
   });
+}
+
+/** Returns every registry entry in deterministic name order. */
+export function getAllComponents(): RegistryIndexItem[] {
+  return readRegistryIndex().sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /** Returns a single category by slug, or null if not found. */

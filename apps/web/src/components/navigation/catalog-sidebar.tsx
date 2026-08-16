@@ -1,49 +1,65 @@
+'use client';
+
 import Link from 'next/link';
-import { getCategories } from '@/lib/registry/data';
+import { usePathname } from 'next/navigation';
+import { Category } from '@/lib/registry/data';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface CatalogSidebarProps {
-  currentCategory?: string;
-  className?: string;
+  categories: Category[];
 }
 
-export function CatalogSidebar({
-  currentCategory,
-  className,
-}: CatalogSidebarProps) {
-  const categories = getCategories();
+export function CatalogSidebar({ categories }: CatalogSidebarProps) {
+  const pathname = usePathname();
 
   return (
-    <aside className={cn('w-56 shrink-0', className)}>
-      <ScrollArea className="h-[calc(100vh-3.5rem)] py-6 pr-6 lg:py-8">
-        <div className="w-full">
-          <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
-            Categories
-          </h4>
-          <div className="grid grid-flow-row auto-rows-max text-sm">
+    <aside className="sticky top-[72px] hidden h-[calc(100vh-72px)] shrink-0 border-r border-border md:block">
+      <ScrollArea className="h-full py-10 pr-7">
+        <div className="w-full space-y-6">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Library
+            </p>
+            <h2 className="mt-2 font-display text-3xl leading-none">
+              Find your next section.
+            </h2>
+          </div>
+          <nav
+            className="grid grid-flow-row auto-rows-max border-t border-border"
+            aria-label="Component categories"
+          >
             {categories.map((category) => {
-              const isActive = currentCategory === category.slug;
+              const isActive = pathname.startsWith(
+                `/components/${category.slug}`
+              );
               return (
                 <Link
                   key={category.slug}
                   href={`/components/${category.slug}`}
                   className={cn(
-                    'flex w-full items-center justify-between rounded-md px-3 py-1.5 transition-colors hover:bg-accent hover:text-accent-foreground',
+                    'group flex w-full items-center justify-between border-b border-border py-3 text-sm transition-colors hover:text-foreground',
                     isActive
-                      ? 'bg-accent text-accent-foreground font-medium'
+                      ? 'font-semibold text-foreground'
                       : 'text-muted-foreground'
                   )}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  <span>{category.title}</span>
-                  <span className="flex h-5 items-center justify-center rounded-full bg-muted px-2 text-xs font-medium text-muted-foreground">
+                  <span
+                    className={cn(
+                      isActive &&
+                        'underline decoration-accent decoration-[3px] underline-offset-4'
+                    )}
+                  >
+                    {category.title}
+                  </span>
+                  <span className="font-mono text-[10px] text-muted-foreground transition-colors group-hover:text-foreground">
                     {category.componentCount}
                   </span>
                 </Link>
               );
             })}
-          </div>
+          </nav>
         </div>
       </ScrollArea>
     </aside>

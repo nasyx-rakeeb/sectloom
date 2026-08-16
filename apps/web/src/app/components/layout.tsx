@@ -14,13 +14,15 @@ export default function ComponentsLayout({ children }: ComponentsLayoutProps) {
   return (
     <>
       <SiteHeader />
-      <div className="container mx-auto flex-1 items-start px-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 md:px-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-        <CatalogSidebar className="hidden md:block sticky top-14 z-30 -ml-2 h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto py-6 pr-2 lg:py-8" />
-        <main id="main-content" className="relative py-6 lg:py-8">
+      <div className="mx-auto grid w-full max-w-[1600px] flex-1 items-start px-5 md:grid-cols-[232px_minmax(0,1fr)] md:gap-8 md:px-8 xl:grid-cols-[264px_minmax(0,1fr)] xl:gap-12">
+        <CatalogSidebar categories={categories} />
+        <main id="main-content" className="relative min-w-0 py-8 lg:py-12">
           <div className="mx-auto w-full min-w-0">
-            <div className="md:hidden flex items-center mb-4">
+            <div className="mb-8 flex items-center border-b border-border pb-4 md:hidden">
               <CatalogMobileNav categories={categories} />
-              <span className="text-sm font-medium">Menu</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                Browse categories
+              </span>
             </div>
             {children}
           </div>

@@ -63,7 +63,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   }));
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12 pb-16">
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <CollectionPageJsonLd
         name={`${category.title} Components`}
@@ -72,16 +72,24 @@ export default function CategoryPage({ params }: CategoryPageProps) {
         items={collectionItems}
       />
 
-      <div className="space-y-4">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
-          {category.title}
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          {category.description} ({category.componentCount} components)
+      <header className="grid gap-6 border-b border-foreground pb-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+        <div>
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            Section collection
+          </p>
+          <h1 className="max-w-4xl font-display text-5xl font-normal leading-[0.92] tracking-[-0.035em] sm:text-7xl lg:text-8xl">
+            {category.title}
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+            {category.description}
+          </p>
+        </div>
+        <p className="font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+          {String(category.componentCount).padStart(2, '0')} sections
         </p>
-      </div>
+      </header>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-12 xl:grid-cols-2 xl:gap-x-8 xl:gap-y-16">
         {components.map((component) => (
           <ComponentCard key={component.name} item={component} />
         ))}

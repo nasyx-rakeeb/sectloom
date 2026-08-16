@@ -1,14 +1,20 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { DM_Serif_Display, JetBrains_Mono, Manrope } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { SkipLink } from '@/components/layout/skip-link';
 import { siteConfig } from '@/config/site';
 import './globals.css';
 
-const fontSans = Plus_Jakarta_Sans({
+const fontSans = Manrope({
   subsets: ['latin'],
   variable: '--font-sans',
+});
+
+const fontDisplay = DM_Serif_Display({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-display',
 });
 
 const fontMono = JetBrains_Mono({
@@ -60,11 +66,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.className} ${fontSans.variable} ${fontMono.variable}`}
+        className={`${fontSans.className} ${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable}`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

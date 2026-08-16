@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Metadata } from 'next';
+import { ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import {
   getComponentBySlug,
@@ -89,7 +91,7 @@ export default function ComponentPage({ params }: ComponentPageProps) {
   const sourceCode = component.files[0]?.content || '';
 
   return (
-    <div className="space-y-10 pb-12">
+    <div className="space-y-12 pb-16">
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <TechArticleJsonLd
         headline={component.title}
@@ -97,7 +99,7 @@ export default function ComponentPage({ params }: ComponentPageProps) {
         url={`${siteConfig.url}/components/${component.category}/${component.name}`}
       />
 
-      <Breadcrumb>
+      <Breadcrumb className="border-b border-border pb-5">
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink href="/components">Components</BreadcrumbLink>
@@ -118,24 +120,92 @@ export default function ComponentPage({ params }: ComponentPageProps) {
         </BreadcrumbList>
       </Breadcrumb>
 
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+      <header className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-end">
+        <div>
+          <div className="mb-5 flex flex-wrap items-center gap-2">
+            <Badge className="capitalize">{component.category}</Badge>
+            <Badge variant="outline">v{component.version}</Badge>
+          </div>
+          <h1 className="max-w-5xl font-display text-5xl font-normal leading-[0.94] tracking-[-0.035em] sm:text-7xl lg:text-8xl">
             {component.title}
           </h1>
-          <Badge variant="outline">{component.version}</Badge>
-          <Badge className="capitalize">{component.category}</Badge>
+          {component.description && (
+            <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+              {component.description}
+            </p>
+          )}
         </div>
-        {component.description && (
-          <p className="text-lg text-muted-foreground">
-            {component.description}
+        <div className="border-t border-foreground pt-4 lg:border-t-0 lg:border-l lg:pl-6">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            Built for ownership
           </p>
-        )}
-      </div>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Install the source directly into your app, then adapt every detail.
+          </p>
+        </div>
+      </header>
+
+      {component.previewAssets.length > 0 && (
+        <section className="space-y-4" aria-labelledby="preview-heading">
+          <div className="flex items-end justify-between border-b border-foreground pb-3">
+            <h2
+              id="preview-heading"
+              className="text-xs font-semibold uppercase tracking-[0.18em]"
+            >
+              Preview
+            </h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+              Reference fidelity
+            </span>
+          </div>
+          <div className="relative aspect-[16/10] w-full overflow-hidden border border-border bg-white shadow-card dark:bg-zinc-950">
+            <Image
+              src={component.previewAssets[0].url}
+              alt={component.previewAssets[0].alt || component.title}
+              fill
+              className="object-contain"
+              sizes="(min-width: 1024px) calc(100vw - 360px), 100vw"
+              priority
+            />
+          </div>
+        </section>
+      )}
+
+      <section
+        className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-8 border-y border-foreground py-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-12"
+        aria-labelledby="installation-heading"
+      >
+        <div className="min-w-0">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            01 / Add to your project
+          </p>
+          <h2
+            id="installation-heading"
+            className="font-display text-4xl font-normal tracking-tight sm:text-5xl"
+          >
+            One command. Your code.
+          </h2>
+          <InstallCommand name={component.name} className="mt-6" />
+        </div>
+        <div className="flex flex-col justify-end gap-4 text-sm leading-6 text-muted-foreground">
+          <p>
+            The CLI writes the section into your codebase. There is no runtime
+            package or locked abstraction.
+          </p>
+          <Link
+            href="/docs/getting-started"
+            className="inline-flex w-fit items-center gap-2 font-semibold text-foreground underline decoration-accent decoration-[3px] underline-offset-4"
+          >
+            Read installation guide <ArrowUpRight className="size-4" />
+          </Link>
+        </div>
+      </section>
 
       {component.requires && Object.keys(component.requires).length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold tracking-tight">Requires</h3>
+        <section className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-[220px_minmax(0,1fr)]">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.18em]">
+            Requirements
+          </h2>
           <div className="flex flex-wrap gap-2">
             {Object.entries(component.requires).map(([pkg, version]) => (
               <Badge key={pkg} variant="secondary">
@@ -143,34 +213,16 @@ export default function ComponentPage({ params }: ComponentPageProps) {
               </Badge>
             ))}
           </div>
-        </div>
-      )}
-
-      <div className="space-y-2">
-        <h3 className="text-lg font-semibold tracking-tight">Installation</h3>
-        <InstallCommand name={component.name} />
-      </div>
-
-      {component.previewAssets.length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold tracking-tight">Preview</h3>
-          <div className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted">
-            <Image
-              src={component.previewAssets[0].url}
-              alt={component.previewAssets[0].alt || component.title}
-              fill
-              className="object-cover"
-              sizes="(min-width: 1280px) 50vw, (min-width: 768px) 75vw, 100vw"
-            />
-          </div>
-        </div>
+        </section>
       )}
 
       {component.propsDocumentation &&
         Object.keys(component.propsDocumentation).length > 0 && (
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold tracking-tight">Props</h3>
-            <div className="rounded-md border">
+          <section className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-[220px_minmax(0,1fr)]">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em]">
+              Props
+            </h2>
+            <div className="overflow-hidden border border-border">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b bg-muted/50">
@@ -196,12 +248,14 @@ export default function ComponentPage({ params }: ComponentPageProps) {
                 </tbody>
               </table>
             </div>
-          </div>
+          </section>
         )}
 
       {component.dependencies.length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold tracking-tight">Dependencies</h3>
+        <section className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-[220px_minmax(0,1fr)]">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.18em]">
+            Dependencies
+          </h2>
           <div className="flex flex-wrap gap-2">
             {component.dependencies.map((dep) => (
               <Badge key={dep} variant="outline" className="font-mono">
@@ -209,15 +263,24 @@ export default function ComponentPage({ params }: ComponentPageProps) {
               </Badge>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
-      <div className="space-y-2">
-        <h3 className="text-lg font-semibold tracking-tight">Source Code</h3>
+      <section className="space-y-4">
+        <div className="flex items-end justify-between border-b border-foreground pb-3">
+          <div>
+            <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              02 / Inspect
+            </p>
+            <h2 className="font-display text-4xl font-normal">Source code</h2>
+          </div>
+          <span className="hidden font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground sm:block">
+            TSX / Tailwind CSS
+          </span>
+        </div>
         <ComponentCode code={sourceCode} />
-      </div>
+      </section>
 
-      <hr className="my-8" />
       <ComponentPrevNext prev={prev} next={next} />
     </div>
   );

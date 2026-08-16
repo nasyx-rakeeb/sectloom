@@ -20,7 +20,7 @@ export function CardCopyButton({ text }: CardCopyButtonProps) {
   return (
     <button
       type="button"
-      className="shrink-0 rounded p-1 hover:bg-accent/50 transition-colors"
+      className="shrink-0 rounded-sm p-2 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -30,9 +30,9 @@ export function CardCopyButton({ text }: CardCopyButtonProps) {
     >
       <span className="sr-only">Copy command</span>
       {hasCopied ? (
-        <Check className="h-3 w-3 text-green-500" />
+        <Check className="size-3.5" />
       ) : (
-        <Copy className="h-3 w-3" />
+        <Copy className="size-3.5" />
       )}
     </button>
   );

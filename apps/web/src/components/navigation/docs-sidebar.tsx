@@ -9,13 +9,23 @@ interface DocsSidebarProps {
 
 export function DocsSidebar({ currentPath }: DocsSidebarProps) {
   return (
-    <div className="w-64 shrink-0 hidden lg:block border-r sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
-      <ScrollArea className="h-full py-6 pr-6 lg:pl-8">
-        <div className="flex flex-col gap-6">
+    <aside className="sticky top-[72px] hidden h-[calc(100vh-72px)] shrink-0 border-r border-border lg:block">
+      <ScrollArea className="h-full py-10 pr-8">
+        <div className="mb-8">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            Documentation
+          </p>
+          <h2 className="mt-2 font-display text-3xl leading-none">
+            From install to ownership.
+          </h2>
+        </div>
+        <nav className="flex flex-col gap-7" aria-label="Documentation">
           {docsNavigation.map((section, index) => (
             <div key={index} className="flex flex-col gap-2">
-              <h4 className="font-medium px-3 text-sm">{section.title}</h4>
-              <div className="flex flex-col gap-1">
+              <h3 className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                {section.title}
+              </h3>
+              <div className="flex flex-col border-t border-border">
                 {section.items.map((item, itemIndex) => {
                   const isActive = currentPath === item.href;
                   return (
@@ -24,10 +34,10 @@ export function DocsSidebar({ currentPath }: DocsSidebarProps) {
                       href={item.href}
                       aria-current={isActive ? 'page' : undefined}
                       className={cn(
-                        'text-sm px-3 py-1.5 rounded-md transition-colors',
+                        'border-b border-border py-2.5 text-sm transition-colors',
                         isActive
-                          ? 'bg-accent text-accent-foreground font-medium'
-                          : 'text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground'
+                          ? 'font-semibold text-foreground underline decoration-accent decoration-[3px] underline-offset-4'
+                          : 'text-muted-foreground hover:text-foreground'
                       )}
                     >
                       {item.title}
@@ -37,8 +47,8 @@ export function DocsSidebar({ currentPath }: DocsSidebarProps) {
               </div>
             </div>
           ))}
-        </div>
+        </nav>
       </ScrollArea>
-    </div>
+    </aside>
   );
 }

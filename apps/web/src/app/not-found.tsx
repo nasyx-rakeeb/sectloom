@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SiteFooter } from '@/components/layout/site-footer';
-import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 export default function NotFound() {
   return (
@@ -9,17 +9,30 @@ export default function NotFound() {
       <SiteHeader />
       <main
         id="main-content"
-        className="flex-1 flex flex-col items-center justify-center p-6 text-center"
+        className="surface-solid flex flex-1 items-center border-b border-border"
       >
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
-          Page not found
-        </h1>
-        <p className="text-xl text-muted-foreground mb-8">
-          Sorry, we couldn't find the page you're looking for.
-        </p>
-        <Button asChild>
-          <Link href="/">Return to Homepage</Link>
-        </Button>
+        <div className="mx-auto grid w-full max-w-[1600px] gap-10 px-5 py-24 sm:px-8 lg:grid-cols-[0.55fr_1.45fr] lg:px-10 lg:py-36">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            Error / 404
+          </p>
+          <div>
+            <h1 className="max-w-[12ch] font-display text-[clamp(4.5rem,9vw,10rem)] leading-[0.82] tracking-[-0.06em]">
+              This section went missing.
+            </h1>
+            <div className="mt-10 flex flex-col gap-6 border-t border-foreground pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="max-w-lg text-lg leading-8 text-muted-foreground">
+                The page may have moved, but the section library is still
+                exactly where you left it.
+              </p>
+              <Link
+                href="/components/hero"
+                className="inline-flex min-h-12 w-fit items-center gap-3 bg-accent px-5 text-sm font-bold text-accent-foreground"
+              >
+                Browse sections <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
       </main>
       <SiteFooter />
     </div>

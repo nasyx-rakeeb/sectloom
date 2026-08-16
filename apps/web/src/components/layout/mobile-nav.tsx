@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { ArrowUpRight, Menu } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,43 +20,65 @@ export function MobileNav() {
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+          className="-ml-2 size-10 px-0 text-base hover:bg-muted md:hidden"
         >
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="pr-0">
+      <SheetContent side="left" className="w-[88vw] max-w-sm border-r p-0">
         <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
         <Link
           href="/"
-          className="flex items-center space-x-2 pl-6 pt-4"
+          className="flex items-center gap-3 border-b editorial-rule px-6 py-6"
           onClick={() => setOpen(false)}
         >
-          <span className="font-bold">{siteConfig.name}</span>
+          <span
+            aria-hidden="true"
+            className="grid size-8 grid-cols-2 overflow-hidden border border-foreground"
+          >
+            <span className="bg-foreground" />
+            <span />
+            <span />
+            <span className="bg-accent" />
+          </span>
+          <span className="text-lg font-extrabold tracking-[-0.04em]">
+            {siteConfig.name}
+          </span>
         </Link>
-        <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-          <div className="flex flex-col space-y-3">
+        <div className="flex h-[calc(100dvh-5rem)] flex-col justify-between p-6">
+          <div className="flex flex-col">
             <Link
               href="/components/hero"
               onClick={() => setOpen(false)}
-              className="text-foreground/70 transition-colors hover:text-foreground"
+              className="border-b editorial-rule py-5 font-display text-4xl tracking-[-0.035em] transition-colors hover:text-muted-foreground"
             >
-              Components
+              Browse sections
             </Link>
             <Link
               href="/docs"
               onClick={() => setOpen(false)}
-              className="text-foreground/70 transition-colors hover:text-foreground"
+              className="border-b editorial-rule py-5 font-display text-4xl tracking-[-0.035em] transition-colors hover:text-muted-foreground"
             >
               Docs
             </Link>
+          </div>
+          <div className="space-y-3 border-t editorial-rule pt-5 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
             <Link
               href={siteConfig.links.github}
               onClick={() => setOpen(false)}
-              className="text-foreground/70 transition-colors hover:text-foreground"
+              className="flex items-center justify-between py-2 transition-colors hover:text-foreground"
             >
               GitHub
+              <ArrowUpRight className="size-4" />
+            </Link>
+            <Link
+              href={siteConfig.links.npm}
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between py-2 transition-colors hover:text-foreground"
+            >
+              npm
+              <ArrowUpRight className="size-4" />
             </Link>
           </div>
         </div>

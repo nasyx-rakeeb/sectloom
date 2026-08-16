@@ -30,21 +30,23 @@ export function InstallCommand({ name, className }: InstallCommandProps) {
   return (
     <div
       className={cn(
-        'flex items-center justify-between gap-4 rounded-lg border bg-muted/50 px-4 py-3 font-mono text-sm',
+        'flex min-w-0 items-center justify-between gap-4 border border-foreground bg-foreground px-4 py-4 font-mono text-sm text-background sm:px-5',
         className
       )}
     >
-      <span className="text-muted-foreground">
-        <span className="select-none text-primary/40 mr-2">$</span>
+      <span className="min-w-0 truncate">
+        <span className="mr-2 select-none text-accent">$</span>
         {command}
       </span>
       <Button
         size="icon"
         variant="ghost"
-        className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted"
+        className="h-9 w-9 shrink-0 text-background/70 hover:bg-background/10 hover:text-background"
+        aria-label={
+          hasCopied ? 'Copied install command' : 'Copy install command'
+        }
         onClick={copyToClipboard}
       >
-        <span className="sr-only">Copy</span>
         {hasCopied ? (
           <Check className="h-4 w-4" />
         ) : (
